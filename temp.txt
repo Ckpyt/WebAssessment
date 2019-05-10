@@ -1,0 +1,25 @@
+                                        <!-- start popup -->
+
+                                        <div id='overlay-'></div>
+                                        <div id='modalMsg-' class="hide">
+                                            <div class="popupbox">
+                                                <div>
+                                                    <h1> LOGIN
+                                                    <input type="submit" value="X" class="button-close" onclick="RemoveModal()" />
+                                                    </h1>
+                                                </div>
+                                                <hr />
+                                                <div class="popupdesc">
+                                                    <!-- START POPUP BLOCK -->
+                                                    
+                                                    <!-- END POPUP BLOCK -->
+                                                    <!-- START POPUP BLOCK -->
+                                                    <br />
+                                                    <div class="popblock popblocksubbtn">
+                                                        <input type="submit" value="No" class="button bluebg ibvm" onclick="RemoveModal()" />
+                                                    </div>
+                                                    <!-- END POPUP BLOCK -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- end popup -->

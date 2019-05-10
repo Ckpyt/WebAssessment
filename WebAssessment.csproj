@@ -73,7 +73,9 @@
     <Content Include="blog.html" />
     <Content Include="contact.aspx" />
     <Content Include="contact.html" />
-    <Content Include="css\style.css" />
+    <Content Include="css\style.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Default.aspx" />
     <Content Include="feature.aspx" />
     <Content Include="feature.html" />

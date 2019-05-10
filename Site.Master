@@ -17,14 +17,17 @@
     <link rel="stylesheet" href="vendors/owl-carousel/owl.theme.default.min.css"/>
     <link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css"/>
 
-    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="css/style.css">
+
     <title>Ckpyt Software - Home</title>
 
     <script type="text/javascript">
+
         function DisplayModal() {
             document.getElementById("overlay-").style.height = document.body.clientHeight + 'px';
             document.getElementById("overlay-").className = "OverlayEffect";
-            document.getElementById("modalMsg-").className = "ShowModal";
+            document.getElementById("modalMsg-1").className = "ShowModal";
+            document.getElementById("modalMsg-2").className = "ShowModal";
             document.getElementById("sigin").className = "HideModal";
             return false;
         }
@@ -32,8 +35,37 @@
         function RemoveModal() {
             document.getElementById("overlay-").style.height = "0px";
             document.getElementById("overlay-").className = "";
-            document.getElementById("modalMsg-").className = "HideModal";
+            document.getElementById("modalMsg-1").className = "HideModal";
+            document.getElementById("modalMsg-2").className = "HideModal";
             document.getElementById("sigin").className = "button button-header bg";
+            return false;
+        }
+
+        function RegisterBtnClc() {
+            namestr = document.getElementById('<%= Login.ClientID %>').value.length;
+            passstr = document.getElementById('<%= Password.ClientID %>').value.length;
+            pass = document.getElementById('<%= Password.ClientID %>').value;
+            conf = document.getElementById('<%= Confirm.ClientID %>').value
+            if (namestr == '') {
+                document.getElementById("invMsg").className = "alert alert-danger";
+                document.getElementById("invMsg").innerHTML = "name should contain at least 1 symbol";
+                return false;
+            }
+            if (passstr == '') {
+                document.getElementById("invMsg").className = "alert alert-danger";
+                document.getElementById("invMsg").innerHTML = "password should contain at least 1 symbol";
+                return false;
+            }
+            if (pass != conf) {
+                document.getElementById("invMsg").className = "alert alert-danger";
+                document.getElementById("invMsg").innerHTML = "password and confirm password do not match";
+                return false;
+            }
+            var pageId = '<%= Page.ClientID %>';
+            alert("1" + pageId);
+            __doPostBack(pageId, "Register");
+            alert("2");
+            return true;
         }
     </script>
 </head>
@@ -69,33 +101,105 @@
 
                                 <ul class="navbar-right">
                                     <li class="nav-item">
-                                        <button id="sigin" class="button button-header bg" onclick=" DisplayModal();">Sign up</button>
-                                        <!-- start popup -->
+                                        <button id="sigin" class="button button-header bg" onclick="return DisplayModal();">Sign up</button>
+                                         <!-- start popup -->
 
                                         <div id='overlay-'></div>
-                                        <div id='modalMsg-' class="hide">
+                                        <div id='modalMsg-1' class="HideModal">
                                             <div class="popupbox">
                                                 <div>
                                                     <h1> LOGIN
-                                                    <input type="submit" value="X" class="button-close" onclick="RemoveModal()" />
+                                                    <input type="submit" value="X" class="button-close" onclick="return RemoveModal();" />
                                                     </h1>
                                                 </div>
                                                 <hr />
                                                 <div class="popupdesc">
                                                     <!-- START POPUP BLOCK -->
-                                                   
+                                                    <table>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="nav-link tbl"> Login: </div>
+                                                            </td>
+                                                            <td>
+                                                               <asp:TextBox id="UserName" runat="server" />
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="nav-link tbl"> Password: </div>
+                                                            </td>
+                                                            <td>
+                                                                <asp:TextBox id="UserPassword" runat="server" TextMode="Password" />
+                                                            </td>
+                                                        </tr>
+                                                    </table>
                                                     <!-- END POPUP BLOCK -->
                                                     <!-- START POPUP BLOCK -->
                                                     <br />
                                                     <div class="popblock popblocksubbtn">
-                                                        <input type="submit" value="No" class="button bluebg ibvm" onclick="RemoveModal()" />
+                                                        <asp:Button ID="LoginBtn" class="button bluebg ibvm" runat="server" Text="Login" OnClick="LoginBtn_Click" />
+                                                        
                                                     </div>
                                                     <!-- END POPUP BLOCK -->
                                                 </div>
                                             </div>
                                         </div>
                                         <!-- end popup -->
-
+                                        <!-- start register-->
+                                        <div id='modalMsg-2' class="HideModal" style="padding:0px;">
+                                            <div class="popupbox">
+                                                <hr />
+                                                <div>
+                                                    <h1> REGISTER
+                                                    <!--<input type="submit" value="X" class="button-close" onclick="return RemoveModal();" /> -->
+                                                    </h1>
+                                                </div>
+                                                <hr />
+                                                <div class="popupdesc">
+                                                    <!-- START POPUP BLOCK -->
+                                                    <table>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="nav-link tbl"> Login: </div>
+                                                            </td>
+                                                            <td>
+                                                               <asp:TextBox id="Login" runat="server" />
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="nav-link tbl"> Password: </div>
+                                                            </td>
+                                                            <td>
+                                                                <asp:TextBox id="Password" runat="server" TextMode="Password" />
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="nav-link tbl"> Confirm password: </div>
+                                                            </td>
+                                                            <td>
+                                                                <asp:TextBox id="Confirm" runat="server" TextMode="Password" />
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2"> 
+                                                                <div id="invMsg" class="invisible">message</div>
+                                                            </td>
+                                                        <tr/>
+                                                    </table>
+                                                    <!-- END POPUP BLOCK -->
+                                                    <!-- START POPUP BLOCK -->
+                                                    <br />
+                                                    <div class="popblock popblocksubbtn">
+                                                        <input type="submit" class="button bluebg ibvm" runat="server" Text="Register" OnClick="return RegisterBtnClc();" />
+                                                        
+                                                    </div>
+                                                    <!-- END POPUP BLOCK -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- end register-->
                                     </li>
                                 </ul>
                             </div>
@@ -157,22 +261,6 @@
                             <li><a href="#">Agencies</a></li>
                         </ul>
                     </div>
-                    <div class="col-xl-4 col-md-8 mb-4 mb-xl-0 single-footer-widget">
-                        <h4>Newsletter</h4>
-                        <p>You can trust us. we only send promo offers,</p>
-                        <div class="form-wrap" id="mc_embed_signup">
-                            <!--<form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
-                                method="get" class="form-inline">
-                                <input class="form-control" name="EMAIL" placeholder="Your Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your Email Address '" required="" type="email">
-                                    <button class="click-btn btn btn-default">subscribe</button> 
-                                    <div style="position: absolute; left: -5000px;">
-                                        <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">
-						            </div>
-
-                                    <div class="info"></div>
-					        </form> -->
-				        </div>
-			        </div>
                 </div>
                         <!--footer -->
 		        <div class="footer-bottom row align-items-center text-center text-lg-left">
@@ -193,6 +281,8 @@
 		        </div>
 	        </div>
         </footer>
+
+                                
         <!-- ================ End footer Area ================= -->
 
         <script src="vendors/jquery/jquery-3.2.1.min.js"></script>
@@ -202,5 +292,9 @@
         <script src="js/mail-script.js"></script>
         <script src="js/main.js"></script>
         </form>
+                           
+
+
+
     </body>
 </html>
