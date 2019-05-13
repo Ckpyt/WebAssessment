@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Services;
 using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace WebAssessment
 {
-    public partial class Site : System.Web.UI.MasterPage, IPostBackEventHandler
+
+    public partial class Site : System.Web.UI.MasterPage
     {
         private string ConnString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["ModalConnectionString"].ConnectionString;
         private SqlConnection conn;
@@ -19,16 +21,8 @@ namespace WebAssessment
         private string Name = "";
         protected void Page_Load(object sender, EventArgs e)
         {
- 
-        }
-
-        public void RaisePostBackEvent(string eventArgument) {
-            switch (eventArgument)
-            {
-                case "Register":
-                    RegisterBtn();
-                    break;
-            }
+            Register.OnClientClick = "return RegisterBtnClc()";
+            LoginBtn.OnClientClick = "return LoginBtnClc()";
         }
 
         public static void ShowAlert(Control ctr, string alert)
@@ -87,7 +81,7 @@ namespace WebAssessment
             conn = new SqlConnection(ConnString);
             conn.Open();
             string s_quarry = "insert into tblUsers values(" + id.ToString()
-                            + "," + Login.Text + "," + Password.Text + ",1);";
+                            + ",'" + Login.Text + "','" + Password.Text + "',1);";
             comm = new SqlCommand(s_quarry, conn);
 
             try
@@ -104,8 +98,7 @@ namespace WebAssessment
             conn.Close();
         }
 
-        [WebMethod]
-        protected Boolean RegisterBtn()
+        protected Boolean RegisterBtn(object sender, EventArgs e)
         {
             if (Password.Text.CompareTo(Confirm.Text) != 0)
             {
@@ -235,6 +228,16 @@ namespace WebAssessment
             }
 
             conn.Close();
+        }
+
+        protected void Register_Click(object sender, EventArgs e)
+        {
+            RegisterBtn(sender,e);
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

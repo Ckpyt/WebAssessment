@@ -22,6 +22,15 @@ namespace WebAssessment {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
+        /// smMain control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager smMain;
+        
+        /// <summary>
         /// UserName control.
         /// </summary>
         /// <remarks>
@@ -75,7 +84,14 @@ namespace WebAssessment {
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Confirm;
         
-
+        /// <summary>
+        /// Register control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Register;
         
         /// <summary>
         /// head control.

@@ -4,6 +4,7 @@
 
 <html >
 <head runat="server">
+    
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
@@ -41,36 +42,73 @@
             return false;
         }
 
+        function eventFire(el, etype) {
+            if (el.fireEvent) {
+                el.fireEvent('on' + etype);
+            } else {
+                var evObj = document.createEvent('Events');
+                evObj.initEvent(etype, true, false);
+                el.dispatchEvent(evObj);
+            }
+        }
+
+        function LoginBtnClc(){
+            namestr = document.getElementById('<%= UserName.ClientID %>').value.length;
+            passstr = document.getElementById('<%= UserPassword.ClientID %>').value.length;
+            let k = 0
+            if (namestr == '') {
+                document.getElementById("invMsgUserNM").className = "alert alert-danger";
+                document.getElementById("invMsgUserNM").innerHTML = "name should contain at least 1 symbol";
+                
+            } else {
+                k++;
+                document.getElementById("invMsgUserNM").className = "invisible";
+            }
+
+            if (passstr == '') {
+                document.getElementById("invMsgUserPSW").className = "alert alert-danger";
+                document.getElementById("invMsgUserPSW").innerHTML = "password should contain at least 1 symbol";
+                return false;
+            } else {
+                k++;
+                document.getElementById("invMsgUserPSW").className = "invisible";
+            }
+
+            return k==2;
+        }
+
         function RegisterBtnClc() {
+
             namestr = document.getElementById('<%= Login.ClientID %>').value.length;
             passstr = document.getElementById('<%= Password.ClientID %>').value.length;
             pass = document.getElementById('<%= Password.ClientID %>').value;
             conf = document.getElementById('<%= Confirm.ClientID %>').value
+            
             if (namestr == '') {
                 document.getElementById("invMsg").className = "alert alert-danger";
                 document.getElementById("invMsg").innerHTML = "name should contain at least 1 symbol";
                 return false;
-            }
+            } 
+
             if (passstr == '') {
                 document.getElementById("invMsg").className = "alert alert-danger";
                 document.getElementById("invMsg").innerHTML = "password should contain at least 1 symbol";
                 return false;
-            }
+            }  
+
             if (pass != conf) {
                 document.getElementById("invMsg").className = "alert alert-danger";
                 document.getElementById("invMsg").innerHTML = "password and confirm password do not match";
                 return false;
-            }
-            var pageId = '<%= Page.ClientID %>';
-            alert("1" + pageId);
-            __doPostBack(pageId, "Register");
-            alert("2");
+            } 
+            document.getElementById("invMsg").className = "invisible";
             return true;
         }
     </script>
 </head>
     <body>
         <form id="form1" runat="server">
+            <asp:ScriptManager ID="smMain" runat="server" EnablePageMethods="true" />
             <header class="header_area">
                 <div class="main_menu">
                     <nav class="navbar navbar-expand-lg navbar-light">
@@ -125,6 +163,11 @@
                                                             </td>
                                                         </tr>
                                                         <tr>
+                                                            <td colspan="2"> 
+                                                                <div id="invMsgUserNM" class="invisible">message</div>
+                                                            </td>
+                                                        <tr/>
+                                                        <tr>
                                                             <td>
                                                                 <div class="nav-link tbl"> Password: </div>
                                                             </td>
@@ -132,11 +175,17 @@
                                                                 <asp:TextBox id="UserPassword" runat="server" TextMode="Password" />
                                                             </td>
                                                         </tr>
+                                                        <tr>
+                                                            <td colspan="2"> 
+                                                                <div id="invMsgUserPSW" class="invisible">message</div>
+                                                            </td>
+                                                        <tr/>
                                                     </table>
                                                     <!-- END POPUP BLOCK -->
                                                     <!-- START POPUP BLOCK -->
                                                     <br />
                                                     <div class="popblock popblocksubbtn">
+                                                       
                                                         <asp:Button ID="LoginBtn" class="button bluebg ibvm" runat="server" Text="Login" OnClick="LoginBtn_Click" />
                                                         
                                                     </div>
@@ -192,8 +241,7 @@
                                                     <!-- START POPUP BLOCK -->
                                                     <br />
                                                     <div class="popblock popblocksubbtn">
-                                                        <input type="submit" class="button bluebg ibvm" runat="server" Text="Register" OnClick="return RegisterBtnClc();" />
-                                                        
+                                                        <asp:Button ID="Register" class="button bluebg ibvm" runat="server" Text="Button" OnCLick="Register_Click"/>
                                                     </div>
                                                     <!-- END POPUP BLOCK -->
                                                 </div>
