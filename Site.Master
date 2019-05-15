@@ -30,6 +30,7 @@
             document.getElementById("modalMsg-1").className = "ShowModal";
             document.getElementById("modalMsg-2").className = "ShowModal";
             document.getElementById("sigin").className = "HideModal";
+            document.getElementById("header").className = "";
             return false;
         }
 
@@ -39,6 +40,7 @@
             document.getElementById("modalMsg-1").className = "HideModal";
             document.getElementById("modalMsg-2").className = "HideModal";
             document.getElementById("sigin").className = "button button-header bg";
+            document.getElementById("header").className = "header_area";
             return false;
         }
 
@@ -77,39 +79,69 @@
             return k==2;
         }
 
+        function validateEmail($email) {
+            var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+            return emailReg.test($email);
+        }
+
         function RegisterBtnClc() {
 
             namestr = document.getElementById('<%= Login.ClientID %>').value.length;
             passstr = document.getElementById('<%= Password.ClientID %>').value.length;
             pass = document.getElementById('<%= Password.ClientID %>').value;
-            conf = document.getElementById('<%= Confirm.ClientID %>').value
-            
+            conf = document.getElementById('<%= Confirm.ClientID %>').value;
+            txtMail = document.getElementById('<%= Email.ClientID %>').value;
+            let k = 0;
             if (namestr == '') {
-                document.getElementById("invMsg").className = "alert alert-danger";
-                document.getElementById("invMsg").innerHTML = "name should contain at least 1 symbol";
-                return false;
-            } 
+                document.getElementById("invMsgLogin").className = "alert alert-danger";
+                document.getElementById("invMsgLogin").innerHTML = "name should contain at least 1 symbol";
+            } else {
+                k++
+                document.getElementById("invMsgLogin").className = "invisible";
+            }
 
             if (passstr == '') {
-                document.getElementById("invMsg").className = "alert alert-danger";
-                document.getElementById("invMsg").innerHTML = "password should contain at least 1 symbol";
-                return false;
-            }  
+                document.getElementById("invMsgPass").className = "alert alert-danger";
+                document.getElementById("invMsgPass").innerHTML = "password should contain at least 1 symbol";
+            } else {
+                k++;
+                document.getElementById("invMsgPass").className = "invisible";
+            }
 
             if (pass != conf) {
                 document.getElementById("invMsg").className = "alert alert-danger";
                 document.getElementById("invMsg").innerHTML = "password and confirm password do not match";
                 return false;
-            } 
-            document.getElementById("invMsg").className = "invisible";
-            return true;
+            } else {
+                k++;
+                document.getElementById("invMsg").className = "invisible";
+            }
+ 
+            if (txtMail.length == '0') {
+
+                document.getElementById("invMsgEmail").className = "alert alert-danger";
+                document.getElementById("invMsgEmail").innerHTML = "email should not be empty";
+                return false;
+            } else {
+                if (!validateEmail(txtMail)) {
+                    document.getElementById("invMsgEmail").className = "alert alert-danger";
+                    document.getElementById("invMsgEmail").innerHTML = "sorry, your email is not correct";
+                    return false;
+                } else {
+                    document.getElementById("invMsgEmail").className = "invisible";
+                }
+            }
+            return k == 3;
+
+
+
         }
     </script>
 </head>
     <body>
         <form id="form1" runat="server">
             <asp:ScriptManager ID="smMain" runat="server" EnablePageMethods="true" />
-            <header class="header_area">
+            <header class="header_area" id="header">
                 <div class="main_menu">
                     <nav class="navbar navbar-expand-lg navbar-light">
                         <div class="container box_1620">
@@ -141,113 +173,146 @@
                                     <li class="nav-item">
                                         <button id="sigin" class="button button-header bg" onclick="return DisplayModal();">Sign up</button>
                                          <!-- start popup -->
-
                                         <div id='overlay-'></div>
-                                        <div id='modalMsg-1' class="HideModal">
-                                            <div class="popupbox">
-                                                <div>
-                                                    <h1> LOGIN
-                                                    <input type="submit" value="X" class="button-close" onclick="return RemoveModal();" />
-                                                    </h1>
-                                                </div>
-                                                <hr />
-                                                <div class="popupdesc">
-                                                    <!-- START POPUP BLOCK -->
-                                                    <table>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="nav-link tbl"> Login: </div>
-                                                            </td>
-                                                            <td>
-                                                               <asp:TextBox id="UserName" runat="server" />
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td colspan="2"> 
-                                                                <div id="invMsgUserNM" class="invisible">message</div>
-                                                            </td>
-                                                        <tr/>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="nav-link tbl"> Password: </div>
-                                                            </td>
-                                                            <td>
-                                                                <asp:TextBox id="UserPassword" runat="server" TextMode="Password" />
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td colspan="2"> 
-                                                                <div id="invMsgUserPSW" class="invisible">message</div>
-                                                            </td>
-                                                        <tr/>
-                                                    </table>
-                                                    <!-- END POPUP BLOCK -->
-                                                    <!-- START POPUP BLOCK -->
-                                                    <br />
-                                                    <div class="popblock popblocksubbtn">
+                                        <table>
+                                            <tr style="vertical-align:top">
+                                                 <td >
+                                                    <!-- start register-->
+                                                    <div id='modalMsg-2' class="HideModal" style="padding:0px;">
+                                                        <div class="popupbox">
+                                                            
+                                                            <div>
+                                                                <h1> REGISTER
+                                                                <!--<input type="submit" value="X" class="button-close" onclick="return RemoveModal();" /> -->
+                                                                </h1>
+                                                            </div>
+                                                            <hr />
+                                                            <div class="popupdesc">
+                                                                <!-- START POPUP BLOCK -->
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <div class="nav-link tbl"> Login: </div>
+                                                                        </td>
+                                                                        <td>
+                                                                           <asp:TextBox id="Login" runat="server" />
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="2"> 
+                                                                            <div id="invMsgLogin" class="invisible">message</div>
+                                                                        </td>
+                                                                    <tr/>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <div class="nav-link tbl"> Password: </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <asp:TextBox id="Password" runat="server" TextMode="Password" />
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="2"> 
+                                                                            <div id="invMsgPass" class="invisible">message</div>
+                                                                        </td>
+                                                                    <tr/>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <div class="nav-link tbl"> Confirm password: </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <asp:TextBox id="Confirm" runat="server" TextMode="Password" />
+                                                                        </td>
+
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="2"> 
+                                                                            <div id="invMsg" class="invisible">message</div>
+                                                                        </td>
+                                                                    <tr/>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <div class="nav-link tbl"> e-mail: </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <asp:TextBox id="Email" runat="server" />
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="2"> 
+                                                                            <div id="invMsgEmail" class="invisible">message</div>
+                                                                        </td>
+                                                                    <tr/>
+                                                                </table>
+                                                                <!-- END POPUP BLOCK -->
+                                                                <!-- START POPUP BLOCK -->
+                                                                <br />
+                                                                <div class="popblock popblocksubbtn">
+                                                                    <asp:Button ID="Register" class="button bluebg ibvm" runat="server" Text="Register" OnCLick="Register_Click"/>
+                                                                </div>
+                                                                <!-- END POPUP BLOCK -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- end register-->
+                                                </td>
+                                                <td>
+                                                    
+                                                    <div id='modalMsg-1' class="HideModal">
+                                                        <div class="popupbox">
+                                                            <div>
+                                                                <h1> LOGIN
+                                                                <input type="submit" value="X" class="button-close" onclick="return RemoveModal();" />
+                                                                </h1>
+                                                            </div>
+                                                            <hr />
+                                                            <div class="popupdesc">
+                                                                <!-- START POPUP BLOCK -->
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <div class="nav-link tbl"> Login: </div>
+                                                                        </td>
+                                                                        <td>
+                                                                           <asp:TextBox id="UserName" runat="server" />
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="2"> 
+                                                                            <div id="invMsgUserNM" class="invisible">message</div>
+                                                                        </td>
+                                                                    <tr/>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <div class="nav-link tbl"> Password: </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <asp:TextBox id="UserPassword" runat="server" TextMode="Password" />
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="2"> 
+                                                                            <div id="invMsgUserPSW" class="invisible">message</div>
+                                                                        </td>
+                                                                    <tr/>
+                                                                </table>
+                                                                <!-- END POPUP BLOCK -->
+                                                                <!-- START POPUP BLOCK -->
+                                                                <br />
+                                                                <div class="popblock popblocksubbtn">
                                                        
-                                                        <asp:Button ID="LoginBtn" class="button bluebg ibvm" runat="server" Text="Login" OnClick="LoginBtn_Click" />
+                                                                    <asp:Button ID="LoginBtn" class="button bluebg ibvm" runat="server" Text="Login" OnClick="LoginBtn_Click" />
                                                         
+                                                                </div>
+                                                                <!-- END POPUP BLOCK -->
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <!-- END POPUP BLOCK -->
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- end popup -->
-                                        <!-- start register-->
-                                        <div id='modalMsg-2' class="HideModal" style="padding:0px;">
-                                            <div class="popupbox">
-                                                <hr />
-                                                <div>
-                                                    <h1> REGISTER
-                                                    <!--<input type="submit" value="X" class="button-close" onclick="return RemoveModal();" /> -->
-                                                    </h1>
-                                                </div>
-                                                <hr />
-                                                <div class="popupdesc">
-                                                    <!-- START POPUP BLOCK -->
-                                                    <table>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="nav-link tbl"> Login: </div>
-                                                            </td>
-                                                            <td>
-                                                               <asp:TextBox id="Login" runat="server" />
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="nav-link tbl"> Password: </div>
-                                                            </td>
-                                                            <td>
-                                                                <asp:TextBox id="Password" runat="server" TextMode="Password" />
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="nav-link tbl"> Confirm password: </div>
-                                                            </td>
-                                                            <td>
-                                                                <asp:TextBox id="Confirm" runat="server" TextMode="Password" />
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td colspan="2"> 
-                                                                <div id="invMsg" class="invisible">message</div>
-                                                            </td>
-                                                        <tr/>
-                                                    </table>
-                                                    <!-- END POPUP BLOCK -->
-                                                    <!-- START POPUP BLOCK -->
-                                                    <br />
-                                                    <div class="popblock popblocksubbtn">
-                                                        <asp:Button ID="Register" class="button bluebg ibvm" runat="server" Text="Button" OnCLick="Register_Click"/>
-                                                    </div>
-                                                    <!-- END POPUP BLOCK -->
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- end register-->
+                                                    <!-- end popup -->
+                                                </td>
+                                               
+                                            </tr>
+                                        </table>
                                     </li>
                                 </ul>
                             </div>

@@ -51,7 +51,7 @@ namespace WebAssessment
             }
             if (result == null)
             {
-                comm = new SqlCommand("CREATE TABLE tblUsers ( [Id] INT NOT NULL, [Name] VARCHAR(50)  primary key NOT NULL, [Pass] VARCHAR(50) NOT NULL,  [Rights] INT NULL);insert into tblUsers values(1,'Ckpyt', 'ghjwtccjh', 255);", conn);
+                comm = new SqlCommand("CREATE TABLE tblUsers ( [Id] INT NOT NULL, [Name] VARCHAR(50)  primary key NOT NULL, [Pass] VARCHAR(50) NOT NULL, [Email] VARCHAR(50) NOT NULL,  [Rights] INT NULL);insert into tblUsers values(1,'Ckpyt', 'ghjwtccjh','ckpyt@bk.ru', 255);", conn);
                 comm.ExecuteNonQuery();
                 id = 2;
             }
@@ -81,7 +81,7 @@ namespace WebAssessment
             conn = new SqlConnection(ConnString);
             conn.Open();
             string s_quarry = "insert into tblUsers values(" + id.ToString()
-                            + ",'" + Login.Text + "','" + Password.Text + "',1);";
+                            + ",'" + Login.Text + "','" + Password.Text + "','" + Email.Text + "',1);";
             comm = new SqlCommand(s_quarry, conn);
 
             try
@@ -140,7 +140,8 @@ namespace WebAssessment
                         id = Convert.ToInt64(result[0]);
                         string name = Convert.ToString(result[1]);
                         string pass = Convert.ToString(result[2]);
-                        int rights = Convert.ToInt32(result[3]);
+                        string email= Convert.ToString(result[3]);
+                        int rights = Convert.ToInt32(result[4]);
                         if (name.CompareTo(Login.Text) == 0 && pass.CompareTo(Password.Text) == 0)
                         {
                             IsAutorised = true;
