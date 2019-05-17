@@ -25,6 +25,7 @@
     <script type="text/javascript">
 
         function DisplayModal() {
+            alert("display");
             document.getElementById("overlay-").style.height = document.body.clientHeight + 'px';
             document.getElementById("overlay-").className = "OverlayEffect";
             document.getElementById("modalMsg-1").className = "ShowModal";
@@ -54,14 +55,14 @@
             }
         }
 
-        function LoginBtnClc(){
+        function LoginBtnClc() {
             namestr = document.getElementById('<%= UserName.ClientID %>').value.length;
-            passstr = document.getElementById('<%= UserPassword.ClientID %>').value.length;
+                    passstr = document.getElementById('<%= UserPassword.ClientID %>').value.length;
             let k = 0
             if (namestr == '') {
                 document.getElementById("invMsgUserNM").className = "alert alert-danger";
                 document.getElementById("invMsgUserNM").innerHTML = "name should contain at least 1 symbol";
-                
+
             } else {
                 k++;
                 document.getElementById("invMsgUserNM").className = "invisible";
@@ -76,8 +77,29 @@
                 document.getElementById("invMsgUserPSW").className = "invisible";
             }
 
-            return k==2;
+            return k == 2;
         }
+
+        function setCookie(c_name, value, exdays) {
+            var exdate = new Date();
+            exdate.setDate(exdate.getDate() + exdays);
+            var c_value = escape(value) + ((exdays == null) ? "" : "; expires=" + exdate.toUTCString());
+            document.cookie = c_name + "=" + c_value;
+        }
+
+        function getCookie(c_name) {
+            var i, x, y, ARRcookies = document.cookie.split(";");
+            for (i = 0; i < ARRcookies.length; i++) {
+                x = ARRcookies[i].substr(0, ARRcookies[i].indexOf("="));
+                y = ARRcookies[i].substr(ARRcookies[i].indexOf("=") + 1);
+                x = x.replace(/^\s+|\s+$/g, "");
+                if (x == c_name) {
+                    return unescape(y);
+                }
+            }
+        }
+
+
 
         function validateEmail($email) {
             var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
@@ -87,10 +109,10 @@
         function RegisterBtnClc() {
 
             namestr = document.getElementById('<%= Login.ClientID %>').value.length;
-            passstr = document.getElementById('<%= Password.ClientID %>').value.length;
-            pass = document.getElementById('<%= Password.ClientID %>').value;
-            conf = document.getElementById('<%= Confirm.ClientID %>').value;
-            txtMail = document.getElementById('<%= Email.ClientID %>').value;
+                    passstr = document.getElementById('<%= Password.ClientID %>').value.length;
+                    pass = document.getElementById('<%= Password.ClientID %>').value;
+                    conf = document.getElementById('<%= Confirm.ClientID %>').value;
+                    txtMail = document.getElementById('<%= Email.ClientID %>').value;
             let k = 0;
             if (namestr == '') {
                 document.getElementById("invMsgLogin").className = "alert alert-danger";
@@ -116,7 +138,7 @@
                 k++;
                 document.getElementById("invMsg").className = "invisible";
             }
- 
+
             if (txtMail.length == '0') {
 
                 document.getElementById("invMsgEmail").className = "alert alert-danger";
@@ -132,13 +154,56 @@
                 }
             }
             return k == 3;
+        }
 
+        function DeleteCoockie() {
+            document.cookie = "name= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+        }
 
+        function singOut() {
+            alert("out");
+            document.getElementById("sigin").innerHTML = "Sign Up";
+            document.getElementById("sigin").onclick = function () { DisplayModal(); };
+            document.getElementById('<%= Login.ClientID %>').value = "";
+            DeleteCoockie();
+            return false;
+        }
+
+        function checkCookies() {
+            var text = "";
+            if (navigator.cookieEnabled == true) {
+                var Autorised = document.getElementById('<%= Login.ClientID %>').value;
+                alert("3" + Autorised);
+                if (Autorised != 0 && Autorised != "") {
+                    if (Autorised == "false") {
+                        DeleteCoockie();
+                        return;
+                    }
+                    setCookie("name", Autorised, 1);
+                } 
+
+                var coockie = getCookie("name");
+                if (coockie == 0 || coockie == "" || coockie == isNaN()) {
+                    DeleteCoockie();
+                } else
+                    if (coockie.length > 0 && coockie != "") {
+                    text = "sign out, " + coockie;
+                    document.getElementById("sigin").innerHTML = text;
+                    document.getElementById("sigin").onclick = function () { singOut(); }
+                }
+            } else {
+
+            }
 
         }
     </script>
+
 </head>
-    <body>
+
+
+
+    <body onload ="checkCookies()">
+
         <form id="form1" runat="server">
             <asp:ScriptManager ID="smMain" runat="server" EnablePageMethods="true" />
             <header class="header_area" id="header">
@@ -171,7 +236,7 @@
 
                                 <ul class="navbar-right">
                                     <li class="nav-item">
-                                        <button id="sigin" class="button button-header bg" onclick="return DisplayModal();">Sign up</button>
+                                        <button  onload="" id="sigin" class="button button-header bg" onclick="return DisplayModal();">Sign up</button>
                                          <!-- start popup -->
                                         <div id='overlay-'></div>
                                         <table>

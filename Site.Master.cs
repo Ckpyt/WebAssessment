@@ -209,14 +209,16 @@ namespace WebAssessment
                     if (result != null && result.Read())
                     {
                         id = Convert.ToInt64(result[0]);
-                        int rights = Convert.ToInt32(result[3]);
+                        int rights = Convert.ToInt32(result[4]);
                         IsAutorised = true;
                         Name = UserName.Text;
-                        ShowAlert(this, Name + " welcome on my site!");
-                        
+                        Login.Text = Name;
+                        Password.Text = DateTime.Now.ToString();
+                        //ShowAlert(this, Name + " welcome on my site!");
                     }
                     else
                     {
+                        Login.Text = "false";
                         ShowAlert(this, "this login and password not used in this site");
                         
                     }
