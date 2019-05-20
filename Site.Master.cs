@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Owin.Security;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -23,6 +26,21 @@ namespace WebAssessment
         {
             Register.OnClientClick = "return RegisterBtnClc()";
             LoginBtn.OnClientClick = "return LoginBtnClc()";
+
+            if (!IsPostBack)
+            {
+                if (Context.User.Identity.IsAuthenticated)
+                {
+                    //StatusText.Text = string.Format("Hello {0}!!", User.Identity.GetUserName());
+                    //LoginStatus.Visible = true;
+                    //LogoutButton.Visible = true;
+                }
+                else
+                {
+                    //LoginForm.Visible = true;
+                }
+            }
+
         }
 
         public static void ShowAlert(Control ctr, string alert)
@@ -76,26 +94,39 @@ namespace WebAssessment
             conn.Close();
         }
 
-        protected void RegisterUser()
+        protected bool RegisterUser()
         {
-            conn = new SqlConnection(ConnString);
-            conn.Open();
-            string s_quarry = "insert into tblUsers values(" + id.ToString()
-                            + ",'" + Login.Text + "','" + Password.Text + "','" + Email.Text + "',1);";
-            comm = new SqlCommand(s_quarry, conn);
-
-            try
+            var userStore = new UserStore<IdentityUser>();
+            UserManager<IdentityUser> manager = new UserManager<IdentityUser>(userStore);
+            manager.PasswordValidator = new PasswordValidator
             {
-                SqlDataReader result = comm.ExecuteReader();
-            }
-            catch (Exception ex)
-            {
-                ShowAlert(this, "error happens:" + ex.Message);
-                return;
-            }
+                RequiredLength = 1,
+                RequireNonLetterOrDigit = false,
+                RequireDigit = false,
+                RequireLowercase = false,
+                RequireUppercase = false,
+            };
 
-            ShowAlert(this, "user " + Login.Text + " successful register");
-            conn.Close();
+            var user = new IdentityUser() { UserName = Login.Text, Email = Email.Text };
+            IdentityResult result1 = manager.Create(user, Password.Text);
+            if (result1.Succeeded)
+            {
+                var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
+                var userIdentity = manager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
+                authenticationManager.SignIn(new AuthenticationProperties() { }, userIdentity);
+                //Response.Redirect("~/Login.aspx");
+
+
+                ShowAlert(this, "user " + Login.Text + " successful register");
+            }
+            else
+            {
+                string err = "Error happens:";
+                foreach (var er in result1.Errors)
+                    err += er + " ";
+                ShowAlert(this, err);
+            }
+            return result1.Succeeded;
         }
 
         protected Boolean RegisterBtn(object sender, EventArgs e)
@@ -110,75 +141,48 @@ namespace WebAssessment
                 ShowAlert(this, "Login and password should to contain at least 1 symbol");
                 return false; ;
             }
+            return RegisterUser();
+        }
 
-            CheckTableUsers();
+        protected void SignIn(object sender, EventArgs e)
+        {
+            var userStore = new UserStore<IdentityUser>();
+            var userManager = new UserManager<IdentityUser>(userStore);
+            var user = userManager.Find(UserName.Text, UserPassword.Text);
 
-            conn = new SqlConnection(ConnString);
-            conn.Open();
-            
-            string S_quarry = "select * from tblUsers where(Name='" + Login.Text
-                + "');";
-            SqlCommand comm = new SqlCommand(S_quarry, conn);
+            if (user != null)
+            {
+                var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
+                var userIdentity = userManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
 
-            SqlDataReader result = null;
-            try
-            {
-                result = comm.ExecuteReader();
-            }
-            catch (Exception ex)
-            {
-                ShowAlert(this, "error happens:" + ex.Message);
-                conn.Close();
-                return false;
-            }
-            if (result != null)
-            {
-                try
-                {
-                    if (result != null && result.Read())
-                    {
-                        id = Convert.ToInt64(result[0]);
-                        string name = Convert.ToString(result[1]);
-                        string pass = Convert.ToString(result[2]);
-                        string email= Convert.ToString(result[3]);
-                        int rights = Convert.ToInt32(result[4]);
-                        if (name.CompareTo(Login.Text) == 0 && pass.CompareTo(Password.Text) == 0)
-                        {
-                            IsAutorised = true;
-                            Name = UserName.Text;
-                            ShowAlert(this, Name + " welcome on my site!");
-                            conn.Close();
-                            return true;
-                        }
-                        else
-                        {
-                            ShowAlert(this, "user " + Login.Text + " already register");
-                            conn.Close();
-                            return false;
-                        }
-                    }
-                    else
-                    {
-                        RegisterUser();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    id = 1;
-                    ShowAlert(this, "error happens:" + ex.Message);
-                }
+                authenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = false }, userIdentity);
+                //Response.Redirect("~/Login.aspx");
             }
             else
             {
-                RegisterUser();
+                ShowAlert(this, "Invalid username or password.");
+                //StatusText.Text = "Invalid username or password.";
+                //LoginStatus.Visible = true;
             }
-            conn.Close();
-            return true;
         }
-    
+
+        protected void SignOut(object sender, EventArgs e)
+        {
+            var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
+            authenticationManager.SignOut();
+            //Response.Redirect("~/Login.aspx");
+        }
+
+
 
         protected void LoginBtn_Click(object sender, EventArgs e)
         {
+            var userStore = new UserStore<IdentityUser>();
+            UserManager<IdentityUser> manager = new UserManager<IdentityUser>(userStore);
+
+            SignIn(sender, e);
+
+            /*
             CheckTableUsers();
             conn = new SqlConnection(ConnString);
             conn.Open();
@@ -220,7 +224,6 @@ namespace WebAssessment
                     {
                         Login.Text = "false";
                         ShowAlert(this, "this login and password not used in this site");
-                        
                     }
                 }
                 catch (Exception ex)
@@ -231,6 +234,7 @@ namespace WebAssessment
             }
 
             conn.Close();
+            */
         }
 
         protected void Register_Click(object sender, EventArgs e)

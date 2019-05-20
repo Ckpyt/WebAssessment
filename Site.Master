@@ -25,7 +25,6 @@
     <script type="text/javascript">
 
         function DisplayModal() {
-            alert("display");
             document.getElementById("overlay-").style.height = document.body.clientHeight + 'px';
             document.getElementById("overlay-").className = "OverlayEffect";
             document.getElementById("modalMsg-1").className = "ShowModal";
@@ -161,7 +160,6 @@
         }
 
         function singOut() {
-            alert("out");
             document.getElementById("sigin").innerHTML = "Sign Up";
             document.getElementById("sigin").onclick = function () { DisplayModal(); };
             document.getElementById('<%= Login.ClientID %>').value = "";
@@ -172,8 +170,7 @@
         function checkCookies() {
             var text = "";
             if (navigator.cookieEnabled == true) {
-                var Autorised = document.getElementById('<%= Login.ClientID %>').value;
-                alert("3" + Autorised);
+                var Autorised = document.getElementById('<%= LoginNameRes.ClientID %>').value;
                 if (Autorised != 0 && Autorised != "") {
                     if (Autorised == "false") {
                         DeleteCoockie();
@@ -203,8 +200,9 @@
 
 
     <body onload ="checkCookies()">
-
         <form id="form1" runat="server">
+            <asp:HiddenField ID="LoginNameRes" runat="server" />
+
             <asp:ScriptManager ID="smMain" runat="server" EnablePageMethods="true" />
             <header class="header_area" id="header">
                 <div class="main_menu">
