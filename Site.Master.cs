@@ -26,6 +26,7 @@ namespace WebAssessment
         {
             Register.OnClientClick = "return RegisterBtnClc()";
             LoginBtn.OnClientClick = "return LoginBtnClc()";
+            SignBtn.OnClientClick = "return DisplayModal()";
 
             if (!IsPostBack)
             {
@@ -154,8 +155,11 @@ namespace WebAssessment
             {
                 var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
                 var userIdentity = userManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
-
+                LoginNameRes.Value = UserName.Text;
                 authenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = false }, userIdentity);
+                SignBtn.Visible = false;
+                Logout.Visible = true;
+                Logout.Text = "Sign out, " + UserName.Text;
                 //Response.Redirect("~/Login.aspx");
             }
             else
@@ -171,6 +175,7 @@ namespace WebAssessment
             var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
             authenticationManager.SignOut();
             //Response.Redirect("~/Login.aspx");
+
         }
 
 
@@ -243,6 +248,18 @@ namespace WebAssessment
         }
 
         protected void Button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Logout_Click(object sender, EventArgs e)
+        {
+            SignOut(sender, e);
+            Logout.Visible = false;
+            SignBtn.Visible = true;
+        }
+
+        protected void sigin_Click(object sender, EventArgs e)
         {
 
         }

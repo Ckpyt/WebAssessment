@@ -40,6 +40,24 @@ namespace WebAssessment {
         protected global::System.Web.UI.ScriptManager smMain;
         
         /// <summary>
+        /// Logout control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Logout;
+        
+        /// <summary>
+        /// SignBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button SignBtn;
+        
+        /// <summary>
         /// Login control.
         /// </summary>
         /// <remarks>
