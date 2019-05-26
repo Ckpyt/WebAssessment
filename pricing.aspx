@@ -23,7 +23,9 @@
     <div class="container">
       <div class="section-intro pb-85px text-center">
         <h2 class="section-intro__title">Choose Your Plan</h2>
-        <p class="section-intro__subtitle">Vel aliquam quis, nulla pede mi commodo tristique nam hac. Luctus torquent velit felis commodo pellentesque nulla cras. Tincidunt hacvel alivquam quis nulla pede mi commodo tristique nam hac  luctus torquent</p>
+        <p class="section-intro__subtitle">
+            
+            Vel aliquam quis, nulla pede mi commodo tristique nam hac. Luctus torquent velit felis commodo pellentesque nulla cras. Tincidunt hacvel alivquam quis nulla pede mi commodo tristique nam hac  luctus torquent</p>
       </div>
 
       <div class="row">

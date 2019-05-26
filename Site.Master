@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="WebAssessment.Site" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="WebAssessment.MySite" %>
 
 <!DOCTYPE html>
 
@@ -25,20 +25,15 @@
 
 
 </head>
-
+    <script src="vendors/jquery/jquery-3.2.1.min.js"></script>
+    <script src="vendors/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="vendors/owl-carousel/owl.carousel.min.js"></script>
+    <script src="js/jquery.ajaxchimp.min.js"></script>
+    <script src="js/mail-script.js"></script>
+    <script src="js/main.js"></script>
     <script type="text/javascript">
 
-        function DisplayModal() {
-            alert(1);
-            document.getElementById("overlay-").style.height = document.body.clientHeight + 'px';
-            document.getElementById("overlay-").className = "OverlayEffect";
-            document.getElementById("modalMsg-1").className = "ShowModal";
-            document.getElementById("modalMsg-2").className = "ShowModal";
-            document.getElementById("SignBtn").className = "HideModal";
-            document.getElementById("header").className = "";
-            
-            return false;
-        }
+       
 
         function RemoveModal() {
             document.getElementById("overlay-").style.height = "0px";
@@ -106,59 +101,13 @@
 
 
 
-        function validateEmail($email) {
-            var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-            return emailReg.test($email);
-        }
-
         function RegisterBtnClc() {
-
             namestr = document.getElementById('<%= Login.ClientID %>').value.length;
-                    passstr = document.getElementById('<%= Password.ClientID %>').value.length;
-                    pass = document.getElementById('<%= Password.ClientID %>').value;
-                    conf = document.getElementById('<%= Confirm.ClientID %>').value;
-                    txtMail = document.getElementById('<%= Email.ClientID %>').value;
-            let k = 0;
-            if (namestr == '') {
-                document.getElementById("invMsgLogin").className = "alert alert-danger";
-                document.getElementById("invMsgLogin").innerHTML = "name should contain at least 1 symbol";
-            } else {
-                k++
-                document.getElementById("invMsgLogin").className = "invisible";
-            }
-
-            if (passstr == '') {
-                document.getElementById("invMsgPass").className = "alert alert-danger";
-                document.getElementById("invMsgPass").innerHTML = "password should contain at least 1 symbol";
-            } else {
-                k++;
-                document.getElementById("invMsgPass").className = "invisible";
-            }
-
-            if (pass != conf) {
-                document.getElementById("invMsg").className = "alert alert-danger";
-                document.getElementById("invMsg").innerHTML = "password and confirm password do not match";
-                return false;
-            } else {
-                k++;
-                document.getElementById("invMsg").className = "invisible";
-            }
-
-            if (txtMail.length == '0') {
-
-                document.getElementById("invMsgEmail").className = "alert alert-danger";
-                document.getElementById("invMsgEmail").innerHTML = "email should not be empty";
-                return false;
-            } else {
-                if (!validateEmail(txtMail)) {
-                    document.getElementById("invMsgEmail").className = "alert alert-danger";
-                    document.getElementById("invMsgEmail").innerHTML = "sorry, your email is not correct";
-                    return false;
-                } else {
-                    document.getElementById("invMsgEmail").className = "invisible";
-                }
-            }
-            return k == 3;
+            passstr = document.getElementById('<%= Password.ClientID %>').value.length;
+            pass = document.getElementById('<%= Password.ClientID %>').value;
+            conf = document.getElementById('<%= Confirm.ClientID %>').value;
+            txtMail = document.getElementById('<%= Email.ClientID %>').value;
+            return RegisterCheck(namestr, passstr, pass, conf, txtMail);
         }
 
         function DeleteCoockie() {
@@ -197,7 +146,9 @@
                                             <li class="nav-item"><a class="nav-link" href="blog-detail.aspx">Blog Details</a></li>
                                         </ul>
                                     </li>
+                                    
                                     <li class="nav-item"><a class="nav-link" href="contact.aspx">Contact</a></li>
+                                    <li class="nav-item"><asp:LinkButton class="nav-link" ID="Profilelnk" runat="server" OnClick="Profilelnk_Click">Profile</asp:LinkButton> </li>
                                 </ul>
 
                                 <ul class="navbar-right">
@@ -430,12 +381,7 @@
                                 
         <!-- ================ End footer Area ================= -->
 
-        <script src="vendors/jquery/jquery-3.2.1.min.js"></script>
-        <script src="vendors/bootstrap/bootstrap.bundle.min.js"></script>
-        <script src="vendors/owl-carousel/owl.carousel.min.js"></script>
-        <script src="js/jquery.ajaxchimp.min.js"></script>
-        <script src="js/mail-script.js"></script>
-        <script src="js/main.js"></script>
+        
         </form>
                            
 

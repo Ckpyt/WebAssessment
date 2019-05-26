@@ -14,7 +14,7 @@ using System.Web.UI.WebControls;
 namespace WebAssessment
 {
 
-    public partial class Site : System.Web.UI.MasterPage
+    public partial class MySite : System.Web.UI.MasterPage
     {
         private string ConnString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["ModalConnectionString"].ConnectionString;
         private SqlConnection conn;
@@ -22,6 +22,24 @@ namespace WebAssessment
         private Int64 id = 0;
         private bool IsAutorised = false;
         private string Name = "";
+
+        private static MySite instance = null;
+        public static MySite Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new MySite();
+                }
+                return instance;
+            }
+        }
+
+        public MySite()
+        {
+            instance = this;
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             Register.OnClientClick = "return RegisterBtnClc()";
@@ -30,16 +48,21 @@ namespace WebAssessment
 
             if (!IsPostBack)
             {
+                Logout.Visible = Context.User.Identity.IsAuthenticated;
                 if (Context.User.Identity.IsAuthenticated)
                 {
-                    //StatusText.Text = string.Format("Hello {0}!!", User.Identity.GetUserName());
-                    //LoginStatus.Visible = true;
-                    //LogoutButton.Visible = true;
+                    SignBtn.Visible = false;
+                    Logout.Visible = true;
+                    Logout.Text = "Sign out, " + Context.User.Identity.Name;
+                    Profilelnk.Visible = true;
                 }
                 else
                 {
-                    //LoginForm.Visible = true;
+                    SignBtn.Visible = true;
+                    Logout.Visible = false;
+                    Profilelnk.Visible = false;
                 }
+                
             }
 
         }
@@ -98,6 +121,7 @@ namespace WebAssessment
         protected bool RegisterUser()
         {
             var userStore = new UserStore<IdentityUser>();
+            var rm = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>());
             UserManager<IdentityUser> manager = new UserManager<IdentityUser>(userStore);
             manager.PasswordValidator = new PasswordValidator
             {
@@ -116,7 +140,7 @@ namespace WebAssessment
                 var userIdentity = manager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
                 authenticationManager.SignIn(new AuthenticationProperties() { }, userIdentity);
                 //Response.Redirect("~/Login.aspx");
-
+                manager.AddToRole(user.Id, "User");
 
                 ShowAlert(this, "user " + Login.Text + " successful register");
             }
@@ -145,7 +169,7 @@ namespace WebAssessment
             return RegisterUser();
         }
 
-        protected void SignIn(object sender, EventArgs e)
+        protected bool SignIn(object sender, EventArgs e)
         {
             var userStore = new UserStore<IdentityUser>();
             var userManager = new UserManager<IdentityUser>(userStore);
@@ -160,6 +184,7 @@ namespace WebAssessment
                 SignBtn.Visible = false;
                 Logout.Visible = true;
                 Logout.Text = "Sign out, " + UserName.Text;
+                return true;
                 //Response.Redirect("~/Login.aspx");
             }
             else
@@ -167,14 +192,15 @@ namespace WebAssessment
                 ShowAlert(this, "Invalid username or password.");
                 //StatusText.Text = "Invalid username or password.";
                 //LoginStatus.Visible = true;
+                return false;
             }
         }
 
-        protected void SignOut(object sender, EventArgs e)
+        public void SignOut(object sender, EventArgs e)
         {
             var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
             authenticationManager.SignOut();
-            //Response.Redirect("~/Login.aspx");
+            Response.Redirect("~/index.aspx");
 
         }
 
@@ -185,8 +211,8 @@ namespace WebAssessment
             var userStore = new UserStore<IdentityUser>();
             UserManager<IdentityUser> manager = new UserManager<IdentityUser>(userStore);
 
-            SignIn(sender, e);
-
+            if(SignIn(sender, e))
+                Response.Redirect("~/profile.aspx");
             /*
             CheckTableUsers();
             conn = new SqlConnection(ConnString);
@@ -262,6 +288,11 @@ namespace WebAssessment
         protected void sigin_Click(object sender, EventArgs e)
         {
 
+        }
+
+        protected void Profilelnk_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/profile.aspx");
         }
     }
 }

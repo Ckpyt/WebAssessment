@@ -7,11 +7,12 @@ using System.Web.UI.WebControls;
 
 namespace WebAssessment
 {
+    
     public partial class pricing : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+           
         }
     }
 }

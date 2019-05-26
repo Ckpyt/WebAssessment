@@ -10,7 +10,8 @@
 namespace WebAssessment {
     
     
-    public partial class Site {
+    public partial class MySite
+    {
         
         /// <summary>
         /// form1 control.
@@ -28,7 +29,7 @@ namespace WebAssessment {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField LoginNameRes;
+        public global::System.Web.UI.WebControls.HiddenField LoginNameRes;
         
         /// <summary>
         /// smMain control.
@@ -38,6 +39,15 @@ namespace WebAssessment {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.ScriptManager smMain;
+        
+        /// <summary>
+        /// Profilelnk control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton Profilelnk;
         
         /// <summary>
         /// Logout control.

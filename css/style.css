@@ -14,6 +14,18 @@
     left: 0;
 }
 
+input.blue-btn{
+    background-color: #412fb3;
+    color:#FFFFFF;
+}
+
+.centered-element {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  
+}
+
 .invisible{
     width:0px;
     height:0px;
@@ -627,8 +639,10 @@ border:0;
 transition:all 0.3s ease 0s}
 .card-pricing:hover{background:#fff;
 box-shadow:0px 20px 25.5px 4.5px rgba(33,20,106,0.1)}
-.card-pricing:hover .button{background:#21146a;
+.card-pricing:hover 
+.button{background:#21146a;
 color:#fff}
+
 .card-pricing__header{border-bottom:1px solid #ebebeb;
 padding:40px 7px}
 .card-pricing__header h4{font-size:27px;

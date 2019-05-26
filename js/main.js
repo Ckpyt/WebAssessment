@@ -1,4 +1,66 @@
-$(function() {
+function DisplayModal() {
+    document.getElementById("overlay-").style.height = document.body.clientHeight + 'px';
+    document.getElementById("overlay-").className = "OverlayEffect";
+    document.getElementById("modalMsg-1").className = "ShowModal";
+    document.getElementById("modalMsg-2").className = "ShowModal";
+    document.getElementById("SignBtn").className = "HideModal";
+    document.getElementById("header").className = "";
+    return false;
+}
+
+function validateEmail($email) {
+    var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+    return emailReg.test($email);
+}
+
+
+
+function RegisterCheck(namestr, passstr, pass, conf, txtMail) {
+
+    let k = 0;
+    if (namestr == '') {
+        document.getElementById("invMsgLogin").className = "alert alert-danger";
+        document.getElementById("invMsgLogin").innerHTML = "name should contain at least 1 symbol";
+    } else {
+        k++
+        document.getElementById("invMsgLogin").className = "invisible";
+    }
+
+    if (passstr == '') {
+        document.getElementById("invMsgPass").className = "alert alert-danger";
+        document.getElementById("invMsgPass").innerHTML = "password should contain at least 1 symbol";
+    } else {
+        k++;
+        document.getElementById("invMsgPass").className = "invisible";
+    }
+
+    if (pass != conf) {
+        document.getElementById("invMsg").className = "alert alert-danger";
+        document.getElementById("invMsg").innerHTML = "password and confirm password do not match";
+        return false;
+    } else {
+        k++;
+        document.getElementById("invMsg").className = "invisible";
+    }
+
+    if (txtMail.length == '0') {
+
+        document.getElementById("invMsgEmail").className = "alert alert-danger";
+        document.getElementById("invMsgEmail").innerHTML = "email should not be empty";
+        return false;
+    } else {
+        if (!validateEmail(txtMail)) {
+            document.getElementById("invMsgEmail").className = "alert alert-danger";
+            document.getElementById("invMsgEmail").innerHTML = "sorry, your email is not correct";
+            return false;
+        } else {
+            document.getElementById("invMsgEmail").className = "invisible";
+        }
+    }
+    return k == 3;
+}
+
+$(function () {
   "use strict";
 
   var nav_offset_top = $('header').height() + 50; 
@@ -18,26 +80,6 @@ $(function() {
         };
     };
     navbarFixed();
-
-
- //       t the class from DIV for activate a Modal.
-    function DisplayModal() {
-        alert("funcEn");
-        document.getElementById("overlay-").style.height = document.body.clientHeight + 'px';
-        document.getElementById("overlay-").className = "OverlayEffect";
-        document.getElementById("modalMsg-").className = "ShowModal";
-        alert("funcEx");
-    }
-
-
-//move the class from DIV for disable Modal.
-    function RemoveModal() {
-        alert("funcEn");
-        document.getElementById("overlay-").style.height = "0px";
-        document.getElementById("overlay-").className = "";
-        document.getElementById("modalMsg-").className = "HideModal";
-        alert("funcEx");
-    }
 
 
     /*-------------------------------------------------------------------------------
