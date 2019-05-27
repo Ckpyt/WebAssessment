@@ -132,6 +132,14 @@ namespace WebAssessment
                 RequireUppercase = false,
             };
 
+            var checkName = manager.FindByName(Login.Text);
+            var checkEmail = manager.FindByEmail(Email.Text);
+            if(checkName != null || checkEmail != null)
+            {
+                ShowAlert(this, "Name and e-mail should be unique");
+                return false;
+            }
+
             var user = new IdentityUser() { UserName = Login.Text, Email = Email.Text };
             IdentityResult result1 = manager.Create(user, Password.Text);
             if (result1.Succeeded)
@@ -141,6 +149,10 @@ namespace WebAssessment
                 authenticationManager.SignIn(new AuthenticationProperties() { }, userIdentity);
                 //Response.Redirect("~/Login.aspx");
                 manager.AddToRole(user.Id, "User");
+
+                UserName.Text = Login.Text;
+                UserPassword.Text = Password.Text;
+                LoginBtn_Click(null, null);
 
                 ShowAlert(this, "user " + Login.Text + " successful register");
             }

@@ -21,14 +21,14 @@
   <script>
 
       function ChangeDetailsBtnClc() {
-          alert(1);
+          
           namestr = document.getElementById('<%= Login.ClientID %>').innerText.length;
           oldPass = document.getElementById('<%= Password.ClientID %>').value.length;
           passstr = document.getElementById('<%= newPassword.ClientID %>').value.length;
           pass = document.getElementById('<%= newPassword.ClientID %>').value;
           conf = document.getElementById('<%= Confirm.ClientID %>').value;
           txtMail = document.getElementById('<%= UserEmail.ClientID %>').value;
-          alert(2);
+          
           let k = 0;
           if (namestr == '') {
               document.getElementById("invMsgLogin2").className = "alert alert-danger";
@@ -39,7 +39,7 @@
           }
 
           if (oldPass > 0 && passstr == 0) {
-              alert(3);
+              
               document.getElementById("invMsgPass2").className = "alert alert-danger";
               document.getElementById("invMsgPass2").innerHTML = "password should contain at least 1 symbol";
           } else {
@@ -47,9 +47,9 @@
               k++;
           }
 
-          alert(4 + " " + oldPass + " " + passstr);
+          
           if (passstr > 0 && oldPass == 0) {
-              alert(5);
+              
               document.getElementById("invMsgPass1").className = "alert alert-danger";
               document.getElementById("invMsgPass1").innerHTML = "please, enter your old password";
           } else {
@@ -80,7 +80,7 @@
                   document.getElementById("invMsgEmail2").className = "invisible";
               }
           }
-          alert(10);
+          
           return k == 4;
       }
 
@@ -162,6 +162,15 @@
                     <td colspan="2"> 
                         <div id="invMsgEmail2" class="invisible">message</div>
                     </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="nav-link tbl"> Your description: </div>
+                    </td>
+                    <td>
+                        <asp:TextBox id="Description" runat="server" Height="132px" TextMode="MultiLine" Width="229px" />
+                    </td>
+                </tr>
                 </table>
             <!-- END POPUP BLOCK -->
             <!-- START POPUP BLOCK -->
@@ -179,76 +188,6 @@
   <!--================ Pricing section end =================--> 
   
 
-
-
-  <!--================ Testimonial section start =================-->      
-  <section class="section-padding bg-magnolia">
-    <div class="container">
-      <div class="section-intro pb-5 text-center">
-        <h2 class="section-intro__title">Client Says Me</h2>
-        <p class="section-intro__subtitle">Vel aliquam quis, nulla pede mi commodo tristique nam hac. Luctus torquent velit felis commodo pellentesque nulla cras. Tincidunt hacvel alivquam </p>
-      </div>
-
-      <div class="owl-carousel owl-theme testimonial">
-        <div class="testimonial__item text-center">
-          <div class="testimonial__img">
-            <img src="img/testimonial/testimonial1.png" alt="">
-          </div>
-          <div class="testimonial__content">
-            <h3>Stephen Mcmilan</h3>
-            <p>Executive, ACI Group</p>
-            <p class="testimonial__i">Also made from. Give may saying meat there from heaven it lights face had is gathered god earth light for life may itself shall whales made they're blessed whales also made from give may saying meat. There from heaven it lights face had also made from. Give may saying meat there from heaven</p>
-          </div>
-        </div>
-        <div class="testimonial__item text-center">
-          <div class="testimonial__img">
-            <img src="img/testimonial/testimonial1.png" alt="">
-          </div>
-          <div class="testimonial__content">
-            <h3>Stephen Mcmilan</h3>
-            <p>Executive, ACI Group</p>
-            <p class="testimonial__i">Also made from. Give may saying meat there from heaven it lights face had is gathered god earth light for life may itself shall whales made they're blessed whales also made from give may saying meat. There from heaven it lights face had also made from. Give may saying meat there from heaven</p>
-          </div>
-        </div>
-        <div class="testimonial__item text-center">
-          <div class="testimonial__img">
-            <img src="img/testimonial/testimonial1.png" alt="">
-          </div>
-          <div class="testimonial__content">
-            <h3>Stephen Mcmilan</h3>
-            <p>Executive, ACI Group</p>
-            <p class="testimonial__i">Also made from. Give may saying meat there from heaven it lights face had is gathered god earth light for life may itself shall whales made they're blessed whales also made from give may saying meat. There from heaven it lights face had also made from. Give may saying meat there from heaven</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!--================ Testimonial section end =================-->      
-
-
-  <!--================ Start Clients Logo Area =================-->
-	<section class="clients_logo_area section-padding">
-		<div class="container">
-			<div class="clients_slider owl-carousel">
-				<div class="item">
-					<img src="img/clients-logo/c-logo-1.png" alt="">
-				</div>
-				<div class="item">
-					<img src="img/clients-logo/c-logo-2.png" alt="">
-				</div>
-				<div class="item">
-					<img src="img/clients-logo/c-logo-3.png" alt="">
-				</div>
-				<div class="item">
-					<img src="img/clients-logo/c-logo-4.png" alt="">
-				</div>
-				<div class="item">
-					<img src="img/clients-logo/c-logo-5.png" alt="">
-				</div>
-			</div>
-		</div>
-	</section>
-	<!--================ End Clients Logo Area =================-->
 
 
 </asp:Content>
