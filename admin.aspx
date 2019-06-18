@@ -1,11 +1,7 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="_Default" %>
-
-<!DOCTYPE html>
-
-<html>
-<head runat="server">
-    <title></title>
-    <link href="css/style.css" rel="stylesheet" />
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" EnableEventValidation="false" AutoEventWireup="true" CodeBehind="admin.aspx.cs" Inherits="WebAssessment.admin" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+      <!--================ Hero sm Banner start =================-->      
+    
     <script type="text/javascript">
         function DisplayModal(id) {
             document.getElementById("overlay-" + id).style.height = document.body.clientHeight + 'px';
@@ -18,79 +14,62 @@
             document.getElementById("overlay-" + id).className = "";
             document.getElementById("modalMsg-" + id).className = "HideModal";
         }
-    </script>
-        <style>
-        .OverlayEffect {
-            background-color: black;
-            filter: alpha(opacity=70);
-            opacity: 0.7;
-            width: 100%;
-            height: 100%;
-            z-index: 400;
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
+      </script>
+      <div class="hero-banner--sm__content">
+        <h1>Admin page</h1>
+        <nav aria-label="breadcrumb" class="banner-breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.aspx">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Admin page</li>
+          </ol>
+        </nav>
+      </div>
 
-        .HideModal {
-            display: none;
-        }
-
-        .modalPopup {
-            z-index: 1 !important;
-        }
-
-        .ShowModal {
-            top: 200px;
-            z-index: 1000;
-            position: absolute;
-            background-color: lightblue;
-            text-align: center;
-            width: 300px;
-            height: 200px;
-        }
-    </style>
-
-</head>
-<body>
-    <form id="form1" runat="server">
-        <div>
-            Default form <br/>
-            <asp:Repeater ID="rptFriends" runat="server">
+  <!--================ Hero sm Banner end =================-->
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <div class="container centered-element">
+    <asp:Repeater ID="rptUsers" runat="server" OnItemCommand="rptUsers_ItemCommand">
+    
                 <ItemTemplate>
-                    <table>
+                    <div class="container centered-element">
+                    <table class="centered-element">
                         <tr>
                             <td>Name
                             </td>
                             <td>
-                                <%# Eval("Name") %>
+                                <%# Eval("UserName") %>
                             </td>
                         </tr>
                         <tr>
                             <td>Place
                             </td>
                             <td>
-                                <%# Eval("Place") %>
+                                <%# Eval("Email") %>
                             </td>
                         </tr>
                         <tr>
-                            <td>Mobile
+                            <td>Desription:
                             </td>
+                            
+                        </tr>
+                        <tr>
                             <td>
-                                <%# Eval("Mobile") %>
+                                <%# Eval("Description") %>
                             </td>
                         </tr>
                         <tr>
                             <td rowspan="2">
-                                <input id="btnDeleteClient" type="button" value="Delete" onclick="DisplayModal('<%# Eval("FriendID")%>')" />
+                                <input id="btnDeleteClient"  class="button blue-btn  ibvm" type="button" value="Delete" onclick="DisplayModal('<%# Eval("Id")%>')" />
                             </td>
 
                         </tr>
                     </table>
+                    </div>
                     <%--Start Delete Modal Popup--%>
 
-                    <div id='overlay-<%# Eval("FriendID")%>'></div>
-                    <div id='modalMsg-<%# Eval("FriendID")%>' class="HideModal">
+                    <div id='overlay-<%# Eval("Id")%>'></div>
+                    <div id='modalMsg-<%# Eval("Id")%>' class="HideModal">
 
                         <div class="popupbox">
                             <br />
@@ -109,9 +88,9 @@
                                 <!-- START POPUP BLOCK -->
                                 <br />
                                 <div class="popblock popblocksubbtn">
-                                    <asp:Button ID="btnDelete" runat="server" Text="Yes" CausesValidation="False" CommandName="DeleteItem" />
-                                    <input type="submit" value="No" class="button bluebg ibvm" onclick="RemoveModal('<%# Eval("FriendID")%>    ')" />
-                                    <asp:Button ID="btnHide" runat="server" Text="Back" Style="display: none" />
+                                    <asp:Button  class="button blue-btn  ibvm" CausesValidation="False" CommandArgument='<%#Eval("Id")%>' ID="btnDelete" runat="server"  Text="Yes" OnClick="ConfirmButton_Click" />
+                                    <input type="submit" value="No" class="button bluebg ibvm" onclick="RemoveModal('<%# Eval("Id")%>    ')" />
+                                    <asp:Button  class="button blue-btn  ibvm" ID="btnHide" runat="server" Text="Back" Style="display: none" />
                                 </div>
                                 <!-- END POPUP BLOCK -->
                             </div>
@@ -123,9 +102,7 @@
                 <SeparatorTemplate>
                     <hr />
                 </SeparatorTemplate>
-            </asp:Repeater>
-
-        </div>
-    </form>
-</body>
-</html>
+            
+    </asp:Repeater>
+    </div>
+</asp:Content>

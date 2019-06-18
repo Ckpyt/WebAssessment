@@ -10,8 +10,7 @@
 namespace WebAssessment {
     
     
-    public partial class MySite
-    {
+    public partial class MySite {
         
         /// <summary>
         /// form1 control.
@@ -122,6 +121,15 @@ namespace WebAssessment {
         protected global::System.Web.UI.WebControls.TextBox UserName;
         
         /// <summary>
+        /// invMsgUserNM control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label invMsgUserNM;
+        
+        /// <summary>
         /// UserPassword control.
         /// </summary>
         /// <remarks>
@@ -138,6 +146,15 @@ namespace WebAssessment {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button LoginBtn;
+        
+        /// <summary>
+        /// RestoreBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button RestoreBtn;
         
         /// <summary>
         /// head control.

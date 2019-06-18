@@ -18,7 +18,7 @@
   <!--================ Hero sm Banner end =================-->
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-  <script>
+    <script>
 
       function ChangeDetailsBtnClc() {
           
@@ -176,6 +176,7 @@
             <!-- START POPUP BLOCK -->
             <br />
             <div class="popblock popblocksubbtn">
+                <asp:Button ID="AdminMode" class="button blue-btn  ibvm" runat="server" Text="Open admin page" OnClick="AdminMode_Click" Visible="False" />
                 <asp:Button ID="RemoveUser" class="button blue-btn  ibvm" runat="server" Text="Delete account" OnClick="DeleteAccount_Click"/>
                 <asp:Button ID="ChangeDetails" class="button blue-btn  ibvm" runat="server" Text="Change profile" OnClick="Profilelnk_Click"/>
             </div>

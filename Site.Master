@@ -80,6 +80,21 @@
             return k == 2;
         }
 
+        function RestoreBtnClc() {
+            namestr = document.getElementById('<%= UserName.ClientID %>').value.length;
+            document.getElementById("invMsgUserPSW").className = "invisible";
+
+            let k = 0
+            if (namestr == '') {
+                document.getElementById("invMsgUserNM").className = "alert alert-danger";
+                document.getElementById("invMsgUserNM").innerHTML = "name should contain at least 1 symbol";
+                return false;
+            } else {
+                return true;
+                document.getElementById("invMsgUserNM").className = "invisible";
+            }
+        }
+
         function setCookie(c_name, value, exdays) {
             var exdate = new Date();
             exdate.setDate(exdate.getDate() + exdays);
@@ -262,7 +277,7 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td colspan="2"> 
-                                                                            <div id="invMsgUserNM" class="invisible">message</div>
+                                                                            <asp:Label ID="invMsgUserNM" class="invisible" runat="server" Text="Label">message</asp:Label>
                                                                         </td>
                                                                     <tr/>
                                                                     <tr>
@@ -286,6 +301,9 @@
                                                        
                                                                     <asp:Button ID="LoginBtn" class="button bluebg ibvm" runat="server" Text="Login" OnClick="LoginBtn_Click" />
                                                         
+                                                                </div>
+                                                                <div class="popblock popblocksubbtn">
+                                                                    <asp:Button ID="RestoreBtn" class="button bluebg ibvm" runat="server" Text="Restore password" OnCLick="Restore_Click"/>
                                                                 </div>
                                                                 <!-- END POPUP BLOCK -->
                                                             </div>

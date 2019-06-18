@@ -107,6 +107,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="admin.aspx" />
     <Content Include="blog-detail.aspx" />
     <Content Include="blog-details.html" />
     <Content Include="blog.aspx" />
@@ -116,7 +117,7 @@
     <Content Include="css\style.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Default.aspx" />
+    <Content Include="Example.aspx" />
     <Content Include="feature.aspx" />
     <Content Include="feature.html" />
     <Content Include="img\banner\banner-bg.png" />
@@ -167,7 +168,7 @@
     <Content Include="img\home\solution.png" />
     <Content Include="img\logo.png" />
     <Content Include="img\testimonial\testimonial1.png" />
-    <Content Include="index.aspx" />
+    <Content Include="Index.aspx" />
     <Content Include="index1.html" />
     <Content Include="js\contact.js" />
     <Content Include="js\jquery.ajaxchimp.min.js" />
@@ -175,6 +176,7 @@
     <Content Include="js\jquery.validate.min.js" />
     <Content Include="js\mail-script.js" />
     <Content Include="js\main.js" />
+    <Content Include="login.aspx" />
     <Content Include="Parason Software -doc\css\font-awesome.min.css" />
     <Content Include="Parason Software -doc\css\main.css" />
     <Content Include="Parason Software -doc\css\normalize.min.css" />
@@ -229,6 +231,7 @@
     <Content Include="Parason Software -doc\syntax-highlighter\styles\shThemeMDUltra.css" />
     <Content Include="Parason Software -doc\syntax-highlighter\styles\shThemeMidnight.css" />
     <Content Include="Parason Software -doc\syntax-highlighter\styles\shThemeRDark.css" />
+    <Content Include="PasswordChangeConfirm.aspx" />
     <Content Include="profile.aspx" />
     <Content Include="pricing.aspx" />
     <Content Include="pricing.html" />
@@ -615,6 +618,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="admin.aspx.cs">
+      <DependentUpon>admin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin.aspx.designer.cs">
+      <DependentUpon>admin.aspx</DependentUpon>
+    </Compile>
     <Compile Include="blog-detail.aspx.cs">
       <DependentUpon>blog-detail.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -636,8 +646,8 @@
     <Compile Include="contact.aspx.designer.cs">
       <DependentUpon>contact.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
+    <Compile Include="Example.aspx.cs">
+      <DependentUpon>Example.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="feature.aspx.cs">
@@ -647,12 +657,26 @@
     <Compile Include="feature.aspx.designer.cs">
       <DependentUpon>feature.aspx</DependentUpon>
     </Compile>
-    <Compile Include="index.aspx.cs">
-      <DependentUpon>index.aspx</DependentUpon>
+    <Compile Include="Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="index.aspx.designer.cs">
-      <DependentUpon>index.aspx</DependentUpon>
+    <Compile Include="Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="login.aspx.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="login.aspx.designer.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PasswordChangeConfirm.aspx.cs">
+      <DependentUpon>PasswordChangeConfirm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PasswordChangeConfirm.aspx.designer.cs">
+      <DependentUpon>PasswordChangeConfirm.aspx</DependentUpon>
     </Compile>
     <Compile Include="profile.aspx.cs">
       <DependentUpon>profile.aspx</DependentUpon>

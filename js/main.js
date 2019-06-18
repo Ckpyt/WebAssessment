@@ -37,7 +37,7 @@ function RegisterCheck(namestr, passstr, pass, conf, txtMail) {
     if (pass != conf) {
         document.getElementById("invMsg").className = "alert alert-danger";
         document.getElementById("invMsg").innerHTML = "password and confirm password do not match";
-        return false;
+
     } else {
         k++;
         document.getElementById("invMsg").className = "invisible";

@@ -10,6 +10,7 @@ using System.Web.Script.Services;
 using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Net.Mail;
 
 namespace WebAssessment
 {
@@ -45,6 +46,7 @@ namespace WebAssessment
             Register.OnClientClick = "return RegisterBtnClc()";
             LoginBtn.OnClientClick = "return LoginBtnClc()";
             SignBtn.OnClientClick = "return DisplayModal()";
+            RestoreBtn.OnClientClick = "return LoginBtnClc()";
 
             if (!IsPostBack)
             {
@@ -152,9 +154,11 @@ namespace WebAssessment
 
                 UserName.Text = Login.Text;
                 UserPassword.Text = Password.Text;
+                SendEmail(user, "Hello, " + user.UserName + "<br>Congratilation!<br> You was registred on my site!<br> I'll never send you any junk mails, only security confirmations.<br><br>Cheers, Dmitriy Shabalin",
+                    "Registration complite");
                 LoginBtn_Click(null, null);
 
-                ShowAlert(this, "user " + Login.Text + " successful register");
+                //ShowAlert(this, "user " + Login.Text + " successful register");
             }
             else
             {
@@ -164,6 +168,43 @@ namespace WebAssessment
                 ShowAlert(this, err);
             }
             return result1.Succeeded;
+        }
+
+        public void SendEmail(IdentityUser user, string message, string subject)
+        {
+
+            System.Net.Mail.MailMessage mail = new System.Net.Mail.MailMessage();
+
+            mail.To.Add(user.Email); //What address you send your email
+            mail.From = new MailAddress("ckpyt.site@gmail.com", "Ckpyt's site", System.Text.Encoding.UTF8);
+            mail.Subject = subject;
+            mail.SubjectEncoding = System.Text.Encoding.UTF8;
+            mail.Body = message;
+            mail.BodyEncoding = System.Text.Encoding.UTF8;
+            mail.IsBodyHtml = true;
+            mail.Priority = MailPriority.High;
+
+            SmtpClient client = new SmtpClient();
+            client.Credentials = new System.Net.NetworkCredential("ckpyt.site@gmail.com", "cfvjktnbrb_987"); //Your initial email and password which you use as a Credential
+            client.Port = 587;
+            client.Host = "smtp.gmail.com";
+            client.EnableSsl = true;
+
+            try
+            {
+                client.Send(mail);
+            }
+            catch (Exception ex)
+            {
+                Exception ex2 = ex;
+                string errorMessage = string.Empty;
+                while (ex2 != null)
+                {
+                    errorMessage += ex2.ToString();
+                    ex2 = ex2.InnerException;
+                }
+                ShowAlert(this, "Error happens:" + errorMessage);
+            }
         }
 
         protected Boolean RegisterBtn(object sender, EventArgs e)
@@ -196,12 +237,22 @@ namespace WebAssessment
                 SignBtn.Visible = false;
                 Logout.Visible = true;
                 Logout.Text = "Sign out, " + UserName.Text;
+
+                var ReturnParam = Request.Params.Get("ReturnUrl");
+                if (ReturnParam != null)
+                    Response.Redirect(ReturnParam);
                 return true;
                 //Response.Redirect("~/Login.aspx");
             }
             else
             {
-                ShowAlert(this, "Invalid username or password.");
+
+                invMsgUserNM.Attributes.Remove("Class");
+                invMsgUserNM.Attributes.Add("Class", "alert alert-danger");
+                invMsgUserNM.Text = "Invalid username or password.";
+                Page.ClientScript.RegisterStartupScript(GetType(), "MyKey", "DisplayModal();", true);
+
+                //ShowAlert(this, "Invalid username or password.");
                 //StatusText.Text = "Invalid username or password.";
                 //LoginStatus.Visible = true;
                 return false;
@@ -216,6 +267,48 @@ namespace WebAssessment
 
         }
 
+        public void Restore_Click(object sender, EventArgs e)
+        {
+            if (UserName.Text.Length == 0)
+                ShowAlert(this, "Login should contain at least 1 symbol");
+
+            var userStore = new UserStore<IdentityUser>();
+            var userManager = new UserManager<IdentityUser>(userStore);
+            var user = userManager.FindByName(UserName.Text);
+            if (user == null)
+            {
+                invMsgUserNM.Attributes.Remove("Class");
+                invMsgUserNM.Attributes.Add("Class", "alert alert-danger");
+                invMsgUserNM.Text = "Unfortunatelly, I cannot find this user";
+                Page.ClientScript.RegisterStartupScript( GetType(), "MyKey", "DisplayModal();", true);
+                return;
+            }
+
+
+            Random rnd = new Random();
+            int randomeKode = rnd.Next(100000, 999999);
+
+            var pg = Page.Master as MySite;
+            pg.SendEmail(user, "Hello, " + user.UserName + "<br>Somebody want to change your password on my web-site <br>If it was your action, please, follow the link and type this code:" + randomeKode.ToString() + ". <br> <a href=\"http://localhost:62817/passwordChangeConfirm.aspx \"> Confirm page </a><br>Your new password will be the same as it was typed in the password field  <br> Cheers, Dmitriy Shabalin",
+                "Password changing request");
+
+            SqlConnection conn = new SqlConnection(ConnString);
+            conn.Open();
+            SqlCommand comm = new SqlCommand("insert into tblPassConfirm values('" + user.Id +
+                "'," + randomeKode.ToString() + ",'" + DateTime.Now.ToString("yyyy-MM-ddThh:mm:ss") +
+                "','" + UserPassword.Text +"','1', 'true' );", conn);
+                
+            try
+            {
+                comm.ExecuteReader();
+            }
+            catch (Exception ex)
+            {
+                MySite.ShowAlert(this, "Error happens:" + ex.Message);
+            }
+
+            MySite.ShowAlert(this, "Password notification was send into your email.\n Please, follow instructions.");
+        }
 
 
         protected void LoginBtn_Click(object sender, EventArgs e)

@@ -13,7 +13,7 @@ namespace WebAssessment
     
     public partial class profile : System.Web.UI.Page
     {
-        private string ConnString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["ModalConnectionString"].ConnectionString;
+        private static string ConnString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["ModalConnectionString"].ConnectionString;
         
 
         void FillTheTable()
@@ -44,6 +44,7 @@ namespace WebAssessment
                 {
                     var desc = result[0];
                     string descr = Convert.ToString(desc);
+                    
                     Description.Text = descr;
                     conn.Close();
                 }
@@ -91,23 +92,22 @@ namespace WebAssessment
             FillTheTable();
             if (User.IsInRole("Administrator"))
             {
-                //Button1.Visible = true;
+                AdminMode.Visible = true;
             }
             else
             {
-                //Button1.Visible = false;
+                AdminMode.Visible = false;
             }
             ChangeDetails.OnClientClick = "return ChangeDetailsBtnClc()";
             RemoveUser.OnClientClick = "return DeleteConfirm()";
         }
 
-        public void DeleteAccount_Click(object sender, EventArgs e)
+        public static void DeleteAccount(string id, Control th)
         {
             var userStore = new UserStore<IdentityUser>();
             var userManager = new UserManager<IdentityUser>(userStore);
-            var user = userManager.FindByName(this.User.Identity.Name);
+            var user = userManager.FindById(id);
             userManager.Delete(user);
-            
 
             SqlConnection conn = new SqlConnection(ConnString);
             conn.Open();
@@ -115,13 +115,27 @@ namespace WebAssessment
             try
             {
                 comm.ExecuteReader();
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
-                MySite.ShowAlert(this, "Error happens:" + ex.Message);
+                MySite.ShowAlert(th, "Error happens:" + ex.Message);
             }
 
+        }
+
+        public void DeleteAccount_Click(object sender, EventArgs e)
+        {
+            var userStore = new UserStore<IdentityUser>();
+            var userManager = new UserManager<IdentityUser>(userStore);
+            var user = userManager.FindById(User.Identity.GetUserId());
+
+            DeleteAccount(User.Identity.GetUserId(), this);
+
             var pg = Page.Master as MySite;
-            pg.SignOut(sender, e);
+            pg.SendEmail(user, "Hello, " + user.UserName + "<br>Unfortunatelly, your account was deleted.<br>If it was not your action, please, register again. <br><br> Cheers, Dmitriy Shabalin",
+                "Account was deleted");
+            pg.SignOut(null, null);
+
         }
 
         public void Profilelnk_Click(object sender, EventArgs e)
@@ -147,6 +161,30 @@ namespace WebAssessment
 
             if (Password.Text.Length > 0)
             {
+                Random rnd = new Random();
+                int randomeKode = rnd.Next(100000, 999999);
+
+                var pg = Page.Master as MySite;
+                pg.SendEmail(user, "Hello, " + user.UserName + "<br>Somebody want to change your password on my web-site <br>If it was your action, please, follow the link and type this code:" + randomeKode.ToString() + ". <br> <a href=\"http://localhost:62817/passwordChangeConfirm.aspx \"> Confirm page </a><br> Cheers, Dmitriy Shabalin",
+                    "Password changing request");
+
+                SqlConnection conn = new SqlConnection(ConnString);
+                conn.Open();
+                SqlCommand comm = new SqlCommand("insert into tblPassConfirm values('" + user.Id + 
+                    "'," + randomeKode.ToString() + ",'" + DateTime.Now.ToString("yyyy-MM-ddThh:mm:ss") + 
+                    "','" + Password.Text + "','" + newPassword.Text + "');", conn);
+
+                try
+                {
+                    comm.ExecuteReader();
+                }
+                catch (Exception ex)
+                {
+                    MySite.ShowAlert(this, "Error happens:" + ex.Message);
+                }
+
+                MySite.ShowAlert(this, "Password notification was send into your email.\n Please, follow instructions.");
+                /*
                 var result = userManager.ChangePassword(user.Id, Password.Text, newPassword.Text);
                 if (!result.Succeeded)
                 {
@@ -154,8 +192,11 @@ namespace WebAssessment
                 }
                 else
                 {
-                    MySite.ShowAlert(this, "Password changed");
-                }
+                    //MySite.ShowAlert(this, "Password changed");
+                    var pg1 = Page.Master as MySite;
+                    pg1.SendEmail(user, "Hello, " + user.UserName + "<br>Somebody had changed your password on my web-site <br>If it was not your action, please, register again. <br><br> Cheers, Dmitriy Shabalin",
+                        "Password was changed");
+                }*/
             }
 
             /*if(Description.Text.CompareTo(m_currDescr) != 0)
@@ -175,6 +216,18 @@ namespace WebAssessment
             }*/
 
             //Response.Redirect("~/profile.aspx");
+        }
+
+        protected void AdminMode_Click(object sender, EventArgs e)
+        {
+            if (User.IsInRole("Administrator"))
+            {
+                Response.Redirect("~/admin.aspx");
+            }
+            else
+            {
+                MySite.ShowAlert(this, "Sorry, this page is not allowed for you");
+            }
         }
     }
 }
