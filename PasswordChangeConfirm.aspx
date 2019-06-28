@@ -17,6 +17,9 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
      <section class="section-margin">
+         <div class="container text-center centered-element">
+             <asp:Label ID="PassCCinvMsg" runat="server" class="invisible"></asp:Label>
+         </div>
     <div class="container text-center centered-element">
         <div class="section-intro pb-85px text-center">
         Please, type your confirmation code(ctrl+c, ctrl+v avaliable)

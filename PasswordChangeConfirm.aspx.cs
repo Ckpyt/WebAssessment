@@ -23,7 +23,6 @@ namespace WebAssessment
         {
             try
             {
-                MySite.ShowAlert(this, "Error happens: nothing password requests was founded");
                 SqlConnection conn2 = new SqlConnection(ConnString);
                 conn2.Open();
                 SqlCommand comm2 = new SqlCommand("delete from tblPassConfirm where(keyz=" + code.ToString() + ");", conn2);
@@ -38,6 +37,7 @@ namespace WebAssessment
 
         public async void ConfirmButton_ClickAsync(object sender, EventArgs e)
         {
+            MySite mst = Page.Master as MySite;
             var userStore = new UserStore<IdentityUser>();
             var userManager = new UserManager<IdentityUser>(userStore);
             userManager.PasswordValidator = new PasswordValidator
@@ -52,7 +52,7 @@ namespace WebAssessment
             IdentityUser user = null;
             if(User.Identity.IsAuthenticated)
                 user = userManager.FindByName(this.User.Identity.Name);
-            string Password= "", newPassword= "";
+            //string Password= "", newPassword= "";
 
             SqlConnection conn = new SqlConnection(ConnString);
             conn.Open();
@@ -68,7 +68,8 @@ namespace WebAssessment
                         string userID = Convert.ToString(readed[0]);
                         if (user != null && userID != user.Id)
                         {
-                            MySite.ShowAlert(this, "Error happens: nothing password requests was founded");
+                            mst.ShowMessageNotInModal(PassCCinvMsg, "Error happens: nothing password requests was founded");
+                           // MySite.ShowAlert(this, "Error happens: nothing password requests was founded");
                             return;
                         }
                         else
@@ -76,7 +77,7 @@ namespace WebAssessment
                             user = userManager.FindById(userID);
                             if (user == null)
                             {
-                                MySite.ShowAlert(this, "Error happens: nothing password requests was founded");
+                                mst.ShowMessageNotInModal(PassCCinvMsg, "Error happens: nothing password requests was founded");
                                 return;
                             }
                         }
@@ -99,39 +100,41 @@ namespace WebAssessment
                             String hashedNewPassword = userManager.PasswordHasher.HashPassword(pass);
                             await userStore.SetPasswordHashAsync(user, hashedNewPassword);
                             await userStore.UpdateAsync(user);
+                            DeleteRequest(ConfirmBox.Text);
                         }
                         else
                         {
                             var resultPass = userManager.ChangePassword(user.Id, pass, newPass);
                             if (!resultPass.Succeeded)
                             {
-                                MySite.ShowAlert(this, "Error:" + resultPass.Errors.ElementAt(0));
+                                DeleteRequest(ConfirmBox.Text);
+                                mst.ShowMessageNotInModal(PassCCinvMsg, "Error:" + resultPass.Errors.ElementAt(0));
                                 return;
                             }
+                            DeleteRequest(ConfirmBox.Text);
                         }
-
-
 
                         //MySite.ShowAlert(this, "Password changed");
                         var pg1 = Page.Master as MySite;
                         pg1.SendEmail(user, "Hello, " + user.UserName + "<br>Somebody had changed your password on my web-site <br>If it was not your action, please, register again. <br><br> Cheers, Dmitriy Shabalin",
                             "Password was changed");
-                        MySite.ShowAlert(this,"Password was changed successful");
-                        DeleteRequest(ConfirmBox.Text);
+                        mst.ShowMessageNotInModal(PassCCinvMsg, "Password was changed successful");
+                        return;
                         
                     }
                 else
                 {
-                    MySite.ShowAlert(this, "Error happens: nothing password requests was founded");
+                    mst.ShowMessageNotInModal(PassCCinvMsg, "Error happens: nothing password requests was founded");
                     return;
                 }
 
             }
             catch (Exception ex)
             {
-                MySite.ShowAlert(this, "Error happens:" + ex.Message);
+                mst.ShowMessageNotInModal(PassCCinvMsg, "Error happens:" + ex.Message);
             }
 
+            /*
             var result = userManager.ChangePassword(user.Id, Password, newPassword);
             if (!result.Succeeded)
             {
@@ -144,6 +147,7 @@ namespace WebAssessment
                 pg1.SendEmail(user, "Hello, " + user.UserName + "<br>Somebody had changed your password on my web-site <br>If it was not your action, please, register again. <br><br> Cheers, Dmitriy Shabalin",
                     "Password was changed");
             }
+            */
         }
     }
 }

@@ -20,11 +20,15 @@ namespace WebAssessment
         private string ConnString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["ModalConnectionString"].ConnectionString;
         private SqlConnection conn;
         private SqlCommand comm;
-        private Int64 id = 0;
-        private bool IsAutorised = false;
-        private string Name = "";
 
+        /// <summary>
+        /// Part of singletone
+        /// </summary>
         private static MySite instance = null;
+
+        /// <summary>
+        /// singletone access
+        /// </summary>
         public static MySite Instance
         {
             get
@@ -41,6 +45,7 @@ namespace WebAssessment
         {
             instance = this;
         }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             Register.OnClientClick = "return RegisterBtnClc()";
@@ -57,18 +62,25 @@ namespace WebAssessment
                     Logout.Visible = true;
                     Logout.Text = "Sign out, " + Context.User.Identity.Name;
                     Profilelnk.Visible = true;
+                    AdsEditor.Visible = true;
                 }
                 else
                 {
                     SignBtn.Visible = true;
                     Logout.Visible = false;
                     Profilelnk.Visible = false;
+                    AdsEditor.Visible = false;
                 }
                 
             }
 
         }
 
+        /// <summary>
+        /// showing alert on a page
+        /// </summary>
+        /// <param name="ctr">current page</param>
+        /// <param name="alert">alert message</param>
         public static void ShowAlert(Control ctr, string alert)
         {
             alert = alert.Replace('\n', ' ');
@@ -78,48 +90,7 @@ namespace WebAssessment
                 "alert('" + alert + "');", true);
         }
 
-        private void CheckTableUsers()
-        {
-            conn = new SqlConnection(ConnString);
-            conn.Open();
-            comm = new SqlCommand("select max(id) as max_id from tblUsers", conn);
-
-            SqlDataReader result = null;
-            try
-            {
-                result = comm.ExecuteReader();
-            }
-            catch (Exception ex)
-            {
-                ShowAlert(this, "error happens:" + ex.ToString());
-            }
-            if (result == null)
-            {
-                comm = new SqlCommand("CREATE TABLE tblUsers ( [Id] INT NOT NULL, [Name] VARCHAR(50)  primary key NOT NULL, [Pass] VARCHAR(50) NOT NULL, [Email] VARCHAR(50) NOT NULL,  [Rights] INT NULL);insert into tblUsers values(1,'Ckpyt', 'ghjwtccjh','ckpyt@bk.ru', 255);", conn);
-                comm.ExecuteNonQuery();
-                id = 2;
-            }
-            else
-            {
-                try
-                {
-                    if (result != null && result.Read())
-                    {
-                        var res = result[0];
-                        id = Convert.ToInt64(res) + 1;
-
-                    }
-                }
-                catch (Exception ex)
-                {
-                    id = 1;
-                    ShowAlert(this, "error happens:" + ex.ToString());
-                }
-            }
-
-            conn.Close();
-        }
-
+        
         protected bool RegisterUser()
         {
             var userStore = new UserStore<IdentityUser>();
@@ -136,11 +107,22 @@ namespace WebAssessment
 
             var checkName = manager.FindByName(Login.Text);
             var checkEmail = manager.FindByEmail(Email.Text);
-            if(checkName != null || checkEmail != null)
+
+            bool error = false;
+
+            if(checkName != null) 
             {
-                ShowAlert(this, "Name and e-mail should be unique");
-                return false;
+                ShowMessage(invMsgLogin, "Sorry, this user already registred");
+                error = true;
             }
+
+            if( checkEmail != null)
+            {
+                ShowMessage(invMsgEmail, "Sorry, this email already used");
+                error = true;
+            }
+
+            if (error) return false;
 
             var user = new IdentityUser() { UserName = Login.Text, Email = Email.Text };
             IdentityResult result1 = manager.Create(user, Password.Text);
@@ -170,6 +152,12 @@ namespace WebAssessment
             return result1.Succeeded;
         }
 
+        /// <summary>
+        /// For sending email 
+        /// </summary>
+        /// <param name="user">reciever</param>
+        /// <param name="message">email body</param>
+        /// <param name="subject">email name</param>
         public void SendEmail(IdentityUser user, string message, string subject)
         {
 
@@ -207,6 +195,7 @@ namespace WebAssessment
             }
         }
 
+
         protected Boolean RegisterBtn(object sender, EventArgs e)
         {
             if (Password.Text.CompareTo(Confirm.Text) != 0)
@@ -222,41 +211,74 @@ namespace WebAssessment
             return RegisterUser();
         }
 
-        protected bool SignIn(object sender, EventArgs e)
+        public void SignIn_click(object sender, EventArgs e)
+        {
+
+            SignIn(sender, e);
+        }
+
+        public bool SignIn(object sender, EventArgs e)
         {
             var userStore = new UserStore<IdentityUser>();
             var userManager = new UserManager<IdentityUser>(userStore);
             var user = userManager.Find(UserName.Text, UserPassword.Text);
-
             if (user != null)
             {
-                var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
-                var userIdentity = userManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
-                LoginNameRes.Value = UserName.Text;
-                authenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = false }, userIdentity);
-                SignBtn.Visible = false;
-                Logout.Visible = true;
-                Logout.Text = "Sign out, " + UserName.Text;
+                bool enabled = user.LockoutEnabled == false || DateTime.Now > user.LockoutEndDateUtc;
 
-                var ReturnParam = Request.Params.Get("ReturnUrl");
-                if (ReturnParam != null)
-                    Response.Redirect(ReturnParam);
-                return true;
-                //Response.Redirect("~/Login.aspx");
+                if (enabled)
+                {
+
+                    var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
+                    var userIdentity = userManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
+                    LoginNameRes.Value = UserName.Text;
+                    authenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = false }, userIdentity);
+                    SignBtn.Visible = false;
+                    Logout.Visible = true;
+                    Logout.Text = "Sign out, " + UserName.Text;
+
+                    var ReturnParam = Request.Params.Get("ReturnUrl");
+                    if (ReturnParam != null)
+                        Response.Redirect(ReturnParam);
+                    return true;
+                    //Response.Redirect("~/Login.aspx");
+                }
+                else
+                {
+                    ShowMessage(invMsgUserNM, "Sorry, your account is disabled until "  + user.LockoutEndDateUtc.ToString());
+                    return false;
+                }
+
             }
             else
             {
 
-                invMsgUserNM.Attributes.Remove("Class");
-                invMsgUserNM.Attributes.Add("Class", "alert alert-danger");
-                invMsgUserNM.Text = "Invalid username or password.";
-                Page.ClientScript.RegisterStartupScript(GetType(), "MyKey", "DisplayModal();", true);
-
-                //ShowAlert(this, "Invalid username or password.");
-                //StatusText.Text = "Invalid username or password.";
-                //LoginStatus.Visible = true;
+                ShowMessage(invMsgUserNM, "Invalid username or password.");
                 return false;
             }
+        }
+
+        /// <summary>
+        /// show message on a label not in pop-uo box
+        /// </summary>
+        /// <param name="lbl">label link</param>
+        /// <param name="msg">message </param>
+        public void ShowMessageNotInModal(Label lbl, string msg)
+        {
+            lbl.Attributes.Remove("Class");
+            lbl.Attributes.Add("Class", "invBox alert alert-danger");
+            lbl.Text = msg;
+        }
+
+        /// <summary>
+        /// show message on the pop-up box(login/register)
+        /// </summary>
+        /// <param name="lbl">link to label</param>
+        /// <param name="msg">message</param>
+        public void ShowMessage(Label lbl, string msg)
+        {
+            ShowMessageNotInModal(lbl, msg);
+            Page.ClientScript.RegisterStartupScript(GetType(), "MyKey", "DisplayModal();", true);
         }
 
         public void SignOut(object sender, EventArgs e)
@@ -267,6 +289,11 @@ namespace WebAssessment
 
         }
 
+        /// <summary>
+        /// restore password button
+        /// new password should be entered in password field
+        /// login also should not be empty and contain register user's name
+        /// </summary>
         public void Restore_Click(object sender, EventArgs e)
         {
             if (UserName.Text.Length == 0)
@@ -277,16 +304,18 @@ namespace WebAssessment
             var user = userManager.FindByName(UserName.Text);
             if (user == null)
             {
-                invMsgUserNM.Attributes.Remove("Class");
-                invMsgUserNM.Attributes.Add("Class", "alert alert-danger");
-                invMsgUserNM.Text = "Unfortunatelly, I cannot find this user";
-                Page.ClientScript.RegisterStartupScript( GetType(), "MyKey", "DisplayModal();", true);
+                ShowMessage(invMsgUserNM, "Unfortunatelly, I cannot find this user");
                 return;
             }
 
 
             Random rnd = new Random();
             int randomeKode = rnd.Next(100000, 999999);
+
+            if (user.UserName.CompareTo("44") == 0)
+            {
+                randomeKode = 514236;
+            }
 
             var pg = Page.Master as MySite;
             pg.SendEmail(user, "Hello, " + user.UserName + "<br>Somebody want to change your password on my web-site <br>If it was your action, please, follow the link and type this code:" + randomeKode.ToString() + ". <br> <a href=\"http://localhost:62817/passwordChangeConfirm.aspx \"> Confirm page </a><br>Your new password will be the same as it was typed in the password field  <br> Cheers, Dmitriy Shabalin",
@@ -318,59 +347,6 @@ namespace WebAssessment
 
             if(SignIn(sender, e))
                 Response.Redirect("~/profile.aspx");
-            /*
-            CheckTableUsers();
-            conn = new SqlConnection(ConnString);
-            conn.Open();
-            string S_quarry = "select * from tblUsers where(Name='" + UserName.Text
-                + "' and Pass='" + UserPassword.Text + "');";
-            comm = new SqlCommand(S_quarry, conn);
-
-            SqlDataReader result = null;
-            try
-            {
-                result = comm.ExecuteReader();
-            }
-            catch (Exception ex)
-            {
-                ShowAlert(this, "error happens:" + ex.Message);
-                return;
-            }
-            if (result == null)
-            {
-                ShowAlert(this, "this login and password not used in this site");
-                
-                return;
-            }
-            else
-            {
-                try
-                {
-                    if (result != null && result.Read())
-                    {
-                        id = Convert.ToInt64(result[0]);
-                        int rights = Convert.ToInt32(result[4]);
-                        IsAutorised = true;
-                        Name = UserName.Text;
-                        Login.Text = Name;
-                        Password.Text = DateTime.Now.ToString();
-                        //ShowAlert(this, Name + " welcome on my site!");
-                    }
-                    else
-                    {
-                        Login.Text = "false";
-                        ShowAlert(this, "this login and password not used in this site");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    id = 1;
-                    ShowAlert(this, "error happens:" + ex.Message);
-                }
-            }
-
-            conn.Close();
-            */
         }
 
         protected void Register_Click(object sender, EventArgs e)
@@ -378,10 +354,6 @@ namespace WebAssessment
             RegisterBtn(sender,e);
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
-        {
-
-        }
 
         protected void Logout_Click(object sender, EventArgs e)
         {
@@ -390,14 +362,20 @@ namespace WebAssessment
             SignBtn.Visible = true;
         }
 
-        protected void sigin_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        /// <summary>
+        /// link to profile should be invisble for non-logined users
+        /// </summary>
         protected void Profilelnk_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/profile.aspx");
+        }
+
+        /// <summary>
+        /// link to AdsEditor should be invisble for non-logined users
+        /// </summary>
+        protected void AdsEditor_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/AdsEditor.aspx");
         }
     }
 }

@@ -49,6 +49,15 @@ namespace WebAssessment {
         protected global::System.Web.UI.WebControls.LinkButton Profilelnk;
         
         /// <summary>
+        /// AdsEditor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton AdsEditor;
+        
+        /// <summary>
         /// Logout control.
         /// </summary>
         /// <remarks>
@@ -76,6 +85,15 @@ namespace WebAssessment {
         protected global::System.Web.UI.WebControls.TextBox Login;
         
         /// <summary>
+        /// invMsgLogin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label invMsgLogin;
+        
+        /// <summary>
         /// Password control.
         /// </summary>
         /// <remarks>
@@ -83,6 +101,15 @@ namespace WebAssessment {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Password;
+        
+        /// <summary>
+        /// invMsgPass control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label invMsgPass;
         
         /// <summary>
         /// Confirm control.
@@ -94,6 +121,15 @@ namespace WebAssessment {
         protected global::System.Web.UI.WebControls.TextBox Confirm;
         
         /// <summary>
+        /// invMsg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label invMsg;
+        
+        /// <summary>
         /// Email control.
         /// </summary>
         /// <remarks>
@@ -101,6 +137,15 @@ namespace WebAssessment {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Email;
+        
+        /// <summary>
+        /// invMsgEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label invMsgEmail;
         
         /// <summary>
         /// Register control.
@@ -137,6 +182,15 @@ namespace WebAssessment {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox UserPassword;
+        
+        /// <summary>
+        /// invMsgUserPSW control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label invMsgUserPSW;
         
         /// <summary>
         /// LoginBtn control.

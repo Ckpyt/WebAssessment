@@ -60,7 +60,7 @@
                     passstr = document.getElementById('<%= UserPassword.ClientID %>').value.length;
             let k = 0
             if (namestr == '') {
-                document.getElementById("invMsgUserNM").className = "alert alert-danger";
+                document.getElementById("invMsgUserNM").className = "invBox alert alert-danger";
                 document.getElementById("invMsgUserNM").innerHTML = "name should contain at least 1 symbol";
 
             } else {
@@ -69,7 +69,7 @@
             }
 
             if (passstr == '') {
-                document.getElementById("invMsgUserPSW").className = "alert alert-danger";
+                document.getElementById("invMsgUserPSW").className = "invBox alert alert-danger";
                 document.getElementById("invMsgUserPSW").innerHTML = "password should contain at least 1 symbol";
                 return false;
             } else {
@@ -86,7 +86,7 @@
 
             let k = 0
             if (namestr == '') {
-                document.getElementById("invMsgUserNM").className = "alert alert-danger";
+                document.getElementById("invMsgUserNM").className = "invBox alert alert-danger";
                 document.getElementById("invMsgUserNM").innerHTML = "name should contain at least 1 symbol";
                 return false;
             } else {
@@ -164,12 +164,13 @@
                                     
                                     <li class="nav-item"><a class="nav-link" href="contact.aspx">Contact</a></li>
                                     <li class="nav-item"><asp:LinkButton class="nav-link" ID="Profilelnk" runat="server" OnClick="Profilelnk_Click">Profile</asp:LinkButton> </li>
+                                    <li class="nav-item"><asp:LinkButton class="nav-link" ID="AdsEditor" runat="server" OnClick="AdsEditor_Click">Adverts editor</asp:LinkButton> </li>
                                 </ul>
 
                                 <ul class="navbar-right">
                                     <li class="nav-item">
                                         <asp:Button ID="Logout" runat="server" class="button button-header bg" Text="Log out" OnClick="Logout_Click" Visible="False" />
-                                        <asp:Button ID="SignBtn" class="button button-header bg" runat="server" Text="Sign in" OnClick="sigin_Click" />
+                                        <asp:Button ID="SignBtn" class="button button-header bg" runat="server" Text="Sign in" OnClick="SignIn_click" />
                                          <!-- start popup -->
                                         <div id='overlay-'></div>
                                         <table>
@@ -198,7 +199,7 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td colspan="2"> 
-                                                                            <div id="invMsgLogin" class="invisible">message</div>
+                                                                            <asp:Label id="invMsgLogin" runat="server" class="invisible">message</asp:Label>
                                                                         </td>
                                                                     <tr/>
                                                                     <tr>
@@ -211,7 +212,7 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td colspan="2"> 
-                                                                            <div id="invMsgPass" class="invisible">message</div>
+                                                                            <asp:Label id="invMsgPass" runat="server" class="invisible">message</asp:Label>
                                                                         </td>
                                                                     <tr/>
                                                                     <tr>
@@ -225,7 +226,7 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td colspan="2"> 
-                                                                            <div id="invMsg" class="invisible">message</div>
+                                                                            <asp:Label id="invMsg" runat="server" class="invisible">message</asp:Label>
                                                                         </td>
                                                                     <tr/>
                                                                     <tr>
@@ -238,13 +239,13 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td colspan="2"> 
-                                                                            <div id="invMsgEmail" class="invisible">message</div>
+                                                                            <asp:Label id="invMsgEmail" runat="server" class="invisible">message</asp:Label>
                                                                         </td>
                                                                     <tr/>
                                                                 </table>
                                                                 <!-- END POPUP BLOCK -->
                                                                 <!-- START POPUP BLOCK -->
-                                                                <br />
+                                                                
                                                                 <div class="popblock popblocksubbtn">
                                                                     <asp:Button ID="Register" class="button bluebg ibvm" runat="server" Text="Register" OnCLick="Register_Click"/>
                                                                 </div>
@@ -290,13 +291,13 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td colspan="2"> 
-                                                                            <div id="invMsgUserPSW" class="invisible">message</div>
+                                                                            <asp:Label id="invMsgUserPSW"  runat="server"  class="invisible">message</asp:Label>
                                                                         </td>
                                                                     <tr/>
                                                                 </table>
                                                                 <!-- END POPUP BLOCK -->
                                                                 <!-- START POPUP BLOCK -->
-                                                                <br />
+                                                                
                                                                 <div class="popblock popblocksubbtn">
                                                        
                                                                     <asp:Button ID="LoginBtn" class="button bluebg ibvm" runat="server" Text="Login" OnClick="LoginBtn_Click" />

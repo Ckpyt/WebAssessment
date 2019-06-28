@@ -108,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="admin.aspx" />
+    <Content Include="AdsEditor.aspx" />
     <Content Include="blog-detail.aspx" />
     <Content Include="blog-details.html" />
     <Content Include="blog.aspx" />
@@ -624,6 +625,13 @@
     </Compile>
     <Compile Include="admin.aspx.designer.cs">
       <DependentUpon>admin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdsEditor.aspx.cs">
+      <DependentUpon>AdsEditor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdsEditor.aspx.designer.cs">
+      <DependentUpon>AdsEditor.aspx</DependentUpon>
     </Compile>
     <Compile Include="blog-detail.aspx.cs">
       <DependentUpon>blog-detail.aspx</DependentUpon>

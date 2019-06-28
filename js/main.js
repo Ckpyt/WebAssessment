@@ -19,7 +19,7 @@ function RegisterCheck(namestr, passstr, pass, conf, txtMail) {
 
     let k = 0;
     if (namestr == '') {
-        document.getElementById("invMsgLogin").className = "alert alert-danger";
+        document.getElementById("invMsgLogin").className = "invBox alert alert-danger";
         document.getElementById("invMsgLogin").innerHTML = "name should contain at least 1 symbol";
     } else {
         k++
@@ -27,7 +27,7 @@ function RegisterCheck(namestr, passstr, pass, conf, txtMail) {
     }
 
     if (passstr == '') {
-        document.getElementById("invMsgPass").className = "alert alert-danger";
+        document.getElementById("invMsgPass").className = "invBox alert alert-danger";
         document.getElementById("invMsgPass").innerHTML = "password should contain at least 1 symbol";
     } else {
         k++;
@@ -35,7 +35,7 @@ function RegisterCheck(namestr, passstr, pass, conf, txtMail) {
     }
 
     if (pass != conf) {
-        document.getElementById("invMsg").className = "alert alert-danger";
+        document.getElementById("invMsg").className = "invBox alert alert-danger";
         document.getElementById("invMsg").innerHTML = "password and confirm password do not match";
 
     } else {
@@ -45,12 +45,12 @@ function RegisterCheck(namestr, passstr, pass, conf, txtMail) {
 
     if (txtMail.length == '0') {
 
-        document.getElementById("invMsgEmail").className = "alert alert-danger";
+        document.getElementById("invMsgEmail").className = "invBox alert alert-danger";
         document.getElementById("invMsgEmail").innerHTML = "email should not be empty";
         return false;
     } else {
         if (!validateEmail(txtMail)) {
-            document.getElementById("invMsgEmail").className = "alert alert-danger";
+            document.getElementById("invMsgEmail").className = "invBox alert alert-danger";
             document.getElementById("invMsgEmail").innerHTML = "sorry, your email is not correct";
             return false;
         } else {

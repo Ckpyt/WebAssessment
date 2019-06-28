@@ -10,96 +10,69 @@
 namespace WebAssessment {
     
     
-    public partial class profile {
+    public partial class AdsEditor {
         
         /// <summary>
-        /// Login control.
+        /// rptAds control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Login;
+        protected global::System.Web.UI.WebControls.Repeater rptAds;
         
         /// <summary>
-        /// Password control.
+        /// AdsName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Password;
+        protected global::System.Web.UI.WebControls.TextBox AdsName;
         
         /// <summary>
-        /// newPassword control.
+        /// AdsCategory control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox newPassword;
+        protected global::System.Web.UI.WebControls.DropDownList AdsCategory;
         
         /// <summary>
-        /// Confirm control.
+        /// AdsText control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Confirm;
+        protected global::System.Web.UI.WebControls.TextBox AdsText;
         
         /// <summary>
-        /// UserEmail control.
+        /// AdsEnabled control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox UserEmail;
+        protected global::System.Web.UI.WebControls.CheckBox AdsEnabled;
         
         /// <summary>
-        /// invMsgEmail2 control.
+        /// AdvId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label invMsgEmail2;
+        protected global::System.Web.UI.WebControls.Label AdvId;
         
         /// <summary>
-        /// Description control.
+        /// EditAds control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Description;
-        
-        /// <summary>
-        /// AdminMode control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button AdminMode;
-        
-        /// <summary>
-        /// RemoveUser control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button RemoveUser;
-        
-        /// <summary>
-        /// ChangeDetails control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ChangeDetails;
+        protected global::System.Web.UI.WebControls.Button EditAds;
     }
 }

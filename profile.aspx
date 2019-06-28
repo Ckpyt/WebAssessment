@@ -160,7 +160,7 @@
                 </tr>
                 <tr>
                     <td colspan="2"> 
-                        <div id="invMsgEmail2" class="invisible">message</div>
+                        <asp:Label id="invMsgEmail2" runat="server" class="invisible">message</asp:Label>
                     </td>
                 </tr>
                 <tr>
@@ -187,8 +187,4 @@
     </div>
   </section>
   <!--================ Pricing section end =================--> 
-  
-
-
-
 </asp:Content>

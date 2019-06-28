@@ -27,11 +27,8 @@ namespace WebAssessment
             if(UserEmail.Text.Length == 0)
                 UserEmail.Text = user.Email;
             
-
             SqlConnection conn = new SqlConnection(ConnString);
             SqlCommand comm;
-
-            
 
             conn.Open();
             comm = new SqlCommand("select Description from tblDescription where(id='" + user.Id + "')", conn);
@@ -155,14 +152,28 @@ namespace WebAssessment
 
             if (UserEmail.Text.Length > 5 && UserEmail.Text != user.Email)
             {
-                user.Email = UserEmail.Text;
-                userManager.SetEmail(user.Id, UserEmail.Text);
+                var checkEmail = userManager.FindByEmail(UserEmail.Text);
+                if (checkEmail != null && checkEmail.Id != user.Id)
+                {
+                    MySite mst = Page.Master as MySite;
+                    mst.ShowMessageNotInModal(invMsgEmail2, "sorry, this email already used");
+                }
+                else
+                {
+                    user.Email = UserEmail.Text;
+                    userManager.SetEmail(user.Id, UserEmail.Text);
+                }
             }
 
             if (Password.Text.Length > 0)
             {
                 Random rnd = new Random();
                 int randomeKode = rnd.Next(100000, 999999);
+                //just for testing
+                if(user.UserName.CompareTo("44") == 0)
+                {
+                    randomeKode = 514236;
+                }
 
                 var pg = Page.Master as MySite;
                 pg.SendEmail(user, "Hello, " + user.UserName + "<br>Somebody want to change your password on my web-site <br>If it was your action, please, follow the link and type this code:" + randomeKode.ToString() + ". <br> <a href=\"http://localhost:62817/passwordChangeConfirm.aspx \"> Confirm page </a><br> Cheers, Dmitriy Shabalin",
@@ -172,7 +183,7 @@ namespace WebAssessment
                 conn.Open();
                 SqlCommand comm = new SqlCommand("insert into tblPassConfirm values('" + user.Id + 
                     "'," + randomeKode.ToString() + ",'" + DateTime.Now.ToString("yyyy-MM-ddThh:mm:ss") + 
-                    "','" + Password.Text + "','" + newPassword.Text + "');", conn);
+                    "','" + Password.Text + "','" + newPassword.Text + "','false');", conn);
 
                 try
                 {
@@ -184,38 +195,7 @@ namespace WebAssessment
                 }
 
                 MySite.ShowAlert(this, "Password notification was send into your email.\n Please, follow instructions.");
-                /*
-                var result = userManager.ChangePassword(user.Id, Password.Text, newPassword.Text);
-                if (!result.Succeeded)
-                {
-                    MySite.ShowAlert(this, "Error:" + result.Errors.ElementAt(0));
-                }
-                else
-                {
-                    //MySite.ShowAlert(this, "Password changed");
-                    var pg1 = Page.Master as MySite;
-                    pg1.SendEmail(user, "Hello, " + user.UserName + "<br>Somebody had changed your password on my web-site <br>If it was not your action, please, register again. <br><br> Cheers, Dmitriy Shabalin",
-                        "Password was changed");
-                }*/
             }
-
-            /*if(Description.Text.CompareTo(m_currDescr) != 0)
-            {
-                SqlConnection conn = new SqlConnection(ConnString);
-                conn.Open();
-                SqlCommand comm = new SqlCommand("update tblDescription set Description='" + Description.Text
-                    + "' where(Id='"+ user.Id.ToString() + "');");
-
-                try
-                {
-                    comm.ExecuteReader();
-                }catch(Exception ex)
-                {
-                    MySite.ShowAlert(this, "Error happens:" + ex.Message);
-                }
-            }*/
-
-            //Response.Redirect("~/profile.aspx");
         }
 
         protected void AdminMode_Click(object sender, EventArgs e)

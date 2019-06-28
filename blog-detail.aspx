@@ -11,7 +11,7 @@
       </div>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    
+
   <!--================Blog Area =================-->
 	<section class="blog_area single-post-area section-margin--medium">
 		<div class="container">
