@@ -20,6 +20,7 @@ namespace WebAssessment
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
                 LoginPath = new PathString("/Login")
             });
+
         }
     }
 }

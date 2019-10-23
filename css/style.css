@@ -25,6 +25,11 @@
 input.blue-btn{
     background-color: #412fb3;
     color:#FFFFFF;
+    margin-bottom: 10px;
+}
+
+input.bluebg{
+    margin-bottom: 4px;
 }
 
 .centered-element {

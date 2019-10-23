@@ -25,12 +25,13 @@
 
 
 </head>
-    <script src="vendors/jquery/jquery-3.2.1.min.js"></script>
-    <script src="vendors/bootstrap/bootstrap.bundle.min.js"></script>
-    <script src="vendors/owl-carousel/owl.carousel.min.js"></script>
-    <script src="js/jquery.ajaxchimp.min.js"></script>
-    <script src="js/mail-script.js"></script>
-    <script src="js/main.js"></script>
+    <script src='<%= ResolveUrl("vendors/jquery/jquery-3.2.1.min.js") %>'></script>
+    <script src='<%= ResolveUrl("vendors/bootstrap/bootstrap.bundle.min.js") %>'></script>
+    <script src='<%= ResolveUrl("vendors/owl-carousel/owl.carousel.min.js") %>'></script>
+    <script src='<%= ResolveUrl("js/jquery.ajaxchimp.min.js") %>'></script>
+    <script src='<%= ResolveUrl("js/mail-script.js") %>'></script>
+    <script src='<%= ResolveUrl("js/main.js") %>'></script>
+    <asp:ContentPlaceHolder ID="Header" runat="server"> </asp:ContentPlaceHolder>
     <script type="text/javascript">
 
        
@@ -66,6 +67,7 @@
             } else {
                 k++;
                 document.getElementById("invMsgUserNM").className = "invisible";
+                document.getElementById("invMsgUserNM").innerHTML = " ";
             }
 
             if (passstr == '') {
@@ -75,6 +77,7 @@
             } else {
                 k++;
                 document.getElementById("invMsgUserPSW").className = "invisible";
+                document.getElementById("invMsgUserPSW").innerHTML = " ";
             }
 
             return k == 2;
@@ -83,6 +86,7 @@
         function RestoreBtnClc() {
             namestr = document.getElementById('<%= UserName.ClientID %>').value.length;
             document.getElementById("invMsgUserPSW").className = "invisible";
+            document.getElementById("invMsgUserPSW").innerHTML = " ";
 
             let k = 0
             if (namestr == '') {
@@ -92,6 +96,7 @@
             } else {
                 return true;
                 document.getElementById("invMsgUserNM").className = "invisible";
+                document.getElementById("invMsgUserNM").innerHTML = " ";
             }
         }
 
@@ -130,7 +135,7 @@
         }
 
     </script>
-
+   
     <body>
         <form id="form1" runat="server">
             <asp:HiddenField ID="LoginNameRes" runat="server" />
@@ -141,7 +146,8 @@
                     <nav class="navbar navbar-expand-lg navbar-light">
                         <div class="container box_1620">
                             <!-- Brand and toggle get grouped for better mobile display -->
-                            <a class="navbar-brand logo_h" href="index.html"><img src="img/logo.png" alt="" /></a>
+                            <img class="navbar-brand logo_h" src='<%= ResolveUrl("img/0.jpg")%>' alt="" height="60" width="50" />
+                            <a class="navbar-brand logo_h" href="index.aspx"><img src='<%= ResolveUrl("img/logo.png")%>' alt="" /></a>
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
@@ -150,21 +156,20 @@
                             <!-- Collect the nav links, forms, and other content for toggling -->
                             <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                                 <ul class="nav navbar-nav menu_nav justify-content-end">
-                                    <li class="nav-item active"><a class="nav-link" href="index.aspx">Home</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="feature.aspx">Feature</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="pricing.aspx">Price</a></li>
+                                    <li class="nav-item active"><a class="nav-link" href='<%= ResolveUrl("~/index.aspx")%>'>Home</a></li>
+                                    <li class="nav-item"><a class="nav-link" href='<%= ResolveUrl("~/resume.aspx")%>'>Resume</a></li>
+                                    <li class="nav-item"><a class="nav-link" href='<%= ResolveUrl("~/future.aspx")%>'>Future plans</a></li>
                                     <li class="nav-item submenu dropdown">
                                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                                            aria-expanded="false">Pages</a>
-                                        <ul class="dropdown-menu">
-                                            <li class="nav-item"><a class="nav-link" href="blog.aspx">Blog</a></li>
-                                            <li class="nav-item"><a class="nav-link" href="blog-detail.aspx">Blog Details</a></li>
+                                            aria-expanded="false">My games</a>
+                                        <ul class="dropdown-menu"> 
+                                            <li class="nav-item"><a class="nav-link" href="\Games\ColonyRuler\index.aspx">Colony ruler</a></li>
                                         </ul>
                                     </li>
                                     
-                                    <li class="nav-item"><a class="nav-link" href="contact.aspx">Contact</a></li>
+                                    <li class="nav-item"><a class="nav-link" href='<%= ResolveUrl("~/contact.aspx")%>'>Contact</a></li>
                                     <li class="nav-item"><asp:LinkButton class="nav-link" ID="Profilelnk" runat="server" OnClick="Profilelnk_Click">Profile</asp:LinkButton> </li>
-                                    <li class="nav-item"><asp:LinkButton class="nav-link" ID="AdsEditor" runat="server" OnClick="AdsEditor_Click">Adverts editor</asp:LinkButton> </li>
+                                    
                                 </ul>
 
                                 <ul class="navbar-right">
@@ -199,7 +204,7 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td colspan="2"> 
-                                                                            <asp:Label id="invMsgLogin" runat="server" class="invisible">message</asp:Label>
+                                                                            <asp:Label id="invMsgLogin" runat="server" class="invisible"></asp:Label>
                                                                         </td>
                                                                     <tr/>
                                                                     <tr>
@@ -212,7 +217,7 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td colspan="2"> 
-                                                                            <asp:Label id="invMsgPass" runat="server" class="invisible">message</asp:Label>
+                                                                            <asp:Label id="invMsgPass" runat="server" class="invisible"></asp:Label>
                                                                         </td>
                                                                     <tr/>
                                                                     <tr>
@@ -226,7 +231,7 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td colspan="2"> 
-                                                                            <asp:Label id="invMsg" runat="server" class="invisible">message</asp:Label>
+                                                                            <asp:Label id="invMsg" runat="server" class="invisible"></asp:Label>
                                                                         </td>
                                                                     <tr/>
                                                                     <tr>
@@ -239,7 +244,7 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td colspan="2"> 
-                                                                            <asp:Label id="invMsgEmail" runat="server" class="invisible">message</asp:Label>
+                                                                            <asp:Label id="invMsgEmail" runat="server" class="invisible"></asp:Label>
                                                                         </td>
                                                                     <tr/>
                                                                 </table>
@@ -278,7 +283,7 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td colspan="2"> 
-                                                                            <asp:Label ID="invMsgUserNM" class="invisible" runat="server" Text="Label">message</asp:Label>
+                                                                            <asp:Label ID="invMsgUserNM" class="invisible" runat="server" Text=""></asp:Label>
                                                                         </td>
                                                                     <tr/>
                                                                     <tr>
@@ -291,7 +296,7 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td colspan="2"> 
-                                                                            <asp:Label id="invMsgUserPSW"  runat="server"  class="invisible">message</asp:Label>
+                                                                            <asp:Label id="invMsgUserPSW"  runat="server"  class="invisible"></asp:Label>
                                                                         </td>
                                                                     <tr/>
                                                                 </table>
@@ -339,44 +344,6 @@
         
         <footer class="footer-area section-gap">
             <div class="container">
-                <div class="row">
-                    <div class="col-xl-2 col-sm-6 mb-4 mb-xl-0 single-footer-widget">
-                        <h4>Top Products</h4>
-                        <ul>
-                            <li><a href="#">Managed Website</a></li>
-                            <li><a href="#">Manage Reputation</a></li>
-                            <li><a href="#">Power Tools</a></li>
-                            <li><a href="#">Marketing Service</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-xl-2 col-sm-6 mb-4 mb-xl-0 single-footer-widget">
-                        <h4>Quick Links</h4>
-                        <ul>
-                            <li><a href="#">Jobs</a></li>
-                            <li><a href="#">Brand Assets</a></li>
-                            <li><a href="#">Investor Relations</a></li>
-                            <li><a href="#">Terms of Service</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-xl-2 col-sm-6 mb-4 mb-xl-0 single-footer-widget">
-                        <h4>Features</h4>
-                        <ul>
-                            <li><a href="#">Jobs</a></li>
-                            <li><a href="#">Brand Assets</a></li>
-                            <li><a href="#">Investor Relations</a></li>
-                            <li><a href="#">Terms of Service</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-xl-2 col-sm-6 mb-4 mb-xl-0 single-footer-widget">
-                        <h4>Resources</h4>
-                        <ul>
-                            <li><a href="#">Guides</a></li>
-                            <li><a href="#">Research</a></li>
-                            <li><a href="#">Experts</a></li>
-                            <li><a href="#">Agencies</a></li>
-                        </ul>
-                    </div>
-                </div>
                         <!--footer -->
 		        <div class="footer-bottom row align-items-center text-center text-lg-left">
                     <p class="footer-text m-0 col-lg-8 col-md-12">
@@ -388,10 +355,8 @@
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </p>
 			        <div class="col-lg-4 col-md-12 text-center text-lg-right footer-social">
-				        <a href="#"><i class="fab fa-facebook-f"></i></a>
-				        <a href="#"><i class="fab fa-twitter"></i></a>
-				        <a href="#"><i class="fab fa-dribbble"></i></a>
-				        <a href="#"><i class="fab fa-behance"></i></a>
+				        <a href="https://www.facebook.com/profile.php?id=100004127282322"><i class="fab fa-facebook-f"></i></a>
+				        <a href="https://www.linkedin.com/in/dmitry-shabalin-69a436b4/"><i class="fab fa-linkedin-in"></i></a>
 			        </div>
 		        </div>
 	        </div>

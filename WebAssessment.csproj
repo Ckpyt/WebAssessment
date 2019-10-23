@@ -119,8 +119,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Example.aspx" />
-    <Content Include="feature.aspx" />
+    <Content Include="future.aspx" />
     <Content Include="feature.html" />
+    <Content Include="Games\ColonyRuler\index.aspx" />
     <Content Include="img\banner\banner-bg.png" />
     <Content Include="img\banner\hero-banner.png" />
     <Content Include="img\blog\add.jpg" />
@@ -234,7 +235,7 @@
     <Content Include="Parason Software -doc\syntax-highlighter\styles\shThemeRDark.css" />
     <Content Include="PasswordChangeConfirm.aspx" />
     <Content Include="profile.aspx" />
-    <Content Include="pricing.aspx" />
+    <Content Include="resume.aspx" />
     <Content Include="pricing.html" />
     <Content Include="vendors\bootstrap\bootstrap.bundle.min.js" />
     <Content Include="vendors\bootstrap\bootstrap.min.css" />
@@ -658,12 +659,19 @@
       <DependentUpon>Example.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="feature.aspx.cs">
-      <DependentUpon>feature.aspx</DependentUpon>
+    <Compile Include="future.aspx.cs">
+      <DependentUpon>future.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="feature.aspx.designer.cs">
-      <DependentUpon>feature.aspx</DependentUpon>
+    <Compile Include="future.aspx.designer.cs">
+      <DependentUpon>future.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Games\ColonyRuler\index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Games\ColonyRuler\index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
     </Compile>
     <Compile Include="Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
@@ -693,12 +701,12 @@
     <Compile Include="profile.aspx.designer.cs">
       <DependentUpon>profile.aspx</DependentUpon>
     </Compile>
-    <Compile Include="pricing.aspx.cs">
-      <DependentUpon>pricing.aspx</DependentUpon>
+    <Compile Include="resume.aspx.cs">
+      <DependentUpon>resume.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="pricing.aspx.designer.cs">
-      <DependentUpon>pricing.aspx</DependentUpon>
+    <Compile Include="resume.aspx.designer.cs">
+      <DependentUpon>resume.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">

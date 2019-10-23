@@ -1,97 +1,87 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="pricing.aspx.cs" Inherits="WebAssessment.pricing" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="future.aspx.cs" Inherits="WebAssessment.feature" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-
-    
-  <!--================ Hero sm Banner start =================-->      
+      <!--================ Hero sm Banner start =================-->      
 
       <div class="hero-banner--sm__content">
-        <h1>Pricing Plan</h1>
+        <h1>Our Features</h1>
         <nav aria-label="breadcrumb" class="banner-breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.aspx">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Pricing Plan</li>
+            <li class="breadcrumb-item active" aria-current="page">Our Feature</li>
           </ol>
         </nav>
       </div>
 
   <!--================ Hero sm Banner end =================-->
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-  
-  <!--================ Pricing section start =================-->      
+
+     <!--================ Offer section start =================-->      
   <section class="section-margin">
     <div class="container">
       <div class="section-intro pb-85px text-center">
-        <h2 class="section-intro__title">Choose Your Plan</h2>
-        <p class="section-intro__subtitle">
-            
-            Vel aliquam quis, nulla pede mi commodo tristique nam hac. Luctus torquent velit felis commodo pellentesque nulla cras. Tincidunt hacvel alivquam quis nulla pede mi commodo tristique nam hac  luctus torquent</p>
+        <h2 class="section-intro__title">Features We Offer</h2>
+        <p class="section-intro__subtitle">Vel aliquam quis, nulla pede mi commodo tristique nam hac. Luctus torquent velit felis commodo pellentesque nulla cras. Tincidunt hacvel alivquam quis nulla pede mi commodo tristique nam hac  luctus torquent</p>
       </div>
 
       <div class="row">
-        <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
-          <div class="card text-center card-pricing">
-            <div class="card-pricing__header">
-              <h4>Normal</h4>
-              <p>Attend only first day</p>
-              <h1 class="card-pricing__price"><span>$</span>45.00</h1>
+        <div class="col-lg-6">
+
+          <div class="row offer-single-wrapper">
+            <div class="col-lg-6 offer-single">
+              <div class="card offer-single__content text-center">
+                <span class="offer-single__icon">
+                  <i class="ti-pencil-alt"></i>
+                </span>
+                <h4>Easy To Manage</h4>
+                <p>Posuere porttitor justo ornare dictum ultricies enim imperdiet integer habitant.</p>
+              </div>
             </div>
-            <ul class="card-pricing__list">
-              <li><i class="ti-check"></i>Unlimited Entrance</li>
-              <li><i class="ti-check"></i>Comfortable Seat</li>
-              <li><i class="ti-check"></i>Paid Certificate</li>
-              <li class="unvalid"><i class="ti-close"></i>Day One Workshop</li>
-              <li class="unvalid"><i class="ti-close"></i>One Certificate</li>
-            </ul>
-            <div class="card-pricing__footer">
-              <button class="button button-light">Buy Now</button>
+            
+            <div class="col-lg-6 offer-single">
+              <div class="card offer-single__content text-center">
+                <span class="offer-single__icon">
+                  <i class="ti-ruler-pencil"></i>
+                </span>
+                <h4>Analytics Tool</h4>
+                <p>Posuere porttitor justo ornare dictum ultricies enim imperdiet integer habitant.</p>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
-          <div class="card text-center card-pricing">
-            <div class="card-pricing__header">
-              <h4>Advanced</h4>
-              <p>Attend only first day</p>
-              <h1 class="card-pricing__price"><span>$</span>55.00</h1>
+          <div class="row offer-single-wrapper">
+            <div class="col-lg-6 offer-single">
+              <div class="card offer-single__content text-center">
+                <span class="offer-single__icon">
+                  <i class="ti-cut"></i>
+                </span>
+                <h4>Professionals Tools</h4>
+                <p>Posuere porttitor justo ornare dictum ultricies enim imperdiet integer habitant.</p>
+              </div>
             </div>
-            <ul class="card-pricing__list">
-              <li><i class="ti-check"></i>Unlimited Entrance</li>
-              <li><i class="ti-check"></i>Comfortable Seat</li>
-              <li><i class="ti-check"></i>Paid Certificate</li>
-              <li class="unvalid"><i class="ti-close"></i>Day One Workshop</li>
-              <li class="unvalid"><i class="ti-close"></i>One Certificate</li>
-            </ul>
-            <div class="card-pricing__footer">
-              <button class="button button-light">Buy Now</button>
+            
+            <div class="col-lg-6 offer-single">
+              <div class="card offer-single__content text-center">
+                <span class="offer-single__icon">
+                  <i class="ti-light-bulb"></i>
+                </span>
+                <h4>Ready Content</h4>
+                <p>Posuere porttitor justo ornare dictum ultricies enim imperdiet integer habitant.</p>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
-          <div class="card text-center card-pricing">
-            <div class="card-pricing__header">
-              <h4>Ultimate</h4>
-              <p>Attend only first day</p>
-              <h1 class="card-pricing__price"><span>$</span>65.00</h1>
-            </div>
-            <ul class="card-pricing__list">
-              <li><i class="ti-check"></i>Unlimited Entrance</li>
-              <li><i class="ti-check"></i>Comfortable Seat</li>
-              <li><i class="ti-check"></i>Paid Certificate</li>
-              <li class="unvalid"><i class="ti-close"></i>Day One Workshop</li>
-              <li class="unvalid"><i class="ti-close"></i>One Certificate</li>
-            </ul>
-            <div class="card-pricing__footer">
-              <button class="button button-light">Buy Now</button>
-            </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="offer-single__img">
+            <img class="img-fluid" src="img/home/offer.png" alt="">
           </div>
         </div>
       </div>
     </div>
   </section>
-  <!--================ Pricing section end =================--> 
+  <!--================ Offer section end =================-->
   
 
 
@@ -138,7 +128,7 @@
       </div>
     </div>
   </section>
-  <!--================ Testimonial section end =================-->      
+  <!--================ Testimonial section end =================-->         
 
 
   <!--================ Start Clients Logo Area =================-->

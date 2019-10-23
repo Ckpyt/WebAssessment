@@ -1,4 +1,4 @@
-function DisplayModal() {
+function ShowModal() {
     document.getElementById("overlay-").style.height = document.body.clientHeight + 'px';
     document.getElementById("overlay-").className = "OverlayEffect";
     document.getElementById("modalMsg-1").className = "ShowModal";
@@ -24,6 +24,7 @@ function RegisterCheck(namestr, passstr, pass, conf, txtMail) {
     } else {
         k++
         document.getElementById("invMsgLogin").className = "invisible";
+        document.getElementById("invMsgLogin").innerHTML = " ";
     }
 
     if (passstr == '') {
@@ -32,6 +33,7 @@ function RegisterCheck(namestr, passstr, pass, conf, txtMail) {
     } else {
         k++;
         document.getElementById("invMsgPass").className = "invisible";
+        document.getElementById("invMsgPass").innerHTML = " ";
     }
 
     if (pass != conf) {
@@ -41,6 +43,7 @@ function RegisterCheck(namestr, passstr, pass, conf, txtMail) {
     } else {
         k++;
         document.getElementById("invMsg").className = "invisible";
+        document.getElementById("invMsg").innerHTML = " ";
     }
 
     if (txtMail.length == '0') {
@@ -55,6 +58,7 @@ function RegisterCheck(namestr, passstr, pass, conf, txtMail) {
             return false;
         } else {
             document.getElementById("invMsgEmail").className = "invisible";
+            document.getElementById("invMsgEmail").innerHTML = " ";
         }
     }
     return k == 3;

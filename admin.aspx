@@ -3,7 +3,7 @@
       <!--================ Hero sm Banner start =================-->      
     
     <script type="text/javascript">
-        function DisplayModal(id) {
+        function ShowModal(id) {
             document.getElementById("overlay-" + id).style.height = document.body.clientHeight + 'px';
             document.getElementById("overlay-" + id).className = "OverlayEffect";
             document.getElementById("modalMsg-" + id).className = "ShowModal";
@@ -117,7 +117,7 @@
                             </tr>
                             <tr>
                                 <td rowspan="2">
-                                   <asp:Button  class="button blue-btn  ibvm" ID="btnDeleteClient" runat="server" Text="Delete"  OnClientClick='<%# "return DisplayModal(\"" +  ((string) Eval("Id")) + "\")"%>' />
+                                   <asp:Button  class="button blue-btn  ibvm" ID="btnDeleteClient" runat="server" Text="Delete"  OnClientClick='<%# "return ShowModal(\"" +  ((string) Eval("Id")) + "\")"%>' />
                                    <asp:Button  class="button blue-btn  ibvm" ID="btnShowUser" runat="server" Text="Show User" CommandArgument='<%#Eval("Id")%>' OnClick="ShowUser" />
                                 </td>
 

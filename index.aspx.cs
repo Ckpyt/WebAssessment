@@ -37,19 +37,19 @@ namespace WebAssessment
         void BindAdsRepeater(int id = 0)
         {
 
-            SqlConnection conn = new SqlConnection(ConnString);
+            /*SqlConnection conn = new SqlConnection(ConnString);
             SqlDataAdapter da = new SqlDataAdapter("select tblAdverts.AdsName, tblCategory.Name, tblAdverts.AdsText from tblAdverts, tblCategory" +
                 " where(tblCategory.ID=tblAdverts.CategoryID" + (id > 0 ? " and tblCategory.ID=" + id: "") + ")" , conn);
 
             DataSet ds = new DataSet();
             da.Fill(ds);
             rptAds.DataSource = ds.Tables[0];
-            rptAds.DataBind();
+            rptAds.DataBind();*/
         }
         void FillAdsCategoryList()
         {
 
-            DataTable subjects = new DataTable();
+           /* DataTable subjects = new DataTable();
 
             using (SqlConnection con = new SqlConnection(ConnString))
             {
@@ -70,12 +70,12 @@ namespace WebAssessment
                     MySite.ShowAlert(this, "Error happen:" + ex.Message);
                 }
                 AdsCategory.Items.Insert(0, new ListItem("All categories", "0"));
-            }
+            }*/
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            int id = AdsCategory.SelectedIndex;
+            /*int id = AdsCategory.SelectedIndex;
             if (searchText.Text.Length == 0)
                 BindAdsRepeater(id);
             else {
@@ -111,10 +111,11 @@ namespace WebAssessment
                         }
                     }
                 }
-                rptAds.DataSource = ds.Tables[0];
-                rptAds.DataBind();
+                //rptAds.DataSource = ds.Tables[0];
+                //rptAds.DataBind();
+                
             }
-
+            */
 
         }
     }

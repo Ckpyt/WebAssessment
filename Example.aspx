@@ -7,7 +7,7 @@
     <title></title>
     <link href="css/style.css" rel="stylesheet" />
     <script type="text/javascript">
-        function DisplayModal(id) {
+        function ShowModal(id) {
             document.getElementById("overlay-" + id).style.height = document.body.clientHeight + 'px';
             document.getElementById("overlay-" + id).className = "OverlayEffect";
             document.getElementById("modalMsg-" + id).className = "ShowModal";
@@ -82,7 +82,7 @@
                         </tr>
                         <tr>
                             <td rowspan="2">
-                                <input id="btnDeleteClient" type="button" value="Delete" onclick="DisplayModal('<%# Eval("FriendID")%>')" />
+                                <input id="btnDeleteClient" type="button" value="Delete" onclick="ShowModal('<%# Eval("FriendID")%>')" />
                             </td>
 
                         </tr>

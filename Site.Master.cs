@@ -50,7 +50,7 @@ namespace WebAssessment
         {
             Register.OnClientClick = "return RegisterBtnClc()";
             LoginBtn.OnClientClick = "return LoginBtnClc()";
-            SignBtn.OnClientClick = "return DisplayModal()";
+            SignBtn.OnClientClick = "return ShowModal()";
             RestoreBtn.OnClientClick = "return LoginBtnClc()";
 
             if (!IsPostBack)
@@ -62,14 +62,14 @@ namespace WebAssessment
                     Logout.Visible = true;
                     Logout.Text = "Sign out, " + Context.User.Identity.Name;
                     Profilelnk.Visible = true;
-                    AdsEditor.Visible = true;
+                    //AdsEditor.Visible = true;
                 }
                 else
                 {
                     SignBtn.Visible = true;
                     Logout.Visible = false;
                     Profilelnk.Visible = false;
-                    AdsEditor.Visible = false;
+                    //AdsEditor.Visible = false;
                 }
                 
             }
@@ -278,7 +278,7 @@ namespace WebAssessment
         public void ShowMessage(Label lbl, string msg)
         {
             ShowMessageNotInModal(lbl, msg);
-            Page.ClientScript.RegisterStartupScript(GetType(), "MyKey", "DisplayModal();", true);
+            Page.ClientScript.RegisterStartupScript(GetType(), "MyKey", "ShowModal();", true);
         }
 
         public void SignOut(object sender, EventArgs e)
