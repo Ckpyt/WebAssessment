@@ -1,0 +1,5 @@
+<svg id="eyeball-icon" viewBox="0 0 24 24" width="24px" height="24px" x="0" y="0" preserveAspectRatio="xMinYMin meet" class="icon" xmlns="http://www.w3.org/2000/svg">
+  <g class="large-icon" style="fill: currentColor; color: #9b9ea2" id="eyeball-icon-large">
+    <path d="M12,7a5,5,0,1,0,5,5A5,5,0,0,0,12,7Zm0,8.13A3.13,3.13,0,1,1,15.13,12,3.13,3.13,0,0,1,12,15.13ZM12,4C3.6,4,0,12,0,12s3.52,8,12,8,12-8,12-8S20.4,4,12,4Zm0,14.13c-5.74,0-8.84-4.31-9.88-6.11C3.18,10.22,6.33,5.88,12,5.88s8.83,4.33,9.88,6.13C20.84,13.81,17.75,18.13,12,18.13Z"/>
+  </g>
+</svg>

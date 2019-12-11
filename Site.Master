@@ -164,6 +164,7 @@
                                             aria-expanded="false">My games</a>
                                         <ul class="dropdown-menu"> 
                                             <li class="nav-item"><a class="nav-link" href="\Games\ColonyRuler\index.aspx">Colony ruler</a></li>
+                                            <li class="nav-item"><a class="nav-link" href="\Games\BullRush\index.aspx">Bull rush</a></li>
                                         </ul>
                                     </li>
                                     

@@ -4,7 +4,11 @@
     <script src="TemplateData/UnityProgress.js"></script>
     <script src="Build/UnityLoader.js"></script>
     <script>
-      var unityInstance = UnityLoader.instantiate("unityContainer", "Build/WebGL.json", {onProgress: UnityProgress});
+        var unityInstance = UnityLoader.instantiate("unityContainer", "Build/WebGL.json", { onProgress: UnityProgress });
+        function GetUserName() {
+            return '<%= UserName %>';
+        }
+        unityInstance.SendMessage('MainMenu', 'StoreUserName', '<%= UserName %>');
     </script>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="head" runat="server">
