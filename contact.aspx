@@ -45,17 +45,17 @@
                   <asp:TextBox runat="server" class="form-control" name="email" id="email" type="email" placeholder="Enter email address"/>
                 </div>
                 <div class="form-group">
-                  <input class="form-control" name="subject" id="subject" type="text" placeholder="Enter Subject">
+                  <asp:TextBox runat="server"  class="form-control" name="subject" id="subject" type="text" placeholder="Enter Subject"/>
                 </div>
               </div>
               <div class="col-lg-7">
                 <div class="form-group">
-                    <textarea class="form-control different-control w-100" name="message" id="message" cols="30" rows="5" placeholder="Enter Message"></textarea>
+                    <asp:TextBox runat="server" TextMode="multiline" class="form-control different-control w-100" name="message" id="message" cols="30" rows="5" placeholder="Enter Message"></asp:TextBox>
                 </div>
               </div>
             </div>
             <div class="form-group text-center text-md-right mt-3">
-              <asp:button type="submit" class="button button-contactForm" runat="server" asp:text="Send Message" Text="Send Message" OnClick="SendMessage"/>
+              <asp:button class="button button-contactForm" runat="server" asp:text="Send Message" Text="Send Message" OnClick="SendMessage"/>
             </div>
           
         </div>

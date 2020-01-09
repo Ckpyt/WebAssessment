@@ -11,15 +11,26 @@ using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Net.Mail;
+using System.Web.Http;
+using WebAssessment.Configuration;
 
 namespace WebAssessment
 {
+    public class Global : System.Web.HttpApplication
+    {
+        protected void Application_Start(object sender, EventArgs e)
+        {
+            GlobalConfiguration.Configure(WebApiConfig.Register);
+        }
+    }
 
     public partial class MySite : System.Web.UI.MasterPage
     {
         private string ConnString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["ModalConnectionString"].ConnectionString;
         private SqlConnection conn;
         private SqlCommand comm;
+
+        static bool m_isItInint = false;
 
         /// <summary>
         /// Part of singletone
@@ -44,15 +55,19 @@ namespace WebAssessment
         public MySite()
         {
             instance = this;
+            if (!m_isItInint)
+                GlobalConfiguration.Configure(WebApiConfig.Register);
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if(!m_isItInint)
+                GlobalConfiguration.Configuration.EnsureInitialized();
             Register.OnClientClick = "return RegisterBtnClc()";
             LoginBtn.OnClientClick = "return LoginBtnClc()";
             SignBtn.OnClientClick = "return ShowModal()";
             RestoreBtn.OnClientClick = "return LoginBtnClc()";
-
+            m_isItInint = true;
             if (!IsPostBack)
             {
                 Logout.Visible = Context.User.Identity.IsAuthenticated;
@@ -164,7 +179,7 @@ namespace WebAssessment
             System.Net.Mail.MailMessage mail = new System.Net.Mail.MailMessage();
 
             mail.To.Add(user.Email); //What address you send your email
-            mail.From = new MailAddress("ckpyt.site@gmail.com", "Ckpyt's site", System.Text.Encoding.UTF8);
+            mail.From = new MailAddress("support@ckpyt.com", "Ckpyt's site", System.Text.Encoding.UTF8);
             mail.Subject = subject;
             mail.SubjectEncoding = System.Text.Encoding.UTF8;
             mail.Body = message;
@@ -173,7 +188,7 @@ namespace WebAssessment
             mail.Priority = MailPriority.High;
 
             SmtpClient client = new SmtpClient();
-            client.Credentials = new System.Net.NetworkCredential("ckpyt.site@gmail.com", "cfvjktnbrb_987"); //Your initial email and password which you use as a Credential
+            client.Credentials = new System.Net.NetworkCredential("support@ckpyt.com", "cfvjktnbrb_987"); //Your initial email and password which you use as a Credential
             client.Port = 587;
             client.Host = "smtp.gmail.com";
             client.EnableSsl = true;
@@ -312,11 +327,12 @@ namespace WebAssessment
             Random rnd = new Random();
             int randomeKode = rnd.Next(100000, 999999);
 
+            /*
             if (user.UserName.CompareTo("44") == 0)
             {
                 randomeKode = 514236;
             }
-
+            */
             var pg = Page.Master as MySite;
             pg.SendEmail(user, "Hello, " + user.UserName + "<br>Somebody want to change your password on my web-site <br>If it was your action, please, follow the link and type this code:" + randomeKode.ToString() + ". <br> <a href=\"http://localhost:62817/passwordChangeConfirm.aspx \"> Confirm page </a><br>Your new password will be the same as it was typed in the password field  <br> Cheers, Dmitriy Shabalin",
                 "Password changing request");

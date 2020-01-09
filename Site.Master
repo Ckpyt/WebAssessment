@@ -20,7 +20,7 @@
 
     <link rel="stylesheet" href="css/style.css">
 
-    <title>Ckpyt Software - Home</title>
+    <title>Ckpyt Software</title>
 
 
 
@@ -176,7 +176,7 @@
                                 <ul class="navbar-right">
                                     <li class="nav-item">
                                         <asp:Button ID="Logout" runat="server" class="button button-header bg" Text="Log out" OnClick="Logout_Click" Visible="False" />
-                                        <asp:Button ID="SignBtn" class="button button-header bg" runat="server" Text="Sign in" OnClick="SignIn_click" />
+                                        <asp:Button ID="SignBtn" class="button button-header bg" runat="server" Text="Sign in" UseSubmitBehavior="false" OnClick="SignIn_click" />
                                          <!-- start popup -->
                                         <div id='overlay-'></div>
                                         <table>
@@ -267,7 +267,7 @@
                                                         <div class="popupbox">
                                                             <div>
                                                                 <h1> LOGIN
-                                                                <input type="submit" value="X" class="button-close" onclick="return RemoveModal();" />
+                                                                <input type="button" value="X" class="button-close" onclick="return RemoveModal();" />
                                                                 </h1>
                                                             </div>
                                                             <hr />

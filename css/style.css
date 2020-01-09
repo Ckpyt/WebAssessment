@@ -142,7 +142,7 @@ font-weight:600}@media (min-width: 1000px)
 }
 .header_area 
 .navbar-right{
-    min-width:200px;
+    
     text-align:right
 }
 @media (max-width: 991px){.header_area .navbar-right{margin:20px 0}}
@@ -721,7 +721,7 @@ margin-bottom:50px}@media (max-width: 576px){
 box-shadow:0 3px 14px 0px rgba(221,221,221,0.85);
 margin-bottom:30px;
 overflow:hidden}@media (max-width: 576px){
-.our_major_cause .card .card-body{padding:5px}}
+.our_major_cause .card .card-body{padding:5px;}}
 .our_major_cause .card figure{overflow:hidden;
 margin:0}
 .our_major_cause .card figure img{-webkit-transition:all 0.3s ease 0s;

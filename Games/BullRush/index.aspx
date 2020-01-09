@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="index.aspx.cs" Inherits="WebAssessment.Games.ColonyRuler.index" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="index.aspx.cs" Inherits="WebAssessment.Games.Bullrush.index" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Header" runat="server">
     <link rel="stylesheet" href="TemplateData/style.css">
     <script src="TemplateData/UnityProgress.js"></script>
@@ -9,11 +9,11 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="head" runat="server">
     <div class="hero-banner--sm__content">
-        <h1>Colony ruler</h1>
+        <h1>Bull rush</h1>
         <nav aria-label="breadcrumb" class="banner-breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.aspx">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Colony ruler</li>
+            <li class="breadcrumb-item active" aria-current="page">Bull rush</li>
           </ol>
         </nav>
       </div>
@@ -28,7 +28,7 @@
           <div class="footer">
             <div class="webgl-logo"></div>
             <div class="fullscreen" onclick="unityInstance.SetFullscreen(1)"></div>
-            <div class="title">ColonyRuler</div>
+            <div class="title">Bull rush</div>
           </div>
         </div>
     </div>

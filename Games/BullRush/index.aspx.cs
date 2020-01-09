@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace WebAssessment.Games.ColonyRuler
+namespace WebAssessment.Games.Bullrush
 {
     public partial class index : System.Web.UI.Page
     {

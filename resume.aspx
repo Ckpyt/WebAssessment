@@ -31,7 +31,7 @@
                             <div class="top-card-layout__entity-info">
                                 <h1 class="top-card-layout__title">Dmitry Shabalin</h1>
                                 <h2 class="top-card-layout__headline">Software developer <br>
-I'm actively seeking a part-time role as a software developer</h2>
+I'm actively seeking a full-time role as a software developer</h2>
                             </div>
                         </div>
                     </div>
@@ -99,7 +99,7 @@ travelling, fencing and rock climbing<br>
                                 <h3 class="result-card__title experience-item__title">C# Developer</h3>
                                 
                                 <div class="result-card__meta experience-item__meta">
-                                    <p class="experience-item__duration experience-item__meta-item"><span class="date-range"><time class="date-range__start-date">Apr 2018</time>  –  Feb 2019<span class="date-range__duration">10 months</span></span></p>
+                                    <p class="experience-item__duration experience-item__meta-item"><span class="date-range"><time class="date-range__start-date">Apr 2018</time>  –  Feb 2019<span class="date-range__duration">  10 months</span></span></p>
                                     <p class="experience-item__location experience-item__meta-item">Chrictchurch, New Zealand</p>
                                     <div class="experience-item__description experience-item__meta-item" data-section="currentPositions">
                                         <div class="show-more-less-text show-more-less-description text-left">
@@ -124,7 +124,7 @@ travelling, fencing and rock climbing<br>
                                     <span class="date-range">
                                         <time class="date-range__start-date">Apr 2017</time>  –  
                                         <time class="date-range__end-date">Jan 2018</time>
-                                        <span class="date-range__duration">10 months</span>
+                                        <span class="date-range__duration"> 10 months</span>
                                     </span></p>
                                     <p class="experience-item__location experience-item__meta-item">Saint Petersburg, Russian Federation</p>
                                     <div class="experience-item__description experience-item__meta-item" data-section="pastPositions">
@@ -154,7 +154,7 @@ travelling, fencing and rock climbing<br>
                                     <p class="experience-item__duration experience-item__meta-item">
                                     <span class="date-range"><time class="date-range__start-date">Feb 2015</time>  –  
                                        <time class="date-range__end-date">Oct 2015</time>
-                                       <span class="date-range__duration">9 months</span>
+                                       <span class="date-range__duration"> 9 months</span>
                                     </span></p>
                                     <p class="experience-item__location experience-item__meta-item">Russia, Saint-Peterburg</p>
                                     <div class="experience-item__description experience-item__meta-item" data-section="pastPositions">
@@ -172,7 +172,7 @@ travelling, fencing and rock climbing<br>
                             <h4 class="result-card__subtitle experience-item__subtitle">OOO "Logdep"</h4>
                                 <h3 class="result-card__title experience-item__title">C++ programmer</h3>
                                 <div class="result-card__meta experience-item__meta">
-                                    <p class="experience-item__duration experience-item__meta-item"><span class="date-range"><time class="date-range__start-date">Sep 2014</time>  –  <time class="date-range__end-date">Feb 2015</time><span class="date-range__duration">6 months</span></span></p>
+                                    <p class="experience-item__duration experience-item__meta-item"><span class="date-range"><time class="date-range__start-date">Sep 2014</time>  –  <time class="date-range__end-date">Feb 2015</time><span class="date-range__duration"> 6 months</span></span></p>
                                     <p class="experience-item__location experience-item__meta-item">Russia, Saint-Petersburg</p>
                                     <div class="experience-item__description experience-item__meta-item" data-section="pastPositions">
                                         <div class="show-more-less-text show-more-less-description text-left"><span class="show-more-less-text__sr-only-text">It was a geoinformation system. It created a route for a taxi.<br>
@@ -192,7 +192,7 @@ travelling, fencing and rock climbing<br>
                                 <h3 class="result-card__title experience-item__title">C++ programmer</h3>
                                 
                                 <div class="result-card__meta experience-item__meta">
-                                    <p class="experience-item__duration experience-item__meta-item"><span class="date-range"><time class="date-range__start-date">Oct 2012</time>  –  <time class="date-range__end-date">Sep 2014</time><span class="date-range__duration">2 years</span></span></p>
+                                    <p class="experience-item__duration experience-item__meta-item"><span class="date-range"><time class="date-range__start-date">Oct 2012</time>  –  <time class="date-range__end-date">Sep 2014</time><span class="date-range__duration"> 2 years</span></span></p>
                                     <p class="experience-item__location experience-item__meta-item">Saint Petersburg, Russian Federation</p>
                                     <div class="experience-item__description experience-item__meta-item" data-section="pastPositions">
                                         <div class="show-more-less-text show-more-less-description text-left"><span class="show-more-less-text__sr-only-text">Make server for MMO-game.<br>
@@ -211,7 +211,7 @@ travelling, fencing and rock climbing<br>
                                 <h3 class="result-card__title experience-item__title">Network System Administrator</h3>
                                 
                                 <div class="result-card__meta experience-item__meta">
-                                    <p class="experience-item__duration experience-item__meta-item"><span class="date-range"><time class="date-range__start-date">Sep 2008</time>  –  <time class="date-range__end-date">Oct 2012</time><span class="date-range__duration">4 years 2 months</span></span></p>
+                                    <p class="experience-item__duration experience-item__meta-item"><span class="date-range"><time class="date-range__start-date">Sep 2008</time>  –  <time class="date-range__end-date">Oct 2012</time><span class="date-range__duration"> 4 years 2 months</span></span></p>
                                     <p class="experience-item__location experience-item__meta-item">Saint Petersburg, Russian Federation</p>
                                     <div class="experience-item__description experience-item__meta-item" data-section="pastPositions">
                                         <div class="show-more-less-text show-more-less-description text-left"><span class="show-more-less-text__sr-only-text">I make domen for it, backup system, and utilites for technologists. Also, posted news and make some pages for its site.<br>
@@ -228,7 +228,7 @@ travelling, fencing and rock climbing<br>
                                 <h3 class="result-card__title experience-item__title">Network System Administrator</h3>
                                 
                                 <div class="result-card__meta experience-item__meta">
-                                    <p class="experience-item__duration experience-item__meta-item"><span class="date-range"><time class="date-range__start-date">Sep 2002</time>  –  <time class="date-range__end-date">Sep 2008</time><span class="date-range__duration">6 years 1 month</span></span></p>
+                                    <p class="experience-item__duration experience-item__meta-item"><span class="date-range"><time class="date-range__start-date">Sep 2002</time>  –  <time class="date-range__end-date">Sep 2008</time><span class="date-range__duration"> 6 years 1 month</span></span></p>
                                     <p class="experience-item__location experience-item__meta-item">Saint Petersburg, Russian Federation</p>
                                     <div class="experience-item__description experience-item__meta-item" data-section="pastPositions">
                                         <div class="show-more-less-text show-more-less-description text-left">
@@ -247,7 +247,7 @@ shell scripts and some utilities on C#.</span>
                                 <h3 class="result-card__title experience-item__title">Network System Administrator</h3>
                                 
                                 <div class="result-card__meta experience-item__meta">
-                                    <p class="experience-item__duration experience-item__meta-item"><span class="date-range"><time class="date-range__start-date">Jan 1998</time>  –  <time class="date-range__end-date">Sep 2002</time><span class="date-range__duration">4 years 9 months</span></span></p>
+                                    <p class="experience-item__duration experience-item__meta-item"><span class="date-range"><time class="date-range__start-date">Jan 1998</time>  –  <time class="date-range__end-date">Sep 2002</time><span class="date-range__duration"> 4 years 9 months</span></span></p>
                                     <p class="experience-item__location experience-item__meta-item">Saint Petersburg, Russian Federation</p>
                                     <div class="experience-item__description experience-item__meta-item" data-section="pastPositions">
                                         <div class="show-more-less-text show-more-less-description text-left"><span class="show-more-less-text__sr-only-text">network support, creation, repair of computers and networks, installation and correction of software and games.<br>
