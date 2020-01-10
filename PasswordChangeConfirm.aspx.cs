@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -23,9 +24,9 @@ namespace WebAssessment
         {
             try
             {
-                SqlConnection conn2 = new SqlConnection(ConnString);
+                MySqlConnection conn2 = new MySqlConnection(ConnString);
                 conn2.Open();
-                SqlCommand comm2 = new SqlCommand("delete from tblPassConfirm where(keyz=" + code.ToString() + ");", conn2);
+                MySqlCommand comm2 = new MySqlCommand("delete from tblPassConfirm where(keyz=" + code.ToString() + ");", conn2);
                 comm2.ExecuteReader();
                 conn2.Close();
             }catch(Exception ex)
@@ -54,9 +55,9 @@ namespace WebAssessment
                 user = userManager.FindByName(this.User.Identity.Name);
             //string Password= "", newPassword= "";
 
-            SqlConnection conn = new SqlConnection(ConnString);
+            MySqlConnection conn = new MySqlConnection(ConnString);
             conn.Open();
-            SqlCommand comm = new SqlCommand("select * from tblPassConfirm where keyz=" + ConfirmBox.Text + ";", conn);
+            MySqlCommand comm = new MySqlCommand("select * from tblPassConfirm where keyz=" + ConfirmBox.Text + ";", conn);
 
             try
             {

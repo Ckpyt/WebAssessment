@@ -13,6 +13,7 @@ using System.Web.UI.WebControls;
 using System.Net.Mail;
 using System.Web.Http;
 using WebAssessment.Configuration;
+using MySql.Data.MySqlClient;
 
 namespace WebAssessment
 {
@@ -27,8 +28,6 @@ namespace WebAssessment
     public partial class MySite : System.Web.UI.MasterPage
     {
         private string ConnString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["ModalConnectionString"].ConnectionString;
-        private SqlConnection conn;
-        private SqlCommand comm;
 
         static bool m_isItInint = false;
 
@@ -337,9 +336,9 @@ namespace WebAssessment
             pg.SendEmail(user, "Hello, " + user.UserName + "<br>Somebody want to change your password on my web-site <br>If it was your action, please, follow the link and type this code:" + randomeKode.ToString() + ". <br> <a href=\"http://localhost:62817/passwordChangeConfirm.aspx \"> Confirm page </a><br>Your new password will be the same as it was typed in the password field  <br> Cheers, Dmitriy Shabalin",
                 "Password changing request");
 
-            SqlConnection conn = new SqlConnection(ConnString);
+            MySqlConnection conn = new MySqlConnection(ConnString);
             conn.Open();
-            SqlCommand comm = new SqlCommand("insert into tblPassConfirm values('" + user.Id +
+            MySqlCommand comm = new MySqlCommand("insert into tblPassConfirm values('" + user.Id +
                 "'," + randomeKode.ToString() + ",'" + DateTime.Now.ToString("yyyy-MM-ddThh:mm:ss") +
                 "','" + UserPassword.Text +"','1', 'true' );", conn);
                 

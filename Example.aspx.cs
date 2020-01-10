@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -20,8 +21,8 @@ public partial class _Default : System.Web.UI.Page
     {
         Repeater rptFriends = FindControl("rptFriends") as Repeater;
         string constr = ConfigurationManager.ConnectionStrings["ModalConnectionString"].ConnectionString;
-        SqlConnection _con = new SqlConnection(constr);
-        SqlDataAdapter da = new SqlDataAdapter("Select * From tblFriends", _con);
+        MySqlConnection _con = new MySqlConnection(constr);
+        MySqlDataAdapter da = new MySqlDataAdapter("Select * From tblFriends", _con);
         DataSet ds = new DataSet();
         da.Fill(ds);
         rptFriends.DataSource = ds.Tables[0];

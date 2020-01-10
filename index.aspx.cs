@@ -37,7 +37,7 @@ namespace WebAssessment
         void BindAdsRepeater(int id = 0)
         {
 
-            /*SqlConnection conn = new SqlConnection(ConnString);
+            /*MySqlConnection conn = new MySqlConnection(ConnString);
             SqlDataAdapter da = new SqlDataAdapter("select tblAdverts.AdsName, tblCategory.Name, tblAdverts.AdsText from tblAdverts, tblCategory" +
                 " where(tblCategory.ID=tblAdverts.CategoryID" + (id > 0 ? " and tblCategory.ID=" + id: "") + ")" , conn);
 
@@ -51,7 +51,7 @@ namespace WebAssessment
 
            /* DataTable subjects = new DataTable();
 
-            using (SqlConnection con = new SqlConnection(ConnString))
+            using (MySqlConnection con = new MySqlConnection(ConnString))
             {
 
                 try
@@ -80,7 +80,7 @@ namespace WebAssessment
                 BindAdsRepeater(id);
             else {
                 string key = searchText.Text;
-                SqlConnection conn = new SqlConnection(ConnString);
+                MySqlConnection conn = new MySqlConnection(ConnString);
                 SqlDataAdapter da = new SqlDataAdapter("select tblAdverts.AdsName, tblCategory.Name, tblAdverts.AdsText from tblAdverts, tblCategory" +
                     " where(tblCategory.ID=tblAdverts.CategoryID" + (id > 0 ? " and tblCategory.ID=" + id : "") + ")", conn);
 

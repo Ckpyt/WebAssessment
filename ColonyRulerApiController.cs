@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Diagnostics;
@@ -18,13 +19,14 @@ namespace WebAssessment
 
         string GetSettings(string name)
         {
-            SqlConnection conn = new SqlConnection(ConnString);
-            SqlCommand comm;
+            MySqlConnection conn = new MySqlConnection(ConnString);
+            MySqlCommand comm;
 
             conn.Open();
-            comm = new SqlCommand("select settingsJson from tblSettings where(Name='" + name + "')", conn);
+            comm = new MySqlCommand("select settingsJson from tblSettings where(Name=@name)", conn);
+            comm.Parameters.Add(new MySqlParameter("@name", name));
 
-            SqlDataReader result = null;
+            MySqlDataReader result = null;
             try
             {
                 result = comm.ExecuteReader();
@@ -46,13 +48,14 @@ namespace WebAssessment
 
         string GetSaveNames(string name)
         {
-            SqlConnection conn = new SqlConnection(ConnString);
-            SqlCommand comm;
+            MySqlConnection conn = new MySqlConnection(ConnString);
+            MySqlCommand comm;
             string saveNames = "";
             conn.Open();
-            comm = new SqlCommand("select SaveName from tblSaves where(UserName='" + name + "')", conn);
+            comm = new MySqlCommand("select SaveName from tblSaves where(UserName=@name)", conn);
+            comm.Parameters.Add(new MySqlParameter("@name", name));
 
-            SqlDataReader result = null;
+            MySqlDataReader result = null;
             try
             {
                 result = comm.ExecuteReader();
@@ -79,13 +82,15 @@ namespace WebAssessment
 
         string GetSave(string name, string saveName)
         {
-            SqlConnection conn = new SqlConnection(ConnString);
-            SqlCommand comm;
+            MySqlConnection conn = new MySqlConnection(ConnString);
+            MySqlCommand comm;
 
             conn.Open();
-            comm = new SqlCommand("select SaveData from tblSaves where(UserName='" + name + "' and SaveName='" + saveName + "')", conn);
+            comm = new MySqlCommand("select SaveData from tblSaves where(UserName=@name and SaveName=@savename)", conn);
+            comm.Parameters.Add(new MySqlParameter("@name", name));
+            comm.Parameters.Add(new MySqlParameter("@savename", saveName));
 
-            SqlDataReader result = null;
+            MySqlDataReader result = null;
             try
             {
                 result = comm.ExecuteReader();
@@ -142,17 +147,16 @@ namespace WebAssessment
         {
             string settings = GetSettings(name);
 
-            SqlConnection conn = new SqlConnection(ConnString);
-            SqlCommand comm;
+            MySqlConnection conn = new MySqlConnection(ConnString);
+            MySqlCommand comm;
 
             conn.Open();
             comm = settings != null && settings.Length > 0 ?
-                new SqlCommand("update tblSettings set settingsJson='" + value + 
-                "' where(Name='" + name + "')", conn):
-                new SqlCommand("insert into tblSettings values('" + name + 
-                "','" + value + "')" , conn);
-
-            SqlDataReader result = null;
+                new MySqlCommand("update tblSettings set settingsJson=@value where(Name=@name)", conn):
+                new MySqlCommand("insert into tblSettings values(@nane, @value)" , conn);
+            comm.Parameters.Add(new MySqlParameter("@name", name));
+            comm.Parameters.Add(new MySqlParameter("@value", value));
+            MySqlDataReader result = null;
             try
             {
                 result = comm.ExecuteReader();
@@ -166,13 +170,15 @@ namespace WebAssessment
 
         void DeleteSave(string name, string value)
         {
-            SqlConnection conn = new SqlConnection(ConnString);
-            SqlCommand comm;
+            MySqlConnection conn = new MySqlConnection(ConnString);
+            MySqlCommand comm;
 
             conn.Open();
-            comm = new SqlCommand("delete from tblSaves where(Name='" + name + "', SaveName = '" + value + "')", conn);
+            comm = new MySqlCommand("delete from tblSaves where(Name=@name, SaveName = @value)", conn);
+            comm.Parameters.Add(new MySqlParameter("@name", name));
+            comm.Parameters.Add(new MySqlParameter("@value", value));
 
-            SqlDataReader result = null;
+            MySqlDataReader result = null;
             try
             {
                 result = comm.ExecuteReader();
@@ -219,27 +225,27 @@ namespace WebAssessment
 
                 string curSave = GetSave(name, save);
 
-                SqlConnection conn = new SqlConnection(ConnString);
-                SqlCommand comm;
+                MySqlConnection conn = new MySqlConnection(ConnString);
+                MySqlCommand comm;
 
                 conn.Open();
                 if(curSave != null && curSave.Length > 0)
                 {
-                    comm = new SqlCommand("update tblSaves set SaveData=@save where(UserName=@name and SaveName=@saveName)", conn);
-                    comm.Parameters.Add(new SqlParameter("@name", name));
-                    comm.Parameters.Add(new SqlParameter("@saveName", save));
-                    comm.Parameters.Add(new SqlParameter("@save", converted));
+                    comm = new MySqlCommand("update tblSaves set SaveData=@save where(UserName=@name and SaveName=@saveName)", conn);
+                    comm.Parameters.Add(new MySqlParameter("@name", name));
+                    comm.Parameters.Add(new MySqlParameter("@saveName", save));
+                    comm.Parameters.Add(new MySqlParameter("@save", converted));
                 }
                 else
                 {
-                    comm = new SqlCommand("insert into tblSaves values(@saveName, @name, @save)", conn);
+                    comm = new MySqlCommand("insert into tblSaves values(@saveName, @name, @save)", conn);
 
-                    comm.Parameters.Add(new SqlParameter("@name", name));
-                    comm.Parameters.Add(new SqlParameter("@saveName", save));
-                    comm.Parameters.Add(new SqlParameter("@save", converted));
+                    comm.Parameters.Add(new MySqlParameter("@name", name));
+                    comm.Parameters.Add(new MySqlParameter("@saveName", save));
+                    comm.Parameters.Add(new MySqlParameter("@save", converted));
                 }
 
-                SqlDataReader result = comm.ExecuteReader();
+                MySqlDataReader result = comm.ExecuteReader();
 
             }
             catch (System.Exception e)

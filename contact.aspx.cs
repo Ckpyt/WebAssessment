@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -13,8 +14,6 @@ namespace WebAssessment
     public partial class contact : System.Web.UI.Page
     {
         private string ConnString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["ModalConnectionString"].ConnectionString;
-        private SqlConnection conn;
-        private SqlCommand comm;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -32,13 +31,13 @@ namespace WebAssessment
 
         protected void SendMessage(object sender, EventArgs e)
         {
-            SqlConnection conn = new SqlConnection(ConnString);
+            MySqlConnection conn = new MySqlConnection(ConnString);
             conn.Open();
-            SqlCommand comm = new SqlCommand("insert into tblMessages values(@name, @email, @subject, @body);", conn);
-            comm.Parameters.Add(new SqlParameter("@name", name.Text));
-            comm.Parameters.Add(new SqlParameter("@email", email.Text));
-            comm.Parameters.Add(new SqlParameter("@subject", subject.Text));
-            comm.Parameters.Add(new SqlParameter("@body", message.Text));
+            MySqlCommand comm = new MySqlCommand("insert into tblMessages values(@name, @email, @subject, @body);", conn);
+            comm.Parameters.Add(new MySqlParameter("@name", name.Text));
+            comm.Parameters.Add(new MySqlParameter("@email", email.Text));
+            comm.Parameters.Add(new MySqlParameter("@subject", subject.Text));
+            comm.Parameters.Add(new MySqlParameter("@body", message.Text));
 
             try
             {

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -26,16 +27,17 @@ namespace WebAssessment
             //save e-mail
             if(UserEmail.Text.Length == 0)
                 UserEmail.Text = user.Email;
-            
-            SqlConnection conn = new SqlConnection(ConnString);
-            SqlCommand comm;
+
+            MySqlConnection conn = new MySqlConnection(ConnString);
+            MySqlCommand comm;
 
             conn.Open();
-            comm = new SqlCommand("select Description from tblDescription where(id='" + user.Id + "')", conn);
+            comm = new MySqlCommand("select Description from tblDescription where(id='" + user.Id + "')", conn);
 
-            SqlDataReader result = null;
+            MySqlDataReader result = null;
             try
             {
+                
                 result = comm.ExecuteReader();
                 if (result.HasRows && result.Read())
                 {
@@ -50,7 +52,7 @@ namespace WebAssessment
                     conn.Close();
                     Description.Text = "It is your description";
                     conn.Open();
-                    comm = new SqlCommand("insert into tblDescription values('" + user.Id + "','" + Description.Text +"')", conn);
+                    comm = new MySqlCommand("insert into tblDescription values('" + user.Id + "','" + Description.Text +"')", conn);
                     result = comm.ExecuteReader();
                     conn.Close();
                 }
@@ -66,7 +68,7 @@ namespace WebAssessment
             {
                 conn.Open();
                 
-                comm = new SqlCommand("update tblDescription set Description='" + m_currDescr
+                comm = new MySqlCommand("update tblDescription set Description='" + m_currDescr
                     + "' where(Id='" + user.Id.ToString() + "');", conn);
 
                 try
@@ -106,9 +108,9 @@ namespace WebAssessment
             var user = userManager.FindById(id);
             userManager.Delete(user);
 
-            SqlConnection conn = new SqlConnection(ConnString);
+            MySqlConnection conn = new MySqlConnection(ConnString);
             conn.Open();
-            SqlCommand comm = new SqlCommand("delete from tblDescription where id='" + user.Id + "';", conn);
+            MySqlCommand comm = new MySqlCommand("delete from tblDescription where id='" + user.Id + "';", conn);
             try
             {
                 comm.ExecuteReader();
@@ -179,9 +181,9 @@ namespace WebAssessment
                 pg.SendEmail(user, "Hello, " + user.UserName + "<br>Somebody want to change your password on my web-site <br>If it was your action, please, follow the link and type this code:" + randomeKode.ToString() + ". <br> <a href=\"http://localhost:62817/passwordChangeConfirm.aspx \"> Confirm page </a><br> Cheers, Dmitriy Shabalin",
                     "Password changing request");
 
-                SqlConnection conn = new SqlConnection(ConnString);
+                MySqlConnection conn = new MySqlConnection(ConnString);
                 conn.Open();
-                SqlCommand comm = new SqlCommand("insert into tblPassConfirm values('" + user.Id + 
+                MySqlCommand comm = new MySqlCommand("insert into tblPassConfirm values('" + user.Id + 
                     "'," + randomeKode.ToString() + ",'" + DateTime.Now.ToString("yyyy-MM-ddThh:mm:ss") + 
                     "','" + Password.Text + "','" + newPassword.Text + "','false');", conn);
 

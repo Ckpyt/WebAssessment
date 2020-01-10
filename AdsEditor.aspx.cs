@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -32,8 +33,8 @@ namespace WebAssessment
 
             IdentityUser user = userManager.FindByName(this.User.Identity.Name);
 
-            SqlConnection conn = new SqlConnection(ConnString);
-            SqlDataAdapter da = new SqlDataAdapter("select id, AdsName from tblAdverts where(userId='" 
+            MySqlConnection conn = new MySqlConnection(ConnString);
+            MySqlDataAdapter da = new MySqlDataAdapter("select id, AdsName from tblAdverts where(userId='" 
                 + user.Id +"')", conn);
 
             DataSet ds = new DataSet();
@@ -46,12 +47,12 @@ namespace WebAssessment
         {
             DataTable subjects = new DataTable();
 
-            using (SqlConnection con = new SqlConnection(ConnString))
+            using (MySqlConnection con = new MySqlConnection(ConnString))
             {
 
                 try
                 {
-                    SqlDataAdapter adapter = new SqlDataAdapter("SELECT ID, Name FROM tblCategory", con);
+                    MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT ID, Name FROM tblCategory", con);
                     adapter.Fill(subjects);
 
                     AdsCategory.DataSource = subjects;
@@ -77,8 +78,8 @@ namespace WebAssessment
 
             IdentityUser user = userManager.FindByName(this.User.Identity.Name);
 
-            SqlConnection conn = new SqlConnection(ConnString);
-            SqlCommand comm = new SqlCommand("select * from tblAdverts where(id=" +
+            MySqlConnection conn = new MySqlConnection(ConnString);
+            MySqlCommand comm = new MySqlCommand("select * from tblAdverts where(id=" +
                id + " and UserID='" + user.Id + "')", conn);
 
             conn.Open();
@@ -109,8 +110,8 @@ namespace WebAssessment
 
             IdentityUser user = userManager.FindByName(this.User.Identity.Name);
 
-            SqlConnection conn = new SqlConnection(ConnString);
-            SqlCommand comm = new SqlCommand("delete from tblAdverts where(id=" + 
+            MySqlConnection conn = new MySqlConnection(ConnString);
+            MySqlCommand comm = new MySqlCommand("delete from tblAdverts where(id=" + 
                id + " and UserID='" + user.Id + "')" ,conn);
 
             conn.Open();
@@ -132,15 +133,15 @@ namespace WebAssessment
 
             IdentityUser user = userManager.FindByName(this.User.Identity.Name);
 
-            SqlConnection conn = new SqlConnection(ConnString);
-            SqlCommand comm;
+            MySqlConnection conn = new MySqlConnection(ConnString);
+            MySqlCommand comm;
 
             conn.Open();
             if (AdvId.Text.Length == 0)
             {
-                comm = new SqlCommand("select max(id) as max_id from tblAdverts", conn);
+                comm = new MySqlCommand("select max(id) as max_id from tblAdverts", conn);
                 int id = 1;
-                SqlDataReader result = null;
+                MySqlDataReader result = null;
                 try
                 {
                     result = comm.ExecuteReader();
@@ -158,13 +159,13 @@ namespace WebAssessment
                 }
 
                 result.Close();
-                comm = new SqlCommand("insert tblAdverts values(" + id.ToString() + ",'" +
+                comm = new MySqlCommand("insert tblAdverts values(" + id.ToString() + ",'" +
                     user.Id+ "'," + (AdsCategory.SelectedValue) + ",'"+ AdsName.Text + "','" + 
                     AdsText.Text + "', 'true' );", conn);
             }
             else
             {
-                comm = new SqlCommand("update tblAdverts set AdsName='" + AdsName.Text +
+                comm = new MySqlCommand("update tblAdverts set AdsName='" + AdsName.Text +
                    "', CategoryID=" + (AdsCategory.SelectedValue) + ", AdsText='" + AdsText.Text +
                    "' where(ID=" + AdvId.Text + " and UserID='" + user.Id + "');", conn);
             }

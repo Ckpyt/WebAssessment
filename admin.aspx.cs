@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -28,8 +29,8 @@ namespace WebAssessment
         private void BindRepeater()
         {
             string constr = ConfigurationManager.ConnectionStrings["ModalConnectionString"].ConnectionString;
-            SqlConnection _con = new SqlConnection(constr);
-            SqlDataAdapter da = new SqlDataAdapter("Select AspNetUsers.Id, AspNetUsers.UserName, AspNetUsers.Email, tblDescription.Description From AspNetUsers, tblDescription where(tblDescription.Id=AspNetUsers.Id);", _con);
+            MySqlConnection _con = new MySqlConnection(constr);
+            MySqlDataAdapter da = new MySqlDataAdapter("Select AspNetUsers.Id, AspNetUsers.UserName, AspNetUsers.Email, tblDescription.Description From AspNetUsers, tblDescription where(tblDescription.Id=AspNetUsers.Id);", _con);
             DataSet ds = new DataSet();
             da.Fill(ds);
             rptUsers.DataSource = ds.Tables[0];
@@ -43,8 +44,8 @@ namespace WebAssessment
         private void BindRepeaterCategory()
         {
             string constr = ConfigurationManager.ConnectionStrings["ModalConnectionString"].ConnectionString;
-            SqlConnection _con = new SqlConnection(constr);
-            SqlDataAdapter da = new SqlDataAdapter("Select * From tblCategory;", _con);
+            MySqlConnection _con = new MySqlConnection(constr);
+            MySqlDataAdapter da = new MySqlDataAdapter("Select * From tblCategory;", _con);
             DataSet ds = new DataSet();
             da.Fill(ds);
             rptCategory.DataSource = ds.Tables[0];
@@ -70,9 +71,9 @@ namespace WebAssessment
             Button btn = sender as Button;
             string id = btn.CommandArgument;
             string constr = ConfigurationManager.ConnectionStrings["ModalConnectionString"].ConnectionString;
-            SqlConnection _con = new SqlConnection(constr);
+            MySqlConnection _con = new MySqlConnection(constr);
             _con.Open();
-            SqlCommand comm = new SqlCommand("Select * From tblCategory where(id=" + id + ");", _con);
+            MySqlCommand comm = new MySqlCommand("Select * From tblCategory where(id=" + id + ");", _con);
             try
             {
                 var result = comm.ExecuteReader();
@@ -113,13 +114,13 @@ namespace WebAssessment
 
             Page.ClientScript.RegisterStartupScript(GetType(), "MyKey", "SetText();", true);
 
-            SqlConnection conn = new SqlConnection(ConnString);
-            SqlCommand comm;
+            MySqlConnection conn = new MySqlConnection(ConnString);
+            MySqlCommand comm;
 
             conn.Open();
-            comm = new SqlCommand("select Description from tblDescription where(id='" + user.Id + "')", conn);
+            comm = new MySqlCommand("select Description from tblDescription where(id='" + user.Id + "')", conn);
 
-            SqlDataReader result = null;
+            MySqlDataReader result = null;
             try
             {
                 result = comm.ExecuteReader();
@@ -179,12 +180,12 @@ namespace WebAssessment
 
             }
             
-            SqlConnection conn = new SqlConnection(ConnString);
-            SqlCommand comm;
+            MySqlConnection conn = new MySqlConnection(ConnString);
+            MySqlCommand comm;
 
             conn.Open();
 
-            comm = new SqlCommand("update tblDescription set Description='" + Description.Text
+            comm = new MySqlCommand("update tblDescription set Description='" + Description.Text
                 + "' where(Id='" + usr.Id.ToString() + "');", conn);
 
             try
@@ -204,15 +205,15 @@ namespace WebAssessment
         /// </summary>
         protected void EditCat_Click(object sender, EventArgs e)
         {
-            SqlConnection conn = new SqlConnection(ConnString);
-            SqlCommand comm;
+            MySqlConnection conn = new MySqlConnection(ConnString);
+            MySqlCommand comm;
 
             conn.Open();
             if (CatId.Text.Length == 0)
             {
-                comm = new SqlCommand("select max(id) as max_id from tblCategory", conn);
+                comm = new MySqlCommand("select max(id) as max_id from tblCategory", conn);
                 int id = 1;
-                SqlDataReader result = null;
+                MySqlDataReader result = null;
                 try
                 {
                     result = comm.ExecuteReader();
@@ -230,11 +231,11 @@ namespace WebAssessment
                 }
 
                 result.Close();
-                comm = new SqlCommand("insert tblCategory values(" + id.ToString() + ",'" + Category.Text + "');", conn);
+                comm = new MySqlCommand("insert tblCategory values(" + id.ToString() + ",'" + Category.Text + "');", conn);
             }
             else
             {
-                comm = new SqlCommand("update tblCategory set Name='" + Category.Text + "' where(ID=" + CatId.Text + ");", conn);
+                comm = new MySqlCommand("update tblCategory set Name='" + Category.Text + "' where(ID=" + CatId.Text + ");", conn);
             }
             try
             {
