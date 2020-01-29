@@ -22,7 +22,7 @@
           <div class="media contact-info">
             <span class="contact-info__icon"><i class="ti-headphone"></i></span>
             <div class="media-body">
-              <h3><a href="tel:454545654">+64 (027) 503 6490</a></h3>
+              
               <p>Mon to Fri 9am to 6pm</p>
             </div>
           </div>

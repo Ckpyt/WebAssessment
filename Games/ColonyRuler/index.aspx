@@ -8,7 +8,8 @@
         function GetUserName() {
             return '<%= UserName %>';
         }
-        unityInstance.SendMessage('MainMenu', 'StoreUserName', '<%= UserName %>');
+        //unityInstance.SendMessage('MainMenu', 'StoreUserName', '<%= UserName %>');
+
     </script>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="head" runat="server">
@@ -17,7 +18,7 @@
         <nav aria-label="breadcrumb" class="banner-breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.aspx">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Colony ruler</li>
+            <li class="breadcrumb-item active">Colony ruler</li>
           </ol>
         </nav>
       </div>

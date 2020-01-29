@@ -256,7 +256,7 @@
     <Content Include="img\home\solution.png" />
     <Content Include="img\logo.png" />
     <Content Include="img\testimonial\testimonial1.png" />
-    <Content Include="Index.aspx" />
+    <Content Include="IndexOld.aspx" />
     <Content Include="index1.html" />
     <Content Include="js\contact.js" />
     <Content Include="js\jquery.ajaxchimp.min.js" />
@@ -321,7 +321,7 @@
     <Content Include="Parason Software -doc\syntax-highlighter\styles\shThemeRDark.css" />
     <Content Include="PasswordChangeConfirm.aspx" />
     <Content Include="profile.aspx" />
-    <Content Include="resume.aspx" />
+    <Content Include="index.aspx" />
     <Content Include="pricing.html" />
     <Content Include="resume1.aspx" />
     <Content Include="vendors\bootstrap\bootstrap.bundle.min.js" />
@@ -769,12 +769,12 @@
     <Compile Include="Games\ColonyRuler\index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Index.aspx.cs">
-      <DependentUpon>Index.aspx</DependentUpon>
+    <Compile Include="IndexOld.aspx.cs">
+      <DependentUpon>IndexOld.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Index.aspx.designer.cs">
-      <DependentUpon>Index.aspx</DependentUpon>
+    <Compile Include="IndexOld.aspx.designer.cs">
+      <DependentUpon>IndexOld.aspx</DependentUpon>
     </Compile>
     <Compile Include="login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>
@@ -797,16 +797,17 @@
     <Compile Include="profile.aspx.designer.cs">
       <DependentUpon>profile.aspx</DependentUpon>
     </Compile>
-    <Compile Include="resume.aspx.cs">
-      <DependentUpon>resume.aspx</DependentUpon>
+    <Compile Include="index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="resume.aspx.designer.cs">
-      <DependentUpon>resume.aspx</DependentUpon>
+    <Compile Include="index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>

@@ -17,6 +17,7 @@ using MySql.Data.MySqlClient;
 
 namespace WebAssessment
 {
+    /*
     public class Global : System.Web.HttpApplication
     {
         protected void Application_Start(object sender, EventArgs e)
@@ -24,7 +25,7 @@ namespace WebAssessment
             GlobalConfiguration.Configure(WebApiConfig.Register);
         }
     }
-
+    */
     public partial class MySite : System.Web.UI.MasterPage
     {
         private string ConnString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["ModalConnectionString"].ConnectionString;
@@ -53,9 +54,15 @@ namespace WebAssessment
 
         public MySite()
         {
-            instance = this;
-            if (!m_isItInint)
-                GlobalConfiguration.Configure(WebApiConfig.Register);
+            try
+            {
+                instance = this;
+                if (!m_isItInint)
+                    GlobalConfiguration.Configure(WebApiConfig.Register);
+            }catch(Exception ex)
+            {
+
+            }
         }
 
         protected void Page_Load(object sender, EventArgs e)

@@ -33,7 +33,7 @@ namespace WebAssessment
         {
             MySqlConnection conn = new MySqlConnection(ConnString);
             conn.Open();
-            MySqlCommand comm = new MySqlCommand("insert into tblMessages values(@name, @email, @subject, @body);", conn);
+            MySqlCommand comm = new MySqlCommand("insert into tblMessages (`UserName`, `email`, `subject`, `message`) values(@name, @email, @subject, @body);", conn);
             comm.Parameters.Add(new MySqlParameter("@name", name.Text));
             comm.Parameters.Add(new MySqlParameter("@email", email.Text));
             comm.Parameters.Add(new MySqlParameter("@subject", subject.Text));

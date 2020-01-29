@@ -7,11 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebAssessment
-{
-
-
-    public partial class index
-    {
+namespace WebAssessment {
+    
+    
+    public partial class pricing {
     }
 }

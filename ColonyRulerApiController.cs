@@ -13,10 +13,19 @@ using System.Web.Http;
 
 namespace WebAssessment
 {
+    /// <summary>
+    /// The game API: saving saves and settings
+    /// </summary>
     public class ColonyRulerApiController : ApiController
     {
+        /// <summary> Connection to database string </summary>
         private static string ConnString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["ModalConnectionString"].ConnectionString;
 
+        /// <summary>
+        /// Get user application settings
+        /// </summary>
+        /// <param name="name"> user name </param>
+        /// <returns> settings in json </returns>
         string GetSettings(string name)
         {
             MySqlConnection conn = new MySqlConnection(ConnString);
@@ -46,6 +55,11 @@ namespace WebAssessment
             return "";
         }
 
+        /// <summary>
+        /// Get names of all user's saves
+        /// </summary>
+        /// <param name="name"> user name </param>
+        /// <returns> names, divided by comma </returns>
         string GetSaveNames(string name)
         {
             MySqlConnection conn = new MySqlConnection(ConnString);
@@ -80,6 +94,11 @@ namespace WebAssessment
             return "";
         }
 
+        /// <summary>
+        /// Get save from user name and save name
+        /// </summary>
+        /// <param name="name"> user name </param>
+        /// <returns> save in json </returns>
         string GetSave(string name, string saveName)
         {
             MySqlConnection conn = new MySqlConnection(ConnString);
@@ -116,6 +135,7 @@ namespace WebAssessment
         {
             return new string[] { "value1", "value2" };
         }
+
 
         public string Get(string name, string save)
         {

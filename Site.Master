@@ -34,14 +34,30 @@
     <asp:ContentPlaceHolder ID="Header" runat="server"> </asp:ContentPlaceHolder>
     <script type="text/javascript">
 
-       
+        function ShowModal() {
+            var pathname = window.location.pathname;
+            var res = pathname.split("/");
+            for (var x in res) {
+                if (res[x] == "Games") {
+                    window.location.href = "https://www.ckpyt.com/login.aspx";
+                    return false;
+                }
+            }
+            document.getElementById("overlay-").style.height = document.body.clientHeight + 'px';
+            document.getElementById("overlay-").className = "OverlayEffect";
+            document.getElementById("modalMsg-1").className = "ShowModal";
+            document.getElementById("modalMsg-2").className = "ShowModal";
+            document.getElementById('<%=SignBtn.ClientID %>').className = "HideModal";
+            document.getElementById("header").className = "";
+            return false;
+        }
 
         function RemoveModal() {
             document.getElementById("overlay-").style.height = "0px";
             document.getElementById("overlay-").className = "";
             document.getElementById("modalMsg-1").className = "HideModal";
             document.getElementById("modalMsg-2").className = "HideModal";
-            document.getElementById("SignBtn").className = "button button-header bg";
+            document.getElementById('<%=SignBtn.ClientID %>').className = "button button-header bg";
             document.getElementById("header").className = "header_area";
             return false;
         }
@@ -61,23 +77,23 @@
                     passstr = document.getElementById('<%= UserPassword.ClientID %>').value.length;
             let k = 0
             if (namestr == '') {
-                document.getElementById("invMsgUserNM").className = "invBox alert alert-danger";
-                document.getElementById("invMsgUserNM").innerHTML = "name should contain at least 1 symbol";
+                document.getElementById('<%= invMsgUserNM.ClientID %>').className = "invBox alert alert-danger";
+                document.getElementById('<%= invMsgUserNM.ClientID %>').innerHTML = "name should contain at least 1 symbol";
 
             } else {
                 k++;
-                document.getElementById("invMsgUserNM").className = "invisible";
-                document.getElementById("invMsgUserNM").innerHTML = " ";
+                document.getElementById('<%= invMsgUserNM.ClientID %>').className = "invisible";
+                document.getElementById('<%= invMsgUserNM.ClientID %>').innerHTML = " ";
             }
 
             if (passstr == '') {
-                document.getElementById("invMsgUserPSW").className = "invBox alert alert-danger";
-                document.getElementById("invMsgUserPSW").innerHTML = "password should contain at least 1 symbol";
+                document.getElementById('<%= invMsgUserPSW.ClientID %>').className = "invBox alert alert-danger";
+                document.getElementById('<%= invMsgUserPSW.ClientID %>').innerHTML = "password should contain at least 1 symbol";
                 return false;
             } else {
                 k++;
-                document.getElementById("invMsgUserPSW").className = "invisible";
-                document.getElementById("invMsgUserPSW").innerHTML = " ";
+                document.getElementById('<%= invMsgUserPSW.ClientID %>').className = "invisible";
+                document.getElementById('<%= invMsgUserPSW.ClientID %>').innerHTML = " ";
             }
 
             return k == 2;
@@ -85,18 +101,18 @@
 
         function RestoreBtnClc() {
             namestr = document.getElementById('<%= UserName.ClientID %>').value.length;
-            document.getElementById("invMsgUserPSW").className = "invisible";
-            document.getElementById("invMsgUserPSW").innerHTML = " ";
+            document.getElementById('<%= invMsgUserPSW.ClientID %>').className = "invisible";
+            document.getElementById('<%= invMsgUserPSW.ClientID %>').innerHTML = " ";
 
             let k = 0
             if (namestr == '') {
-                document.getElementById("invMsgUserNM").className = "invBox alert alert-danger";
-                document.getElementById("invMsgUserNM").innerHTML = "name should contain at least 1 symbol";
+                document.getElementById('<%= invMsgUserNM.ClientID %>').className = "invBox alert alert-danger";
+                document.getElementById('<%= invMsgUserNM.ClientID %>').innerHTML = "name should contain at least 1 symbol";
                 return false;
             } else {
                 return true;
-                document.getElementById("invMsgUserNM").className = "invisible";
-                document.getElementById("invMsgUserNM").innerHTML = " ";
+                document.getElementById('<%= invMsgUserNM.ClientID %>').className = "invisible";
+                document.getElementById('<%= invMsgUserNM.ClientID %>').innerHTML = " ";
             }
         }
 
@@ -120,6 +136,50 @@
         }
 
 
+        function RegisterCheck(namestr, passstr, pass, conf, txtMail) {
+            let k = 0;
+            if (namestr == 0 || namestr == "") {
+                document.getElementById('<%=invMsgLogin.ClientID %>').className = "invBox alert alert-danger";
+                document.getElementById('<%=invMsgLogin.ClientID %>').innerHTML = "name should contain at least 1 symbol";
+            } else {
+                k++
+                document.getElementById('<%=invMsgLogin.ClientID %>').className = "invisible";
+                document.getElementById('<%=invMsgLogin.ClientID %>').innerHTML = " ";
+            }
+            if (passstr == '') {
+                document.getElementById('<%=invMsgPass.ClientID %>').className = "invBox alert alert-danger";
+                document.getElementById('<%=invMsgPass.ClientID %>').innerHTML = "password should contain at least 1 symbol";
+            } else {
+                k++;
+                document.getElementById('<%=invMsgPass.ClientID %>').className = "invisible";
+                document.getElementById('<%=invMsgPass.ClientID %>').innerHTML = " ";
+            }
+            if (pass != conf) {
+                document.getElementById('<%=invMsg.ClientID %>').className = "invBox alert alert-danger";
+                document.getElementById('<%=invMsg.ClientID %>').innerHTML = "password and confirm password do not match";
+
+            } else {
+                k++;
+                document.getElementById('<%=invMsg.ClientID %>').className = "invisible";
+                document.getElementById('<%=invMsg.ClientID %>').innerHTML = " ";
+            }
+            if (txtMail.length == '0') {
+
+                document.getElementById('<%=invMsgEmail.ClientID %>').className = "invBox alert alert-danger";
+                document.getElementById('<%=invMsgEmail.ClientID %>').innerHTML = "email should not be empty";
+                return false;
+            } else {
+                if (!validateEmail(txtMail)) {
+                    document.getElementById('<%=invMsgEmail.ClientID %>').className = "invBox alert alert-danger";
+                    document.getElementById('<%=invMsgEmail.ClientID %>').innerHTML = "sorry, your email is not correct";
+                    return false;
+                } else {
+                    document.getElementById('<%=invMsgEmail.ClientID %>').className = "invisible";
+                    document.getElementById('<%=invMsgEmail.ClientID %>').innerHTML = " ";
+                }
+            }
+            return k == 3;
+        }
 
         function RegisterBtnClc() {
             namestr = document.getElementById('<%= Login.ClientID %>').value.length;
@@ -127,6 +187,7 @@
             pass = document.getElementById('<%= Password.ClientID %>').value;
             conf = document.getElementById('<%= Confirm.ClientID %>').value;
             txtMail = document.getElementById('<%= Email.ClientID %>').value;
+            var logiMsg = document.getElementById('<%=invMsgLogin.ClientID %>');
             return RegisterCheck(namestr, passstr, pass, conf, txtMail);
         }
 
@@ -156,8 +217,8 @@
                             <!-- Collect the nav links, forms, and other content for toggling -->
                             <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                                 <ul class="nav navbar-nav menu_nav justify-content-end">
-                                    <li class="nav-item active"><a class="nav-link" href='<%= ResolveUrl("~/index.aspx")%>'>Home</a></li>
-                                    <li class="nav-item"><a class="nav-link" href='<%= ResolveUrl("~/resume.aspx")%>'>Resume</a></li>
+                                    <!--<li class="nav-item active"><a class="nav-link" href='<%= ResolveUrl("~/index.aspx")%>'>Home</a></li> -->
+                                    <li class="nav-item"><a class="nav-link" href='<%= ResolveUrl("~/index.aspx")%>'>Resume</a></li>
                                     <li class="nav-item"><a class="nav-link" href='<%= ResolveUrl("~/future.aspx")%>'>Future plans</a></li>
                                     <li class="nav-item submenu dropdown">
                                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -176,7 +237,7 @@
                                 <ul class="navbar-right">
                                     <li class="nav-item">
                                         <asp:Button ID="Logout" runat="server" class="button button-header bg" Text="Log out" OnClick="Logout_Click" Visible="False" />
-                                        <asp:Button ID="SignBtn" class="button button-header bg" runat="server" Text="Sign in" UseSubmitBehavior="false" OnClick="SignIn_click" />
+                                        <asp:Button ID="SignBtn" class="button button-header bg" runat="server" Text="Login/Sign up" UseSubmitBehavior="false" OnClick="SignIn_click" />
                                          <!-- start popup -->
                                         <div id='overlay-'></div>
                                         <table>
@@ -205,7 +266,7 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td colspan="2"> 
-                                                                            <asp:Label id="invMsgLogin" runat="server" class="invisible"></asp:Label>
+                                                                            <asp:Label id="invMsgLogin" runat="server" class="invisible" Text=""></asp:Label>
                                                                         </td>
                                                                     <tr/>
                                                                     <tr>
@@ -218,7 +279,7 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td colspan="2"> 
-                                                                            <asp:Label id="invMsgPass" runat="server" class="invisible"></asp:Label>
+                                                                            <asp:Label id="invMsgPass" runat="server" class="invisible" Text=""></asp:Label>
                                                                         </td>
                                                                     <tr/>
                                                                     <tr>
@@ -232,7 +293,7 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td colspan="2"> 
-                                                                            <asp:Label id="invMsg" runat="server" class="invisible"></asp:Label>
+                                                                            <asp:Label id="invMsg" runat="server" class="invisible" Text=""></asp:Label>
                                                                         </td>
                                                                     <tr/>
                                                                     <tr>
@@ -245,7 +306,7 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td colspan="2"> 
-                                                                            <asp:Label id="invMsgEmail" runat="server" class="invisible"></asp:Label>
+                                                                            <asp:Label id="invMsgEmail" runat="server" class="invisible" Text=""></asp:Label>
                                                                         </td>
                                                                     <tr/>
                                                                 </table>
