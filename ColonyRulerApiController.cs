@@ -136,13 +136,23 @@ namespace WebAssessment
             return new string[] { "value1", "value2" };
         }
 
-
+        /// <summary>
+        /// Get save from server
+        /// </summary>
+        /// <param name="name">user name</param>
+        /// <param name="save">save name</param>
+        /// <returns></returns>
         public string Get(string name, string save)
         {
             return GetSave(name, save);
         }
 
-        // GET api/<controller>/5
+        /// <summary>
+        /// Get string from server
+        /// </summary>
+        /// <param name="id">requst id. Could 1 or 2</param>
+        /// <param name="name">user name</param>
+        /// <returns></returns>
         public string Get(int id, string name)
         {
             var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
@@ -157,12 +167,20 @@ namespace WebAssessment
             return ("invalid request");
         }
 
-        // POST api/<controller>
+        /// <summary>
+        /// Post request. Not used.
+        /// </summary>
+        /// <param name="value"></param>
         public void Post([FromBody]string value)
         {
             string txt = value;
         }
 
+        /// <summary>
+        /// Save settings to the database
+        /// </summary>
+        /// <param name="name">username</param>
+        /// <param name="value">settings in json string</param>
         void SaveSettings(string name, string value)
         {
             string settings = GetSettings(name);
@@ -188,6 +206,11 @@ namespace WebAssessment
             conn.Close();
         }
 
+        /// <summary>
+        /// delete save from database
+        /// </summary>
+        /// <param name="name">username</param>
+        /// <param name="value">savename</param>
         void DeleteSave(string name, string value)
         {
             MySqlConnection conn = new MySqlConnection(ConnString);
@@ -223,6 +246,11 @@ namespace WebAssessment
             return content;
         }
 
+        /// <summary>
+        /// save savegame to database
+        /// </summary>
+        /// <param name="save"> save name </param>
+        /// <param name="name"> user name </param>
         public async void Post(string save, string name)
         {
             var httpContext = (HttpContextWrapper)Request.Properties["MS_HttpContext"];
@@ -276,6 +304,11 @@ namespace WebAssessment
 
         }
 
+        /// <summary>
+        /// Save settings or delete save
+        /// </summary>
+        /// <param name="id">request id</param>
+        /// <param name="name">username</param>
         public async void Post(int id, string name)
         {
             var httpContext = (HttpContextWrapper)Request.Properties["MS_HttpContext"];
@@ -317,12 +350,14 @@ namespace WebAssessment
         }
 
         // PUT api/<controller>/5
+        // not used
         public void Put(int id, [FromBody]string value)
         {
 
         }
 
         // DELETE api/<controller>/5
+        // not used
         public void Delete(int id)
         {
         }
