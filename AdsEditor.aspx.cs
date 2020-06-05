@@ -2,19 +2,14 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace WebAssessment
 {
     public partial class AdsEditor : System.Web.UI.Page
     {
-        private static string ConnString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["ModalConnectionString"].ConnectionString;
+        private static readonly string ConnString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["ModalConnectionString"].ConnectionString;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -23,7 +18,7 @@ namespace WebAssessment
                 FillAdsCategoryList();
                 FillAllAds();
             }
-            
+
         }
 
         void FillAllAds()
@@ -34,8 +29,8 @@ namespace WebAssessment
             IdentityUser user = userManager.FindByName(this.User.Identity.Name);
 
             MySqlConnection conn = new MySqlConnection(ConnString);
-            MySqlDataAdapter da = new MySqlDataAdapter("select id, AdsName from tblAdverts where(userId='" 
-                + user.Id +"')", conn);
+            MySqlDataAdapter da = new MySqlDataAdapter("select id, AdsName from tblAdverts where(userId='"
+                + user.Id + "')", conn);
 
             DataSet ds = new DataSet();
             da.Fill(ds);
@@ -86,7 +81,7 @@ namespace WebAssessment
             try
             {
                 var reader = comm.ExecuteReader();
-                if(reader.HasRows && reader.Read())
+                if (reader.HasRows && reader.Read())
                 {
                     AdvId.Text = Convert.ToString(reader[0]);
                     AdsCategory.SelectedValue = Convert.ToString(reader[2]);
@@ -111,14 +106,15 @@ namespace WebAssessment
             IdentityUser user = userManager.FindByName(this.User.Identity.Name);
 
             MySqlConnection conn = new MySqlConnection(ConnString);
-            MySqlCommand comm = new MySqlCommand("delete from tblAdverts where(id=" + 
-               id + " and UserID='" + user.Id + "')" ,conn);
+            MySqlCommand comm = new MySqlCommand("delete from tblAdverts where(id=" +
+               id + " and UserID='" + user.Id + "')", conn);
 
             conn.Open();
             try
             {
                 comm.ExecuteReader();
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 MySite.ShowAlert(this, "Error:" + ex.Message);
             }
@@ -127,7 +123,7 @@ namespace WebAssessment
         }
         protected void EditAdsBtn_Click(object sender, EventArgs e)
         {
-            
+
             var userStore = new UserStore<IdentityUser>();
             var userManager = new UserManager<IdentityUser>(userStore);
 
@@ -160,7 +156,7 @@ namespace WebAssessment
 
                 result.Close();
                 comm = new MySqlCommand("insert tblAdverts values(" + id.ToString() + ",'" +
-                    user.Id+ "'," + (AdsCategory.SelectedValue) + ",'"+ AdsName.Text + "','" + 
+                    user.Id + "'," + (AdsCategory.SelectedValue) + ",'" + AdsName.Text + "','" +
                     AdsText.Text + "', 'true' );", conn);
             }
             else

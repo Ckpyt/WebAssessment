@@ -1,19 +1,17 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
+using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
+using System.Data.Entity;
+using System.Net.Mail;
+using System.Security.Claims;
 using System.Web;
-using System.Web.Script.Services;
-using System.Web.Services;
+using System.Web.Http;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Net.Mail;
-using System.Web.Http;
+using MySql.Data.EntityFramework;
 using WebAssessment.Configuration;
-using MySql.Data.MySqlClient;
 
 namespace WebAssessment
 {
@@ -26,9 +24,10 @@ namespace WebAssessment
         }
     }
     */
+    [DbConfigurationType(typeof(MySqlEFConfiguration))]
     public partial class MySite : System.Web.UI.MasterPage
     {
-        private string ConnString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["ModalConnectionString"].ConnectionString;
+        private readonly string ConnString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["ModalConnectionString"].ConnectionString;
 
         static bool m_isItInint = false;
 
@@ -44,10 +43,7 @@ namespace WebAssessment
         {
             get
             {
-                if (instance == null)
-                {
-                    instance = new MySite();
-                }
+                instance = instance ?? new MySite();
                 return instance;
             }
         }
@@ -59,15 +55,16 @@ namespace WebAssessment
                 instance = this;
                 if (!m_isItInint)
                     GlobalConfiguration.Configure(WebApiConfig.Register);
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
-
+                Console.WriteLine("MySite: constructor error:" + ex.Message);
             }
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!m_isItInint)
+            if (!m_isItInint)
                 GlobalConfiguration.Configuration.EnsureInitialized();
             Register.OnClientClick = "return RegisterBtnClc()";
             LoginBtn.OnClientClick = "return LoginBtnClc()";
@@ -92,7 +89,7 @@ namespace WebAssessment
                     Profilelnk.Visible = false;
                     //AdsEditor.Visible = false;
                 }
-                
+
             }
 
         }
@@ -107,23 +104,25 @@ namespace WebAssessment
             alert = alert.Replace('\n', ' ');
             alert = alert.Replace('\'', ' ');
             alert = alert.Replace('\"', ' ');
-            ScriptManager.RegisterStartupScript(ctr, ctr.GetType(), "myalert", 
+            ScriptManager.RegisterStartupScript(ctr, ctr.GetType(), "myalert",
                 "alert('" + alert + "');", true);
         }
 
-        
+
         protected bool RegisterUser()
         {
             var userStore = new UserStore<IdentityUser>();
-            var rm = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>());
-            UserManager<IdentityUser> manager = new UserManager<IdentityUser>(userStore);
-            manager.PasswordValidator = new PasswordValidator
+            //var rm = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>());
+            var manager = new UserManager<IdentityUser>(userStore)
             {
-                RequiredLength = 1,
-                RequireNonLetterOrDigit = false,
-                RequireDigit = false,
-                RequireLowercase = false,
-                RequireUppercase = false,
+                PasswordValidator = new PasswordValidator
+                {
+                    RequiredLength = 1,
+                    RequireNonLetterOrDigit = false,
+                    RequireDigit = false,
+                    RequireLowercase = false,
+                    RequireUppercase = false,
+                }
             };
 
             var checkName = manager.FindByName(Login.Text);
@@ -131,13 +130,13 @@ namespace WebAssessment
 
             bool error = false;
 
-            if(checkName != null) 
+            if (checkName != null)
             {
-                ShowMessage(invMsgLogin, "Sorry, this user already registred");
+                ShowMessage(invMsgLogin, "Sorry, this user already registered");
                 error = true;
             }
 
-            if( checkEmail != null)
+            if (checkEmail != null)
             {
                 ShowMessage(invMsgEmail, "Sorry, this email already used");
                 error = true;
@@ -151,14 +150,14 @@ namespace WebAssessment
             {
                 var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
                 var userIdentity = manager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
-                authenticationManager.SignIn(new AuthenticationProperties() { }, userIdentity);
+                authenticationManager.SignIn(new AuthenticationProperties(), userIdentity);
                 //Response.Redirect("~/Login.aspx");
                 manager.AddToRole(user.Id, "User");
 
                 UserName.Text = Login.Text;
                 UserPassword.Text = Password.Text;
-                SendEmail(user, "Hello, " + user.UserName + "<br>Congratilation!<br> You was registred on my site!<br> I'll never send you any junk mails, only security confirmations.<br><br>Cheers, Dmitriy Shabalin",
-                    "Registration complite");
+                SendEmail(user, "Hello, " + user.UserName + "<br>Congratulation!<br> You was registered on my site!<br> I'll never send you any junk mails, only security confirmations.<br><br>Cheers, Dmitriy Shabalin",
+                    "Registration is complete");
                 LoginBtn_Click(null, null);
 
                 //ShowAlert(this, "user " + Login.Text + " successful register");
@@ -176,13 +175,13 @@ namespace WebAssessment
         /// <summary>
         /// For sending email 
         /// </summary>
-        /// <param name="user">reciever</param>
+        /// <param name="user">receiver</param>
         /// <param name="message">email body</param>
         /// <param name="subject">email name</param>
         public void SendEmail(IdentityUser user, string message, string subject)
         {
 
-            System.Net.Mail.MailMessage mail = new System.Net.Mail.MailMessage();
+            MailMessage mail = new MailMessage();
 
             mail.To.Add(user.Email); //What address you send your email
             mail.From = new MailAddress("support@ckpyt.com", "Ckpyt's site", System.Text.Encoding.UTF8);
@@ -193,11 +192,15 @@ namespace WebAssessment
             mail.IsBodyHtml = true;
             mail.Priority = MailPriority.High;
 
-            SmtpClient client = new SmtpClient();
-            client.Credentials = new System.Net.NetworkCredential("support@ckpyt.com", "cfvjktnbrb_987"); //Your initial email and password which you use as a Credential
-            client.Port = 587;
-            client.Host = "smtp.gmail.com";
-            client.EnableSsl = true;
+            SmtpClient client = new SmtpClient
+            {
+                Credentials = new System.Net.NetworkCredential("support@ckpyt.com", "cfvjktnbrb_987"),
+                Port = 587,
+                Host = "smtp.gmail.com",
+                EnableSsl = true
+            };
+
+            //Your initial email and password which you use as a Credential
 
             try
             {
@@ -224,7 +227,7 @@ namespace WebAssessment
                 ShowAlert(this, "password and confirm password do not match");
                 return false;
             }
-            if(Login.Text.Length == 0 || Password.Text.Length == 0)
+            if (Login.Text.Length == 0 || Password.Text.Length == 0)
             {
                 ShowAlert(this, "Login and password should to contain at least 1 symbol");
                 return false; ;
@@ -240,8 +243,9 @@ namespace WebAssessment
 
         public bool SignIn(object sender, EventArgs e)
         {
-            var userStore = new UserStore<IdentityUser>();
-            var userManager = new UserManager<IdentityUser>(userStore);
+            UserStore<IdentityUser> userStore = new UserStore<IdentityUser>();
+            
+            UserManager<IdentityUser> userManager = new UserManager<IdentityUser>(userStore);
             var user = userManager.Find(UserName.Text, UserPassword.Text);
             if (user != null)
             {
@@ -250,30 +254,29 @@ namespace WebAssessment
                 if (enabled)
                 {
 
-                    var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
-                    var userIdentity = userManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
+                    IAuthenticationManager authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
+                    ClaimsIdentity userIdentity = userManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
                     LoginNameRes.Value = UserName.Text;
                     authenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = false }, userIdentity);
                     SignBtn.Visible = false;
                     Logout.Visible = true;
                     Logout.Text = "Sign out, " + UserName.Text;
 
-                    var ReturnParam = Request.Params.Get("ReturnUrl");
-                    if (ReturnParam != null)
-                        Response.Redirect(ReturnParam);
+                    string returnParam = Request.Params.Get("ReturnUrl");
+                    if (returnParam != null)
+                        Response.Redirect(returnParam);
                     return true;
                     //Response.Redirect("~/Login.aspx");
                 }
                 else
                 {
-                    ShowMessage(invMsgUserNM, "Sorry, your account is disabled until "  + user.LockoutEndDateUtc.ToString());
+                    ShowMessage(invMsgUserNM, "Sorry, your account is disabled until " + user.LockoutEndDateUtc.ToString());
                     return false;
                 }
 
             }
             else
             {
-
                 ShowMessage(invMsgUserNM, "Invalid username or password.");
                 return false;
             }
@@ -325,13 +328,13 @@ namespace WebAssessment
             var user = userManager.FindByName(UserName.Text);
             if (user == null)
             {
-                ShowMessage(invMsgUserNM, "Unfortunatelly, I cannot find this user");
+                ShowMessage(invMsgUserNM, "Unfortunately, I cannot find this user");
                 return;
             }
 
 
             Random rnd = new Random();
-            int randomeKode = rnd.Next(100000, 999999);
+            var randome = rnd.Next(100000, 999999);
 
             /*
             if (user.UserName.CompareTo("44") == 0)
@@ -340,15 +343,15 @@ namespace WebAssessment
             }
             */
             var pg = Page.Master as MySite;
-            pg.SendEmail(user, "Hello, " + user.UserName + "<br>Somebody want to change your password on my web-site <br>If it was your action, please, follow the link and type this code:" + randomeKode.ToString() + ". <br> <a href=\"http://localhost:62817/passwordChangeConfirm.aspx \"> Confirm page </a><br>Your new password will be the same as it was typed in the password field  <br> Cheers, Dmitriy Shabalin",
+            pg.SendEmail(user, "Hello, " + user.UserName + "<br>Somebody want to change your password on my web-site <br>If it was your action, please, follow the link and type this code:" + randome + ". <br> <a href=\"http://localhost:62817/passwordChangeConfirm.aspx \"> Confirm page </a><br>Your new password will be the same as it was typed in the password field  <br> Cheers, Dmitriy Shabalin",
                 "Password changing request");
 
             MySqlConnection conn = new MySqlConnection(ConnString);
             conn.Open();
             MySqlCommand comm = new MySqlCommand("insert into tblPassConfirm values('" + user.Id +
-                "'," + randomeKode.ToString() + ",'" + DateTime.Now.ToString("yyyy-MM-ddThh:mm:ss") +
-                "','" + UserPassword.Text +"','1', 'true' );", conn);
-                
+                "'," + randome + ",'" + DateTime.Now.ToString("yyyy-MM-ddThh:mm:ss") +
+                "','" + UserPassword.Text + "','1', 'true' );", conn);
+
             try
             {
                 comm.ExecuteReader();
@@ -364,16 +367,16 @@ namespace WebAssessment
 
         protected void LoginBtn_Click(object sender, EventArgs e)
         {
-            var userStore = new UserStore<IdentityUser>();
-            UserManager<IdentityUser> manager = new UserManager<IdentityUser>(userStore);
+            //var userStore = new UserStore<IdentityUser>();
+            //UserManager<IdentityUser> manager = new UserManager<IdentityUser>(userStore);
 
-            if(SignIn(sender, e))
+            if (SignIn(sender, e))
                 Response.Redirect("~/profile.aspx");
         }
 
         protected void Register_Click(object sender, EventArgs e)
         {
-            RegisterBtn(sender,e);
+            RegisterBtn(sender, e);
         }
 
 

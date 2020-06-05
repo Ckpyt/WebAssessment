@@ -2,20 +2,15 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace WebAssessment
 {
-    
+
     public partial class profile : System.Web.UI.Page
     {
         private static string ConnString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["ModalConnectionString"].ConnectionString;
-        
+
 
         void FillTheTable()
         {
@@ -25,7 +20,7 @@ namespace WebAssessment
             var user = userManager.FindByName(this.User.Identity.Name);
             Login.Text = user.UserName;
             //save e-mail
-            if(UserEmail.Text.Length == 0)
+            if (UserEmail.Text.Length == 0)
                 UserEmail.Text = user.Email;
 
             MySqlConnection conn = new MySqlConnection(ConnString);
@@ -37,13 +32,13 @@ namespace WebAssessment
             MySqlDataReader result = null;
             try
             {
-                
+
                 result = comm.ExecuteReader();
                 if (result.HasRows && result.Read())
                 {
                     var desc = result[0];
                     string descr = Convert.ToString(desc);
-                    
+
                     Description.Text = descr;
                     conn.Close();
                 }
@@ -52,11 +47,11 @@ namespace WebAssessment
                     conn.Close();
                     Description.Text = "It is your description";
                     conn.Open();
-                    comm = new MySqlCommand("insert into tblDescription values('" + user.Id + "','" + Description.Text +"')", conn);
+                    comm = new MySqlCommand("insert into tblDescription values('" + user.Id + "','" + Description.Text + "')", conn);
                     result = comm.ExecuteReader();
                     conn.Close();
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -67,7 +62,7 @@ namespace WebAssessment
             if (m_currDescr.Length > 0 && m_currDescr.CompareTo(Description.Text) != 0)
             {
                 conn.Open();
-                
+
                 comm = new MySqlCommand("update tblDescription set Description='" + m_currDescr
                     + "' where(Id='" + user.Id.ToString() + "');", conn);
 
@@ -172,7 +167,7 @@ namespace WebAssessment
                 Random rnd = new Random();
                 int randomeKode = rnd.Next(100000, 999999);
                 //just for testing
-                if(user.UserName.CompareTo("44") == 0)
+                if (user.UserName.CompareTo("44") == 0)
                 {
                     randomeKode = 514236;
                 }
@@ -183,8 +178,8 @@ namespace WebAssessment
 
                 MySqlConnection conn = new MySqlConnection(ConnString);
                 conn.Open();
-                MySqlCommand comm = new MySqlCommand("insert into tblPassConfirm values('" + user.Id + 
-                    "'," + randomeKode.ToString() + ",'" + DateTime.Now.ToString("yyyy-MM-ddThh:mm:ss") + 
+                MySqlCommand comm = new MySqlCommand("insert into tblPassConfirm values('" + user.Id +
+                    "'," + randomeKode.ToString() + ",'" + DateTime.Now.ToString("yyyy-MM-ddThh:mm:ss") +
                     "','" + Password.Text + "','" + newPassword.Text + "','false');", conn);
 
                 try

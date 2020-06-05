@@ -2,12 +2,8 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -77,17 +73,18 @@ namespace WebAssessment
             try
             {
                 var result = comm.ExecuteReader();
-                if(result.HasRows && result.Read())
+                if (result.HasRows && result.Read())
                 {
                     CatId.Text = Convert.ToString(result[0]);
                     Category.Text = Convert.ToString(result[1]);
 
                     CatId.Text = CatId.Text.Split(' ')[0];
-                   
+
                     EditCat.Text = "Edit";
                 }
 
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 MySite.ShowAlert(this, "error happens:" + ex.ToString());
             }
@@ -158,7 +155,7 @@ namespace WebAssessment
             var usr = userManager.FindByName(Login.Text);
             if (usr == null) return;
 
-            if(usr.Email.CompareTo(UserEmail.Text) != 0)
+            if (usr.Email.CompareTo(UserEmail.Text) != 0)
                 userManager.SetEmail(usr.Id, UserEmail.Text);
 
             if (usr.LockoutEnabled != DisableAccount.Checked)
@@ -179,7 +176,7 @@ namespace WebAssessment
                 }
 
             }
-            
+
             MySqlConnection conn = new MySqlConnection(ConnString);
             MySqlCommand comm;
 
@@ -227,7 +224,7 @@ namespace WebAssessment
                 catch (Exception ex)
                 {
                     MySite.ShowAlert(this, "error happens:" + ex.ToString());
-                    
+
                 }
 
                 result.Close();

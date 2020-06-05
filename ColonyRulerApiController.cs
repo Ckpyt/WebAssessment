@@ -1,14 +1,9 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace WebAssessment
@@ -19,7 +14,19 @@ namespace WebAssessment
     public class ColonyRulerApiController : ApiController
     {
         /// <summary> Connection to database string </summary>
-        private static string ConnString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["ModalConnectionString"].ConnectionString;
+        private static readonly string ConnString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["ModalConnectionString"].ConnectionString;
+
+        /// <summary> current salt </summary>
+        private static int m_hashSalt = 0;
+
+
+        string GetHashSalt()
+        {
+            DateTime tm = DateTime.Now;
+            Random rnd = new Random((int)tm.Ticks + 1154);
+            m_hashSalt = rnd.Next();
+            return m_hashSalt.ToString();
+        }
 
         /// <summary>
         /// Get user application settings
@@ -29,27 +36,26 @@ namespace WebAssessment
         string GetSettings(string name)
         {
             MySqlConnection conn = new MySqlConnection(ConnString);
-            MySqlCommand comm;
 
             conn.Open();
-            comm = new MySqlCommand("select settingsJson from tblSettings where(Name=@name)", conn);
+            MySqlCommand comm = new MySqlCommand("select settingsJson from tblSettings where(Name=@name)", conn);
             comm.Parameters.Add(new MySqlParameter("@name", name));
 
-            MySqlDataReader result = null;
             try
             {
-                result = comm.ExecuteReader();
+                MySqlDataReader result = comm.ExecuteReader();
                 if (result.HasRows && result.Read())
                 {
                     var scs = result[0];
-                    string settings = Convert.ToString(scs);
+                    var settings = Convert.ToString(scs);
                     conn.Close();
                     return settings;
                 }
 
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
-
+                Console.WriteLine("ColonyRulerApi: GetSettings error:" + ex.Message);
             }
             conn.Close();
             return "";
@@ -62,24 +68,22 @@ namespace WebAssessment
         /// <returns> names, divided by comma </returns>
         string GetSaveNames(string name)
         {
-            MySqlConnection conn = new MySqlConnection(ConnString);
-            MySqlCommand comm;
-            string saveNames = "";
+            var conn = new MySqlConnection(ConnString);
+            var saveNames = "";
             conn.Open();
-            comm = new MySqlCommand("select SaveName from tblSaves where(UserName=@name)", conn);
+            var comm = new MySqlCommand("select SaveName from tblSaves where(UserName=@name)", conn);
             comm.Parameters.Add(new MySqlParameter("@name", name));
 
-            MySqlDataReader result = null;
             try
             {
-                result = comm.ExecuteReader();
-                if (result.HasRows )
+                MySqlDataReader result = comm.ExecuteReader();
+                if (result.HasRows)
                 {
                     while (result.Read())
                     {
                         var scs = result[0];
                         saveNames += Convert.ToString(scs) + ",";
-                        
+
                     }
                     conn.Close();
                     return saveNames;
@@ -88,7 +92,7 @@ namespace WebAssessment
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine("ColonyRulerApi: GetSaveNames error:" + ex.Message);
             }
             conn.Close();
             return "";
@@ -98,21 +102,20 @@ namespace WebAssessment
         /// Get save from user name and save name
         /// </summary>
         /// <param name="name"> user name </param>
+        /// <param name="saveName"> requested save's name </param>
         /// <returns> save in json </returns>
         string GetSave(string name, string saveName)
         {
             MySqlConnection conn = new MySqlConnection(ConnString);
-            MySqlCommand comm;
 
             conn.Open();
-            comm = new MySqlCommand("select SaveData from tblSaves where(UserName=@name and SaveName=@savename)", conn);
+            MySqlCommand comm = new MySqlCommand("select SaveData from tblSaves where(UserName=@name and SaveName=@savename)", conn);
             comm.Parameters.Add(new MySqlParameter("@name", name));
             comm.Parameters.Add(new MySqlParameter("@savename", saveName));
 
-            MySqlDataReader result = null;
             try
             {
-                result = comm.ExecuteReader();
+                MySqlDataReader result = comm.ExecuteReader();
                 if (result.HasRows && result.Read())
                 {
                     var scs = result[0];
@@ -124,7 +127,7 @@ namespace WebAssessment
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine("ColonyRulerApi: GetSave error:" + ex.Message);
             }
             conn.Close();
             return "";
@@ -133,7 +136,7 @@ namespace WebAssessment
         // GET api/<controller>
         public IEnumerable<string> Get()
         {
-            return new string[] { "value1", "value2" };
+            return new[] { "value1", "value2" };
         }
 
         /// <summary>
@@ -150,19 +153,18 @@ namespace WebAssessment
         /// <summary>
         /// Get string from server
         /// </summary>
-        /// <param name="id">requst id. Could 1 or 2</param>
+        /// <param name="id">request id. Could 1 or 2</param>
         /// <param name="name">user name</param>
         /// <returns></returns>
         public string Get(int id, string name)
         {
-            var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
-            switch(id)
+            //var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
+            switch (id)
             {
-                case 1:
-                    return ( GetSettings(name));
-                case 2:
-                    return (GetSaveNames(name));
-            };
+                case 1: return GetSettings(name);
+                case 2: return GetSaveNames(name);
+                case 3: return GetHashSalt();
+            }
 
             return ("invalid request");
         }
@@ -173,7 +175,7 @@ namespace WebAssessment
         /// <param name="value"></param>
         public void Post([FromBody]string value)
         {
-            string txt = value;
+            value += value;
         }
 
         /// <summary>
@@ -181,7 +183,7 @@ namespace WebAssessment
         /// </summary>
         /// <param name="name">username</param>
         /// <param name="value">settings in json string</param>
-        void SaveSettings(string name, string value)
+        private void SaveSettings(string name, string value)
         {
             string settings = GetSettings(name);
 
@@ -189,19 +191,19 @@ namespace WebAssessment
             MySqlCommand comm;
 
             conn.Open();
-            comm = settings != null && settings.Length > 0 ?
-                new MySqlCommand("update tblSettings set settingsJson=@value where(Name=@name)", conn):
-                new MySqlCommand("insert into tblSettings values(@nane, @value)" , conn);
+            comm = !string.IsNullOrEmpty(settings) ?
+                new MySqlCommand("update tblSettings set settingsJson=@value where(Name=@name)", conn) :
+                new MySqlCommand("insert into tblSettings values(@name, @value)", conn);
             comm.Parameters.Add(new MySqlParameter("@name", name));
             comm.Parameters.Add(new MySqlParameter("@value", value));
-            MySqlDataReader result = null;
+            
             try
             {
-                result = comm.ExecuteReader();
+                comm.ExecuteReader();
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine("ColonyRulerApi: SaveSettings error:" + ex.Message);
             }
             conn.Close();
         }
@@ -213,29 +215,20 @@ namespace WebAssessment
         /// <param name="value">savename</param>
         void DeleteSave(string name, string value)
         {
-            MySqlConnection conn = new MySqlConnection(ConnString);
-            MySqlCommand comm;
+            var conn = new MySqlConnection(ConnString);
 
             conn.Open();
-            comm = new MySqlCommand("delete from tblSaves where(Name=@name, SaveName = @value)", conn);
+            var comm = new MySqlCommand("delete from tblSaves where(Name=@name, SaveName = @value)", conn);
             comm.Parameters.Add(new MySqlParameter("@name", name));
             comm.Parameters.Add(new MySqlParameter("@value", value));
 
-            MySqlDataReader result = null;
             try
             {
-                result = comm.ExecuteReader();
-                if (result.HasRows && result.Read())
-                {
-                    var scs = result[0];
-                    string settings = Convert.ToString(scs);
-                    
-                }
-
+                comm.ExecuteReader();
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine("ColonyRulerApi: DeleteSave error:" + ex.Message);
             }
             conn.Close();
         }
@@ -253,14 +246,13 @@ namespace WebAssessment
         /// <param name="name"> user name </param>
         public async void Post(string save, string name)
         {
-            var httpContext = (HttpContextWrapper)Request.Properties["MS_HttpContext"];
-
-            string converted = " ";
+            //var httpContext = (HttpContextWrapper)Request.Properties["MS_HttpContext"];
 
             // Read the form data and return an async task
 
             try
             {
+                string converted = "";
                 // Read the form data.
                 string req = await Request.Content.ReadAsStringAsync();
                 string[] reqStrs = req.Split('\n');
@@ -277,7 +269,7 @@ namespace WebAssessment
                 MySqlCommand comm;
 
                 conn.Open();
-                if(curSave != null && curSave.Length > 0)
+                if (!string.IsNullOrEmpty(curSave))
                 {
                     comm = new MySqlCommand("update tblSaves set SaveData=@save where(UserName=@name and SaveName=@saveName)", conn);
                     comm.Parameters.Add(new MySqlParameter("@name", name));
@@ -304,21 +296,12 @@ namespace WebAssessment
 
         }
 
-        /// <summary>
-        /// Save settings or delete save
-        /// </summary>
-        /// <param name="id">request id</param>
-        /// <param name="name">username</param>
-        public async void Post(int id, string name)
+        async Task<string> ReadData()
         {
-            var httpContext = (HttpContextWrapper)Request.Properties["MS_HttpContext"];
-
-            string converted = " ";
-
-            // Read the form data and return an async task.
-
+            string converted = "";
             try
             {
+                
                 // Read the form data.
                 string req = await Request.Content.ReadAsStringAsync();
                 string[] reqStrs = req.Split('\n');
@@ -333,8 +316,22 @@ namespace WebAssessment
             }
             catch (System.Exception e)
             {
-                Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+                Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e.Message);
             }
+
+            return converted;
+        }
+
+        /// <summary>
+        /// Save settings or delete save
+        /// </summary>
+        /// <param name="id">request id</param>
+        /// <param name="name">username</param>
+        public async void Post(int id, string name)
+        {
+            //var httpContext = (HttpContextWrapper)Request.Properties["MS_HttpContext"];
+            // Read the form data and return an async task.
+            string converted = await ReadData();
 
             switch (id)
             {
@@ -344,16 +341,108 @@ namespace WebAssessment
                 case 2:
                     DeleteSave(name, converted);
                     break;
-
             }
             Request.CreateResponse(HttpStatusCode.OK);
+        }
+
+        string GetLocalization(string name)
+        {
+            MySqlConnection conn = new MySqlConnection(ConnString);
+            string local = "";
+
+            conn.Open();
+            MySqlCommand comm = new MySqlCommand("select UILocalization from tblLocalization where(Name=@name)", conn);
+            comm.Parameters.Add(new MySqlParameter("@name", name));
+
+
+            try
+            {
+                MySqlDataReader result = comm.ExecuteReader();
+                if (result.HasRows && result.Read())
+                {
+                    var scs = result[0];
+                    local = Convert.ToString(scs);
+                    conn.Close();
+                    
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("ColonyRulerApi: GetLocalization error:" + ex.Message);
+            }
+            conn.Close();
+            return local;
+        }
+
+        public async Task<HttpResponseMessage> Post(int id, string name, int hash)
+        {
+            HttpResponseMessage mess = new HttpResponseMessage();
+
+            var pass = "Cnhfnc,ehu(Y.if)";
+            int Hash = -1406264422;
+            int passHash = Hash ^ m_hashSalt;
+            if (passHash != hash)
+            {
+                mess.StatusCode = HttpStatusCode.Forbidden;
+                mess.ReasonPhrase = "incorrect password";
+                return mess;
+            }
+
+            var value = await Request.Content.ReadAsStringAsync();
+
+
+            var loc = GetLocalization(name);
+
+            var conn = new MySqlConnection(ConnString);
+
+            conn.Open();
+
+            MySqlCommand comm;
+            if (string.IsNullOrEmpty(loc))
+            {
+                comm = new MySqlCommand("insert into tblLocalization values(@name, @value, '', '')", conn);
+            }
+            else
+            {
+                switch (id)
+                {
+                    case 1:
+                        comm = new MySqlCommand("update tblLocalization set UILocalization=@value where(Name=@name)", conn);
+                        break;
+                    case 2:
+                        comm = new MySqlCommand("update tblLocalization set Items=@value where(Name=@name)", conn);
+                        break;
+                    case 3:
+                        comm = new MySqlCommand("update tblLocalization set History=@value where(Name=@name)", conn);
+                        break;
+                    default:
+                        mess.StatusCode = HttpStatusCode.Accepted;
+                        return mess;
+                }
+            }
+
+            comm.Parameters.Add(new MySqlParameter("@name", name));
+            comm.Parameters.Add(new MySqlParameter("@value", value));
+            MySqlDataReader result;
+            try
+            {
+                result = comm.ExecuteReader();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("ColonyRulerApi: SaveSettings error:" + ex.Message);
+            }
+            conn.Close();
+            mess.StatusCode = HttpStatusCode.OK;
+            return mess;
         }
 
         // PUT api/<controller>/5
         // not used
         public void Put(int id, [FromBody]string value)
         {
-
+            value += id;
         }
 
         // DELETE api/<controller>/5

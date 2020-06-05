@@ -1,14 +1,5 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
-using System.Web.Script.Services;
-using System.Web.Services;
+﻿using System;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace WebAssessment
 {
@@ -49,28 +40,28 @@ namespace WebAssessment
         void FillAdsCategoryList()
         {
 
-           /* DataTable subjects = new DataTable();
+            /* DataTable subjects = new DataTable();
 
-            using (MySqlConnection con = new MySqlConnection(ConnString))
-            {
+             using (MySqlConnection con = new MySqlConnection(ConnString))
+             {
 
-                try
-                {
-                    SqlDataAdapter adapter = new SqlDataAdapter("SELECT ID, Name FROM tblCategory", con);
-                    adapter.Fill(subjects);
+                 try
+                 {
+                     SqlDataAdapter adapter = new SqlDataAdapter("SELECT ID, Name FROM tblCategory", con);
+                     adapter.Fill(subjects);
 
-                    AdsCategory.DataSource = subjects;
-                    AdsCategory.DataTextField = "Name";
-                    AdsCategory.DataValueField = "ID";
-                    AdsCategory.DataBind();
-                }
-                catch (Exception ex)
-                {
-                    // Handle the error
-                    MySite.ShowAlert(this, "Error happen:" + ex.Message);
-                }
-                AdsCategory.Items.Insert(0, new ListItem("All categories", "0"));
-            }*/
+                     AdsCategory.DataSource = subjects;
+                     AdsCategory.DataTextField = "Name";
+                     AdsCategory.DataValueField = "ID";
+                     AdsCategory.DataBind();
+                 }
+                 catch (Exception ex)
+                 {
+                     // Handle the error
+                     MySite.ShowAlert(this, "Error happen:" + ex.Message);
+                 }
+                 AdsCategory.Items.Insert(0, new ListItem("All categories", "0"));
+             }*/
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)

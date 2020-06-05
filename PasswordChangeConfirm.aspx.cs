@@ -2,12 +2,8 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace WebAssessment
 {
@@ -29,7 +25,8 @@ namespace WebAssessment
                 MySqlCommand comm2 = new MySqlCommand("delete from tblPassConfirm where(keyz=" + code.ToString() + ");", conn2);
                 comm2.ExecuteReader();
                 conn2.Close();
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 MySite.ShowAlert(this, "Error happens:" + ex.Message);
             }
@@ -51,7 +48,7 @@ namespace WebAssessment
             };
 
             IdentityUser user = null;
-            if(User.Identity.IsAuthenticated)
+            if (User.Identity.IsAuthenticated)
                 user = userManager.FindByName(this.User.Identity.Name);
             //string Password= "", newPassword= "";
 
@@ -70,7 +67,7 @@ namespace WebAssessment
                         if (user != null && userID != user.Id)
                         {
                             mst.ShowMessageNotInModal(PassCCinvMsg, "Error happens: nothing password requests was founded");
-                           // MySite.ShowAlert(this, "Error happens: nothing password requests was founded");
+                            // MySite.ShowAlert(this, "Error happens: nothing password requests was founded");
                             return;
                         }
                         else
@@ -121,7 +118,7 @@ namespace WebAssessment
                             "Password was changed");
                         mst.ShowMessageNotInModal(PassCCinvMsg, "Password was changed successful");
                         return;
-                        
+
                     }
                 else
                 {
