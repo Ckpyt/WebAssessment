@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using Newtonsoft.Json;
 
 namespace WebAssessment
 {
@@ -13,6 +14,11 @@ namespace WebAssessment
     /// </summary>
     public class ColonyRulerApiController : ApiController
     {
+        public class LanguagesList
+        {
+            public List<string> m_languages = new List<string>();
+        }
+
         /// <summary> Connection to database string </summary>
         private static readonly string ConnString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["ModalConnectionString"].ConnectionString;
 
@@ -164,6 +170,10 @@ namespace WebAssessment
                 case 1: return GetSettings(name);
                 case 2: return GetSaveNames(name);
                 case 3: return GetHashSalt();
+                case 4:
+                case 5:
+                case 6: return GetLocalization(name, id - 3);
+                case 7: return GetLocalizationNames();
             }
 
             return ("invalid request");
@@ -345,13 +355,55 @@ namespace WebAssessment
             Request.CreateResponse(HttpStatusCode.OK);
         }
 
-        string GetLocalization(string name)
+        string GetLocalizationNames()
         {
             MySqlConnection conn = new MySqlConnection(ConnString);
             string local = "";
 
             conn.Open();
-            MySqlCommand comm = new MySqlCommand("select UILocalization from tblLocalization where(Name=@name)", conn);
+            MySqlCommand comm = new MySqlCommand("select FullName from tblLocalization", conn);
+
+            try
+            {
+                LanguagesList lang = new LanguagesList();
+
+                MySqlDataReader result = comm.ExecuteReader();
+
+                foreach (System.Data.Common.DbDataRecord res in result)
+                {
+                    lang.m_languages.Add(res.GetValue(0).ToString());
+                }
+
+                conn.Close();
+                local = JsonConvert.SerializeObject(lang);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("ColonyRulerApi: GetLocalization error:" + ex.Message);
+            }
+            conn.Close();
+            return local;
+        }
+
+        string GetLocalization(string name, int id = 1)
+        {
+            MySqlConnection conn = new MySqlConnection(ConnString);
+            string local = "";
+
+            conn.Open();
+            MySqlCommand comm;
+            switch (id)
+            {
+                case 2:
+                    comm = new MySqlCommand("select Items from tblLocalization where(Name=@name)", conn);
+                    break;
+                case 3:
+                    comm = new MySqlCommand("select History from tblLocalization where(Name=@name)", conn);
+                    break;
+                default:
+                    comm = new MySqlCommand("select UILocalization from tblLocalization where(Name=@name)", conn);
+                    break;
+            }
             comm.Parameters.Add(new MySqlParameter("@name", name));
 
 
