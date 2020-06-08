@@ -1,6 +1,6 @@
 ﻿using System.Web.Http;
 
-namespace WebAssessment.Configuration
+namespace WebAssessment.App_Start
 {
     class WebApiConfig
     {

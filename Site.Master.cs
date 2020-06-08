@@ -11,7 +11,7 @@ using System.Web.Http;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using MySql.Data.EntityFramework;
-using WebAssessment.Configuration;
+using WebAssessment.App_Start;
 
 namespace WebAssessment
 {
