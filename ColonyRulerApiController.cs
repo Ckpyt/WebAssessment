@@ -395,13 +395,16 @@ namespace WebAssessment
             switch (id)
             {
                 case 2:
-                    comm = new MySqlCommand("select Items from tblLocalization where(Name=@name)", conn);
+                    comm = new MySqlCommand("select Items from tblLocalization where(FullName=@name)", conn);
                     break;
                 case 3:
-                    comm = new MySqlCommand("select History from tblLocalization where(Name=@name)", conn);
+                    comm = new MySqlCommand("select History from tblLocalization where(FullName=@name)", conn);
+                    break;
+                case 4:
+                    comm = new MySqlCommand("select UILocalization from tblLocalization where(Name=@name)", conn);
                     break;
                 default:
-                    comm = new MySqlCommand("select UILocalization from tblLocalization where(Name=@name)", conn);
+                    comm = new MySqlCommand("select UILocalization from tblLocalization where(FullName=@name)", conn);
                     break;
             }
             comm.Parameters.Add(new MySqlParameter("@name", name));
@@ -444,7 +447,7 @@ namespace WebAssessment
             var value = await Request.Content.ReadAsStringAsync();
 
 
-            var loc = GetLocalization(name);
+            var loc = GetLocalization(name, 4);
 
             var conn = new MySqlConnection(ConnString);
 
