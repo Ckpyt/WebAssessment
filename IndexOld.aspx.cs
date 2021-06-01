@@ -13,8 +13,8 @@ namespace WebAssessment
             alert = alert.Replace('\n', ' ');
             alert = alert.Replace('\'', ' ');
             alert = alert.Replace('\"', ' ');
-            ScriptManager.RegisterStartupScript(ctr, ctr.GetType(), "myalert",
-                "alert('" + alert + "');", true);
+            //ScriptManager.RegisterStartupScript(ctr, ctr.GetType(), "myalert",
+            //    "alert('" + alert + "');", true);
         }
 
         protected void Page_Load(object sender, EventArgs e)

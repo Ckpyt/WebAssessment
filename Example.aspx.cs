@@ -4,7 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Web.UI.WebControls;
 
-public partial class _Default : System.Web.UI.Page
+public partial class _Default2 : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
