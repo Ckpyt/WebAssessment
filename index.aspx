@@ -43,6 +43,7 @@ I'm actively seeking a full-time role as a software developer</h2>
                     </header>
                     
                     <div class="text-left">
+                    <p> Contact: email: <a href="mailto:ckpyt@bk.ru">ckpyt@bk.ru </a>   github <a href ="https://github.com/Ckpyt/">github.com/Ckpyt</a>
                     <p>
                         I
  am a dedicated, goal-oriented software engineer with a wide array 
@@ -91,8 +92,32 @@ travelling, fencing and rock climbing<br>
                     </header>
                     <ul class="experience__list">
                         <li class="result-card experience-item" data-section="currentPositionsDetails">
+                            <a class="result-card__image-link" href="https://www.digitalconfectioners.com" data-tracking-control-name="public_profile-settings_experience-item_result-card_image-click" data-tracking-will-navigate="">
+                            <img class="entity-image experience-item entity-image--company experience-item--company entity-image--square-4 experience-item--square-4 result-card__image lazy-loaded" alt="Connex World" src="img/ResumeLogos/digitalLogo.png">
+                            </a>
+                            <div class="result-card__contents experience-item__contents">
+                                <h4 class="result-card__subtitle experience-item__subtitle"><a href="https://www.digitalconfectioners.com" data-tracking-control-name="public_profile-settings_experience-item_result-card_subtitle-click" data-tracking-will-navigate="">Digital confectioners</a></h4>
+                                <h3 class="result-card__title experience-item__title">Tester</h3>
+                                
+                                <div class="result-card__meta experience-item__meta">
+                                    <p class="experience-item__duration experience-item__meta-item"><span class="date-range"><time class="date-range__start-date">Oct 2020</time>  –  May 2021<span class="date-range__duration">  7 months</span></span></p>
+                                    <p class="experience-item__location experience-item__meta-item">Chrictchurch, New Zealand</p>
+                                    <div class="experience-item__description experience-item__meta-item" data-section="currentPositions">
+                                        <div class="show-more-less-text show-more-less-description text-left">
+                                            <span class="show-more-less-text__sr-only-text">In this role, I tested a game, called 
+                                                <a href="https://store.steampowered.com/app/623280/Dungeons__Dragons_Dark_Alliance/">"Dungeons & Dragons: Dark Alliance"</a>
+                                                 for bugs. <br>
+                                            Writing tickets, steps to reproduce, regressive testing and so on.<br>
+                                            Skills: Jira, JS .<br>
+                                        </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="result-card experience-item" data-section="currentPositionsDetails">
                             <a class="result-card__image-link" href="https://www.linkedin.com/company/connex.world?trk=public_profile-settings_experience-item_result-card_image-click" data-tracking-control-name="public_profile-settings_experience-item_result-card_image-click" data-tracking-will-navigate="">
-                            <img class="entity-image experience-item entity-image--company experience-item--company entity-image--square-4 experience-item--square-4 result-card__image lazy-loaded" alt="Connex World" src="resume_files/0_002.png">
+                            <img class="entity-image experience-item entity-image--company experience-item--company entity-image--square-4 experience-item--square-4 result-card__image lazy-loaded" alt="Connex World" src="img/ResumeLogos/ConnexLogo.png">
                             </a>
                             <div class="result-card__contents experience-item__contents">
                                 <h4 class="result-card__subtitle experience-item__subtitle"><a class="result-card__subtitle-link experience-item__subtitle-link" href="https://www.linkedin.com/company/connex.world?trk=public_profile-settings_experience-item_result-card_subtitle-click" data-tracking-control-name="public_profile-settings_experience-item_result-card_subtitle-click" data-tracking-will-navigate="">Connex World</a></h4>
@@ -120,7 +145,9 @@ travelling, fencing and rock climbing<br>
                             </div>
                         </li>
                         <li class="result-card experience-item" data-section="pastPositionsDetails">
-                                <h4 class="result-card__subtitle experience-item__subtitle">SAPRUN Group</h4>
+                                <h4 class="result-card__subtitle experience-item__subtitle">
+                                    <a href="http://www.en.saprun.com/">SAPRUN Group </a>
+                                </h4>
                                 <h3 class="result-card__title experience-item__title">c++ developer</h3>
                                 <div class="result-card__meta experience-item__meta ">
                                     <p class="experience-item__duration experience-item__meta-item">
@@ -131,7 +158,8 @@ travelling, fencing and rock climbing<br>
                                     </span></p>
                                     <p class="experience-item__location experience-item__meta-item">Saint Petersburg, Russian Federation</p>
                                     <div class="experience-item__description experience-item__meta-item" data-section="pastPositions">
-                                        <div class="show-more-less-text show-more-less-description text-left"><span class="show-more-less-text__sr-only-text">I developed server and computer language for expert system for geoinformation system.<br>
+                                        <div class="show-more-less-text show-more-less-description text-left">
+                                            <span class="show-more-less-text__sr-only-text">I developed server and computer language for expert system for geoinformation system.<br>
                                             In this role, I've decresed memory usage from 32GB to 8GB and optimized speed around 2 times.
                                             <br>
                                             <br>
@@ -145,13 +173,15 @@ travelling, fencing and rock climbing<br>
                                             *I have a letter of recommendation from them
                                             <br>
                                             <br>
-                                                                                                              </span>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
                         </li>
                         <li class="result-card experience-item" data-section="pastPositionsDetails">
-                                <h4 class="result-card__subtitle experience-item__subtitle">Confident(Spb)</h4>
+                                <h4 class="result-card__subtitle experience-item__subtitle">
+                                    <a href="https://www.confident.ru/">Confident(Spb) </a>
+                                </h4>
                                 <h3 class="result-card__title experience-item__title">c++ programmer</h3>
                                 <div class="result-card__meta experience-item__meta">
                                     <p class="experience-item__duration experience-item__meta-item">
@@ -172,7 +202,9 @@ travelling, fencing and rock climbing<br>
                                 </div>
                         </li>
                         <li class="result-card experience-item" data-section="pastPositionsDetails">
-                            <h4 class="result-card__subtitle experience-item__subtitle">OOO "Logdep"</h4>
+                            <h4 class="result-card__subtitle experience-item__subtitle">
+                                <a href ="http://logdep.ru/">OOO "Logdep" </a>
+                            </h4>
                                 <h3 class="result-card__title experience-item__title">C++ programmer</h3>
                                 <div class="result-card__meta experience-item__meta">
                                     <p class="experience-item__duration experience-item__meta-item"><span class="date-range"><time class="date-range__start-date">Sep 2014</time>  –  <time class="date-range__end-date">Feb 2015</time><span class="date-range__duration"> 6 months</span></span></p>
@@ -188,76 +220,6 @@ travelling, fencing and rock climbing<br>
                                         </div>
                                     </div>
                                 </div>
-                            
-                        </li>
-                        <li class="result-card experience-item" data-section="pastPositionsDetails">
-                            <h4 class="result-card__subtitle experience-item__subtitle">OOO "Potencial"</h4>
-                                <h3 class="result-card__title experience-item__title">C++ programmer</h3>
-                                
-                                <div class="result-card__meta experience-item__meta">
-                                    <p class="experience-item__duration experience-item__meta-item"><span class="date-range"><time class="date-range__start-date">Oct 2012</time>  –  <time class="date-range__end-date">Sep 2014</time><span class="date-range__duration"> 2 years</span></span></p>
-                                    <p class="experience-item__location experience-item__meta-item">Saint Petersburg, Russian Federation</p>
-                                    <div class="experience-item__description experience-item__meta-item" data-section="pastPositions">
-                                        <div class="show-more-less-text show-more-less-description text-left"><span class="show-more-less-text__sr-only-text">Make server for MMO-game.<br>
-                                            c++, BOOST, WinApi.
-                                            <br>
-                                            Tortoise SVN, Git, Bugzilla.<br>
-                                            MySQL, PostgreSQL</span>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            
-                        </li>
-                        <li class="result-card experience-item" data-section="pastPositionsDetails">
-                            <h4 class="result-card__subtitle experience-item__subtitle">ILLA International</h4>
-                                <h3 class="result-card__title experience-item__title">Network System Administrator</h3>
-                                
-                                <div class="result-card__meta experience-item__meta">
-                                    <p class="experience-item__duration experience-item__meta-item"><span class="date-range"><time class="date-range__start-date">Sep 2008</time>  –  <time class="date-range__end-date">Oct 2012</time><span class="date-range__duration"> 4 years 2 months</span></span></p>
-                                    <p class="experience-item__location experience-item__meta-item">Saint Petersburg, Russian Federation</p>
-                                    <div class="experience-item__description experience-item__meta-item" data-section="pastPositions">
-                                        <div class="show-more-less-text show-more-less-description text-left"><span class="show-more-less-text__sr-only-text">I make domen for it, backup system, and utilites for technologists. Also, posted news and make some pages for its site.<br>
-                                            HTML + VB + C# + C++.<br>
-                                            <br>
-                                            *I have a letter of recommendation from them<br>
-                                            illallc.com</span></div>
-                                    </div>
-                                </div>
-                            
-                        </li>
-                        <li class="result-card experience-item" data-section="pastPositionsDetails">
-                            <h4 class="result-card__subtitle experience-item__subtitle">computer shop "Sintel"</h4>
-                                <h3 class="result-card__title experience-item__title">Network System Administrator</h3>
-                                
-                                <div class="result-card__meta experience-item__meta">
-                                    <p class="experience-item__duration experience-item__meta-item"><span class="date-range"><time class="date-range__start-date">Sep 2002</time>  –  <time class="date-range__end-date">Sep 2008</time><span class="date-range__duration"> 6 years 1 month</span></span></p>
-                                    <p class="experience-item__location experience-item__meta-item">Saint Petersburg, Russian Federation</p>
-                                    <div class="experience-item__description experience-item__meta-item" data-section="pastPositions">
-                                        <div class="show-more-less-text show-more-less-description text-left">
-                                            <span class="show-more-less-text__sr-only-text">I
- worked as remote system administrator. In this work, I had more 250+ 
-computers in 7 company. I made several Visual Basic scripts, command 
-shell scripts and some utilities on C#.</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            
-                        </li>
-                        <li class="result-card experience-item" data-section="pastPositionsDetails">
-                            <div class="result-card__contents experience-item__contents">
-                                <h4 class="result-card__subtitle experience-item__subtitle">computer cloub "Eldorado"</h4>
-                                <h3 class="result-card__title experience-item__title">Network System Administrator</h3>
-                                
-                                <div class="result-card__meta experience-item__meta">
-                                    <p class="experience-item__duration experience-item__meta-item"><span class="date-range"><time class="date-range__start-date">Jan 1998</time>  –  <time class="date-range__end-date">Sep 2002</time><span class="date-range__duration"> 4 years 9 months</span></span></p>
-                                    <p class="experience-item__location experience-item__meta-item">Saint Petersburg, Russian Federation</p>
-                                    <div class="experience-item__description experience-item__meta-item" data-section="pastPositions">
-                                        <div class="show-more-less-text show-more-less-description text-left"><span class="show-more-less-text__sr-only-text">network support, creation, repair of computers and networks, installation and correction of software and games.<br>
-                                            As a result, we had 3 offices and more than 150 computers.</span></div>
-                                    </div>
-                                </div>
-                            </div>
                         </li>
                     </ul>
                 </section>
@@ -368,7 +330,9 @@ of Information Technology implementations in the industry.<br>
                         <br>
                         <li class="result-card" data-id="271549153">
                             <div class="result-card__contents">
-                                <h3 class="result-card__title">Saint Petersburg State University of Aerospace Instrumentation</h3>
+                                <h3 class="result-card__title">
+                                    <a href="http://suai.ru/">Saint Petersburg State University of Aerospace Instrumentation </a>
+                                </h3>
                                 <h4 class="result-card__subtitle">Engineer degreee in Computing Science: "Programming for PC and IBM-compoarable systems"</h4>
                                 <div class="result-card__meta">
                                     <p class="education__item education__item--duration"><span class="date-range"><time class="date-range__start-date">2009</time>  –  <time class="date-range__end-date">2015</time></span></p>

@@ -220,7 +220,7 @@ namespace WebAssessment
         }
 
 
-        protected Boolean RegisterBtn(object sender, EventArgs e)
+        protected bool RegisterBtn(object sender, EventArgs e)
         {
             if (Password.Text.CompareTo(Confirm.Text) != 0)
             {
@@ -235,13 +235,12 @@ namespace WebAssessment
             return RegisterUser();
         }
 
-        public void SignIn_click(object sender, EventArgs e)
+        public void LogIn_click(object sender, EventArgs e)
         {
-
-            SignIn(sender, e);
+            LogIn(sender, e);
         }
 
-        public bool SignIn(object sender, EventArgs e)
+        public bool LogIn(object sender, EventArgs e)
         {
             UserStore<IdentityUser> userStore = new UserStore<IdentityUser>();
             
@@ -370,7 +369,7 @@ namespace WebAssessment
             //var userStore = new UserStore<IdentityUser>();
             //UserManager<IdentityUser> manager = new UserManager<IdentityUser>(userStore);
 
-            if (SignIn(sender, e))
+            if (LogIn(sender, e))
                 Response.Redirect("~/profile.aspx");
         }
 
@@ -388,7 +387,7 @@ namespace WebAssessment
         }
 
         /// <summary>
-        /// link to profile should be invisble for non-logined users
+        /// link to profile should be invisible for non-logined users
         /// </summary>
         protected void Profilelnk_Click(object sender, EventArgs e)
         {
@@ -396,7 +395,7 @@ namespace WebAssessment
         }
 
         /// <summary>
-        /// link to AdsEditor should be invisble for non-logined users
+        /// link to AdsEditor should be invisible for non-logined users
         /// </summary>
         protected void AdsEditor_Click(object sender, EventArgs e)
         {

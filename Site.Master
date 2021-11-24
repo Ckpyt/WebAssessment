@@ -237,7 +237,7 @@
                                 <ul class="navbar-right">
                                     <li class="nav-item">
                                         <asp:Button ID="Logout" runat="server" class="button button-header bg" Text="Log out" OnClick="Logout_Click" Visible="False" />
-                                        <asp:Button ID="SignBtn" class="button button-header bg" runat="server" Text="Login/Sign up" UseSubmitBehavior="false" OnClick="SignIn_click" />
+                                        <asp:Button ID="SignBtn" class="button button-header bg" runat="server" Text="Login/Sign up" UseSubmitBehavior="false" OnClick="LogIn_click" />
                                          <!-- start popup -->
                                         <div id='overlay-'></div>
                                         <table>
