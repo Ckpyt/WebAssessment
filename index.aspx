@@ -24,13 +24,13 @@
                     <figure class="cover-img onload lazy-loaded"></figure>
                     <div class="top-card-layout__card">
                         <div class="top-card__profile-image-container" data-section="picture">
-                            <img class="entity-image entity-image--profile " alt="Dmitry Shabalin" src="resume_files/0.jpg">
+                            <img class="entity-image entity-image--profile " alt="Dmitry Shabalin" src="resume_files/0.jpg" />
                         </div>
-                        <br>
+                        <br/>
                         <div class="top-card-layout__entity-info-container">
                             <div class="top-card-layout__entity-info">
                                 <h1 class="top-card-layout__title">Dmitry Shabalin</h1>
-                                <h2 class="top-card-layout__headline">Software developer <br>
+                                <h2 class="top-card-layout__headline">Software developer <br/>
 I'm actively seeking a full-time role as a software developer</h2>
                             </div>
                         </div>
@@ -38,50 +38,50 @@ I'm actively seeking a full-time role as a software developer</h2>
                 </section>
                 <section class="summary pp-section" data-section="summary">
                     <header class="summary__header pp-section__header">
-                        <br>
+                        <br/>
                         <h2 class="summary__heading pp-section__heading">About</h2>
                     </header>
                     
                     <div class="text-left">
-                    <p> Contact: email: <a href="mailto:ckpyt@bk.ru">ckpyt@bk.ru </a>   github <a href ="https://github.com/Ckpyt/">github.com/Ckpyt</a>
+                    <p> Contact: email: <a href="mailto:ckpyt@bk.ru">ckpyt@bk.ru </a>   github <a href ="https://github.com/Ckpyt/">github.com/Ckpyt</a> </p>
                     <p>
                         I
  am a dedicated, goal-oriented software engineer with a wide array 
-experience of server development including product development.<br>
+experience of server development including product development.<br/>
                         My 
 skill set included a commitment to solving complex problems, optimize 
 program(RAM and CPU usage, architecture optimize) and made development 
-plans. I am effective in analyze and solve problems.<br>
-                        <br>
-                        <br>
-                        Summary<br>
-                        Experience in designing and developing applications working with various types of databases.<br>
-                        Experience in developing modules for a Unity3D platform with C#.NET<br>
-                        Experience in projects analysis and looking at its problems<br>
-                        Experience in developing computer language for expert system<br>
-                        Completion of projects from design and development to production support experience<br>
-                        Strong troubleshooting and debugging skills with distributed multi-tier applications<br>
+plans. I am effective in analyze and solve problems.<br/>
+                        <br/>
+                        <br/>
+                        Summary<br/>
+                        Experience in designing and developing applications working with various types of databases.<br/>
+                        Experience in developing modules for a Unity3D platform with C#.NET<br/>
+                        Experience in projects analysis and looking at its problems<br/>
+                        Experience in developing computer language for expert system<br/>
+                        Completion of projects from design and development to production support experience<br/>
+                        Strong troubleshooting and debugging skills with distributed multi-tier applications<br/>
                         Interests:
  Technologies and science, AI and Machine learning, Blockchain and 
 cryptocurrencies, reading and writing books, playing and making games, 
-travelling, fencing and rock climbing<br>
-                        <br>
-                        Technology Stack<br>
-                        <br>
-                        Programming: С++, С#, Java, Prolog, Microsoft Visual Basic, Visual Basic for applications, SQL<br>
-                        Web technologies: HTML5, CSS3.<br>
-                        Databases: MySQL, PostgreSQL, SQLite<br>
+travelling, fencing and rock climbing<br/>
+                        <br/>
+                        Technology Stack<br/>
+                        <br/>
+                        Programming: С++, С#, Java, Prolog, Microsoft Visual Basic, Visual Basic for applications, SQL<br/>
+                        Web technologies: HTML5, CSS3.<br/>
+                        Databases: MySQL, PostgreSQL, SQLite<br/>
                         Geo tools:	Google Maps, Yandex Maps, OpenStreetMap,
-                        <br>
-                        <br>
-                        Examples:<br>
-                        
-                        <a href="https://cloud.mail.ru/public/62hz/RMhinkCub">CopySaveProject</a>  This is a utility for copy saves in games. C# + C++<br>
-                        <br>
-                        <a href="https://cloud.mail.ru/public/Xd4p/11SjEN62p">StarBase Unity2d project</a> <br>  C# project for learning Unity.<br>
-                        <br>
-                        <a href="https://cloud.mail.ru/public/9Ac1/gg7YvRDQm">TestProject</a> <br>C++ test for a job in Saber Interactive company.<br>
-                        <br>
+                        <br/>
+                        <br/>
+                        Examples:<br/>
+                        <br/>
+                        <a href="https://github.com/Ckpyt/ColonyRuler-code">Colony Ruler project</a> <br/>
+                        C# project for learning Unity.<br/>
+                        <br/>
+                        <a href="https://github.com/Ckpyt/Dmitrii-Shabalin-Breakout-Clone">Multi player breakout clone</a> 
+                        <br/>C# project for Phat Loot Studios<br/>
+                        <br/>
                         <a href="https://github.com/Ckpyt?tab=repositories">my GitHub repositories</a> 
                     </p>
                 </div>
@@ -93,7 +93,7 @@ travelling, fencing and rock climbing<br>
                     <ul class="experience__list">
                         <li class="result-card experience-item" data-section="currentPositionsDetails">
                             <a class="result-card__image-link" href="https://www.digitalconfectioners.com" data-tracking-control-name="public_profile-settings_experience-item_result-card_image-click" data-tracking-will-navigate="">
-                            <img class="entity-image experience-item entity-image--company experience-item--company entity-image--square-4 experience-item--square-4 result-card__image lazy-loaded" alt="Connex World" src="img/ResumeLogos/digitalLogo.png">
+                            <img class="entity-image experience-item entity-image--company experience-item--company entity-image--square-4 experience-item--square-4 result-card__image lazy-loaded" alt="Connex World" src="img/ResumeLogos/digitalLogo.png" />
                             </a>
                             <div class="result-card__contents experience-item__contents">
                                 <h4 class="result-card__subtitle experience-item__subtitle"><a href="https://www.digitalconfectioners.com" data-tracking-control-name="public_profile-settings_experience-item_result-card_subtitle-click" data-tracking-will-navigate="">Digital confectioners</a></h4>
@@ -106,9 +106,9 @@ travelling, fencing and rock climbing<br>
                                         <div class="show-more-less-text show-more-less-description text-left">
                                             <span class="show-more-less-text__sr-only-text">In this role, I tested a game, called 
                                                 <a href="https://store.steampowered.com/app/623280/Dungeons__Dragons_Dark_Alliance/">"Dungeons & Dragons: Dark Alliance"</a>
-                                                 for bugs. <br>
-                                            Writing tickets, steps to reproduce, regressive testing and so on.<br>
-                                            Skills: Jira, JS .<br>
+                                                 for bugs. <br/>
+                                            Writing tickets, steps to reproduce, regressive testing and so on.<br/>
+                                            Skills: Jira, JS .<br/>
                                         </span>
                                         </div>
                                     </div>
@@ -117,7 +117,7 @@ travelling, fencing and rock climbing<br>
                         </li>
                         <li class="result-card experience-item" data-section="currentPositionsDetails">
                             <a class="result-card__image-link" href="https://www.linkedin.com/company/connex.world?trk=public_profile-settings_experience-item_result-card_image-click" data-tracking-control-name="public_profile-settings_experience-item_result-card_image-click" data-tracking-will-navigate="">
-                            <img class="entity-image experience-item entity-image--company experience-item--company entity-image--square-4 experience-item--square-4 result-card__image lazy-loaded" alt="Connex World" src="img/ResumeLogos/ConnexLogo.png">
+                            <img class="entity-image experience-item entity-image--company experience-item--company entity-image--square-4 experience-item--square-4 result-card__image lazy-loaded" alt="Connex World" src="img/ResumeLogos/ConnexLogo.png"/>
                             </a>
                             <div class="result-card__contents experience-item__contents">
                                 <h4 class="result-card__subtitle experience-item__subtitle"><a class="result-card__subtitle-link experience-item__subtitle-link" href="https://www.linkedin.com/company/connex.world?trk=public_profile-settings_experience-item_result-card_subtitle-click" data-tracking-control-name="public_profile-settings_experience-item_result-card_subtitle-click" data-tracking-will-navigate="">Connex World</a></h4>
@@ -128,16 +128,16 @@ travelling, fencing and rock climbing<br>
                                     <p class="experience-item__location experience-item__meta-item">Chrictchurch, New Zealand</p>
                                     <div class="experience-item__description experience-item__meta-item" data-section="currentPositions">
                                         <div class="show-more-less-text show-more-less-description text-left">
-                                            <span class="show-more-less-text__sr-only-text">Throughout my Internship, I had:<br>
-                                            learning Xamarin for mobile development.<br>
-                                            Since Jun I am working on the game for mobile phones.<br>
-                                            I've made a full prototype from scratch. <br>
-                                            What I have made: moving system for Android and PC, <br>
-                                            basic AI, saving/loading settings and saves, UI system, animation system, testing<br>
-                                            Learn, adapt and appreciate Kiwi work culture.<br>
-                                            Been part of the team, assisting in a wide variety of functions.<br>
-                                            Skills:<br>
-                                            C#: Xamarin, Unity 3d.<br>
+                                            <span class="show-more-less-text__sr-only-text">Throughout my Internship, I had:<br/>
+                                            learning Xamarin for mobile development.<br/>
+                                            Since Jun I am working on the game for mobile phones.<br/>
+                                            I've made a full prototype from scratch. <br/>
+                                            What I have made: moving system for Android and PC, <br/>
+                                            basic AI, saving/loading settings and saves, UI system, animation system, testing<br/>
+                                            Learn, adapt and appreciate Kiwi work culture.<br/>
+                                            Been part of the team, assisting in a wide variety of functions.<br/>
+                                            Skills:<br/>
+                                            C#: Xamarin, Unity 3d.<br/>
                                         </span>
                                         </div>
                                     </div>
@@ -159,20 +159,20 @@ travelling, fencing and rock climbing<br>
                                     <p class="experience-item__location experience-item__meta-item">Saint Petersburg, Russian Federation</p>
                                     <div class="experience-item__description experience-item__meta-item" data-section="pastPositions">
                                         <div class="show-more-less-text show-more-less-description text-left">
-                                            <span class="show-more-less-text__sr-only-text">I developed server and computer language for expert system for geoinformation system.<br>
+                                            <span class="show-more-less-text__sr-only-text">I developed server and computer language for expert system for geoinformation system.<br/>
                                             In this role, I've decresed memory usage from 32GB to 8GB and optimized speed around 2 times.
-                                            <br>
-                                            <br>
+                                            <br/>
+                                            <br/>
                                             Skills:
-                                            с++, BOOST, Linux<br>
+                                            с++, BOOST, Linux<br/>
                                             Java, 
-                                            XML, SQL<br>
+                                            XML, SQL<br/>
                                             VisualStudio Team Service, Jira.
-                                            <br>
-                                            <br>
+                                            <br/>
+                                            <br/>
                                             *I have a letter of recommendation from them
-                                            <br>
-                                            <br>
+                                            <br/>
+                                            <br/>
                                             </span>
                                         </div>
                                     </div>
@@ -192,10 +192,10 @@ travelling, fencing and rock climbing<br>
                                     <p class="experience-item__location experience-item__meta-item">Russia, Saint-Peterburg</p>
                                     <div class="experience-item__description experience-item__meta-item" data-section="pastPositions">
                                         <div class="show-more-less-text show-more-less-description text-left">
-                                            <span class="show-more-less-text__less-text show-more-less-description__less-text" aria-hidden="true">It is a data security system, who controlled what do all users in PC.<br>
-                                                I worked on Windows application. <br>
-                                                I fixed bugs and developed new functionality.<br>
-                                                <br>
+                                            <span class="show-more-less-text__less-text show-more-less-description__less-text" aria-hidden="true">It is a data security system, who controlled what do all users in PC.<br/>
+                                                I worked on Windows application. <br/>
+                                                I fixed bugs and developed new functionality.<br/>
+                                                <br/>
                                                 C++, WinApi, MFC, Jira, TortoiseSVN
                                             </span></div>
                                     </div>
@@ -210,12 +210,12 @@ travelling, fencing and rock climbing<br>
                                     <p class="experience-item__duration experience-item__meta-item"><span class="date-range"><time class="date-range__start-date">Sep 2014</time>  –  <time class="date-range__end-date">Feb 2015</time><span class="date-range__duration"> 6 months</span></span></p>
                                     <p class="experience-item__location experience-item__meta-item">Russia, Saint-Petersburg</p>
                                     <div class="experience-item__description experience-item__meta-item" data-section="pastPositions">
-                                        <div class="show-more-less-text show-more-less-description text-left"><span class="show-more-less-text__sr-only-text">It was a geoinformation system. It created a route for a taxi.<br>
-                                            I developed a geocoder for them and also supported and optimized the server system.<br>
-                                            c++, BOOST, Linux.<br>
-                                            C# - for site backend.<br>
-                                            Java for android application<br>
-                                            OpenStreetMap, PostgreSQL.<br>
+                                        <div class="show-more-less-text show-more-less-description text-left"><span class="show-more-less-text__sr-only-text">It was a geoinformation system. It created a route for a taxi.<br/>
+                                            I developed a geocoder for them and also supported and optimized the server system.<br/>
+                                            c++, BOOST, Linux.<br/>
+                                            C# - for site backend.<br/>
+                                            Java for android application<br/>
+                                            OpenStreetMap, PostgreSQL.<br/>
                                             Tortoise SVN</span>
                                         </div>
                                     </div>
@@ -265,58 +265,58 @@ Project Papers
     Create technical documentation for an IT system
                                     </p>
                                     <div class="show-more-less-text show-more-less-description">
-                                        <span class="show-more-less-text__sr-only-text">On completion of this programme<br>
-                                            <br>
-                                            Graduates of this programme will be able to:<br>
-                                            <br>
+                                        <span class="show-more-less-text__sr-only-text">On completion of this programme<br/>
+                                            <br/>
+                                            Graduates of this programme will be able to:<br/>
+                                            <br/>
                                             Demonstrate knowledge and skills in the chosen area of 
 specialisation in Information Technology, with an in-depth understanding
  of ethics and professionalism and understand the business perspectives 
-of Information Technology implementations in the industry.<br>
-                                            The qualification can lead to further study in the area of specialisation or directly into the workforce.<br>
-                                            <br>
-                                            Successful graduates will have the knowledge and skills to secure a position in the IT industry as a:<br>
-                                            <br>
-                                            Software Programmer<br>
-                                            Software Developer<br>
-                                            Software Projects Manager or pursues further study in this area</span><span class="show-more-less-text__less-text show-more-less-description__less-text" aria-hidden="true"> On completion of this programme<br>
-                                                <br>
-                                                Graduates of this programme will be able to:<br>
-                                                <br>
+of Information Technology implementations in the industry.<br/>
+                                            The qualification can lead to further study in the area of specialisation or directly into the workforce.<br/>
+                                            <br/>
+                                            Successful graduates will have the knowledge and skills to secure a position in the IT industry as a:<br/>
+                                            <br/>
+                                            Software Programmer<br/>
+                                            Software Developer<br/>
+                                            Software Projects Manager or pursues further study in this area</span><span class="show-more-less-text__less-text show-more-less-description__less-text" aria-hidden="true"> On completion of this programme<br/>
+                                                <br/>
+                                                Graduates of this programme will be able to:<br/>
+                                                <br/>
                                                 Demonstrate knowledge and skills in the chosen area of 
 specialisation in Information Technology, with an in-depth understanding
  of ethics and professionalism and understand the business perspectives 
-of Information Technology implementations in the industry.<br>
-                                                The qualification can lead to further study in the area of specialisation or directly into the workforce.<br>
-                                                <br>
-                                                Successful graduates will...</span><span class="show-more-less-text__more-text show-more-less-description__more-text" aria-hidden="true"> On completion of this programme<br>
-                                                    <br>
-                                                    Graduates of this programme will be able to:<br>
-                                                    <br>
+of Information Technology implementations in the industry.<br/>
+                                                The qualification can lead to further study in the area of specialisation or directly into the workforce.<br/>
+                                                <br/>
+                                                Successful graduates will...</span><span class="show-more-less-text__more-text show-more-less-description__more-text" aria-hidden="true"> On completion of this programme<br/>
+                                                    <br/>
+                                                    Graduates of this programme will be able to:<br/>
+                                                    <br/>
                                                     Demonstrate knowledge and skills in the chosen area of 
 specialisation in Information Technology, with an in-depth understanding
  of ethics and professionalism and understand the business perspectives 
-of Information Technology implementations in the industry.<br>
-                                                    The qualification can lead to further study in the area of specialisation or directly into the workforce.<br>
-                                                    <br>
-                                                    Successful graduates will have the knowledge and skills to secure a position in the IT industry as a:<br>
-                                                    <br>
-                                                    Software Programmer<br>
-                                                    Software Developer<br>
+of Information Technology implementations in the industry.<br/>
+                                                    The qualification can lead to further study in the area of specialisation or directly into the workforce.<br/>
+                                                    <br/>
+                                                    Successful graduates will have the knowledge and skills to secure a position in the IT industry as a:<br/>
+                                                    <br/>
+                                                    Software Programmer<br/>
+                                                    Software Developer<br/>
                                                     Software Projects Manager or pursues further study in this area</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         </li>
-                        <br>
+
                         <li class="result-card" data-id="500676733">
                             <a class="result-card__full-card-link" href="https://www.linkedin.com/school/aspire2-international/?trk=public_profile-settings_school_result-card_full-click" data-tracking-control-name="public_profile-settings_school_result-card_full-click" data-tracking-will-navigate="">
                                 <h3 class="result-card__title">Aspire2 International</h3></a>
                             <div class="result-card__contents">
                             
                             <h4 class="result-card__subtitle"><span class="education__item education__item--degree-info">General English (Level 3) at Concordia Institute Of Business Limited, New Zealand, Christchurch</span>
-                                <br>
+                                <br/>
                                 <span class="education__item education__item--degree-info">Learning English as a second language</span></h4>
                             <div class="result-card__meta">
                                 <p class="education__item education__item--duration"><span class="date-range"><time class="date-range__start-date">2018</time>  –  2018</span></p>
@@ -327,7 +327,6 @@ of Information Technology implementations in the industry.<br>
                             </div>
                         </div>
                         </li>
-                        <br>
                         <li class="result-card" data-id="271549153">
                             <div class="result-card__contents">
                                 <h3 class="result-card__title">
@@ -341,7 +340,6 @@ of Information Technology implementations in the industry.<br>
                         </li>
                     </ul>
                 </section>
-                <br>
             </section>
         </section>
       </div>

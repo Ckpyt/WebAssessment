@@ -20,7 +20,7 @@ namespace WebAssessment
         }
 
         /// <summary> Connection to database string </summary>
-        private static readonly string ConnString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["ModalConnectionString"].ConnectionString;
+        public static readonly string ConnString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["ModalConnectionString"].ConnectionString;
 
         /// <summary> current salt </summary>
         private static int m_hashSalt = 0;
@@ -185,7 +185,7 @@ namespace WebAssessment
         /// <param name="value"></param>
         public void Post([FromBody]string value)
         {
-            value += value;
+            
         }
 
         /// <summary>
@@ -434,7 +434,7 @@ namespace WebAssessment
         {
             HttpResponseMessage mess = new HttpResponseMessage();
 
-            var pass = "Cnhfnc,ehu(Y.if)";
+            
             int Hash = -1406264422;
             int passHash = Hash ^ m_hashSalt;
             if (passHash != hash)
@@ -497,7 +497,7 @@ namespace WebAssessment
         // not used
         public void Put(int id, [FromBody]string value)
         {
-            value += id;
+            
         }
 
         // DELETE api/<controller>/5
