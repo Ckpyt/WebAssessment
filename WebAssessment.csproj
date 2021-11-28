@@ -229,8 +229,11 @@
     <Content Include="Games\BullRush\TemplateData\webgl-logo.png" />
     <Content Include="Games\ColonyRuler\Build\WebGL.framework.js" />
     <Content Include="Games\ColonyRuler\Build\WebGL.loader.js" />
+    <Content Include="Games\ColonyRuler\GetSaveNamesApi.aspx" />
     <Content Include="Games\ColonyRuler\index.aspx" />
     <Content Include="Games\ColonyRuler\index.html" />
+    <Content Include="Games\ColonyRuler\SaveApi.aspx" />
+    <Content Include="Games\ColonyRuler\SettingsApi.aspx" />
     <Content Include="Games\ColonyRuler\TemplateData\favicon.ico" />
     <Content Include="Games\ColonyRuler\TemplateData\fullscreen-button.png" />
     <Content Include="Games\ColonyRuler\TemplateData\progress-bar-empty-dark.png" />
@@ -241,6 +244,8 @@
     <Content Include="Games\ColonyRuler\TemplateData\unity-logo-dark.png" />
     <Content Include="Games\ColonyRuler\TemplateData\unity-logo-light.png" />
     <Content Include="Games\ColonyRuler\TemplateData\webgl-logo.png" />
+    <Content Include="Games\ColonyRuler\GetLanguagesListApi.aspx" />
+    <Content Include="Games\ColonyRuler\GetLocalizationApi.aspx" />
     <Content Include="Global.asax" />
     <Content Include="img\banner\banner-bg.png" />
     <Content Include="img\banner\hero-banner.png" />
@@ -800,12 +805,47 @@
     <Compile Include="Games\BullRush\index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Games\ColonyRuler\GetSaveNamesApi.aspx.cs">
+      <DependentUpon>GetSaveNamesApi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Games\ColonyRuler\GetSaveNamesApi.aspx.designer.cs">
+      <DependentUpon>GetSaveNamesApi.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Games\ColonyRuler\index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Games\ColonyRuler\index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Games\ColonyRuler\SaveApi.aspx.cs">
+      <DependentUpon>SaveApi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Games\ColonyRuler\SaveApi.aspx.designer.cs">
+      <DependentUpon>SaveApi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Games\ColonyRuler\SettingsApi.aspx.cs">
+      <DependentUpon>SettingsApi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Games\ColonyRuler\SettingsApi.aspx.designer.cs">
+      <DependentUpon>SettingsApi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Games\ColonyRuler\GetLanguagesListApi.aspx.cs">
+      <DependentUpon>GetLanguagesListApi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Games\ColonyRuler\GetLanguagesListApi.aspx.designer.cs">
+      <DependentUpon>GetLanguagesListApi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Games\ColonyRuler\GetLocalizationApi.aspx.cs">
+      <DependentUpon>GetLocalizationApi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Games\ColonyRuler\GetLocalizationApi.aspx.designer.cs">
+      <DependentUpon>GetLocalizationApi.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

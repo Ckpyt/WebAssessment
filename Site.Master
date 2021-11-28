@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="vendors/owl-carousel/owl.theme.default.min.css"/>
     <link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css"/>
 
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css"/>
 
     <title>Ckpyt Software</title>
 
@@ -268,7 +268,7 @@
                                                                         <td colspan="2"> 
                                                                             <asp:Label id="invMsgLogin" runat="server" class="invisible" Text=""></asp:Label>
                                                                         </td>
-                                                                    <tr/>
+                                                                    </tr>
                                                                     <tr>
                                                                         <td>
                                                                             <div class="nav-link tbl"> Password: </div>
@@ -281,7 +281,7 @@
                                                                         <td colspan="2"> 
                                                                             <asp:Label id="invMsgPass" runat="server" class="invisible" Text=""></asp:Label>
                                                                         </td>
-                                                                    <tr/>
+                                                                    </tr>
                                                                     <tr>
                                                                         <td>
                                                                             <div class="nav-link tbl"> Confirm password: </div>
@@ -295,7 +295,7 @@
                                                                         <td colspan="2"> 
                                                                             <asp:Label id="invMsg" runat="server" class="invisible" Text=""></asp:Label>
                                                                         </td>
-                                                                    <tr/>
+                                                                    </tr>
                                                                     <tr>
                                                                         <td>
                                                                             <div class="nav-link tbl"> e-mail: </div>
@@ -308,7 +308,7 @@
                                                                         <td colspan="2"> 
                                                                             <asp:Label id="invMsgEmail" runat="server" class="invisible" Text=""></asp:Label>
                                                                         </td>
-                                                                    <tr/>
+                                                                    </tr>
                                                                 </table>
                                                                 <!-- END POPUP BLOCK -->
                                                                 <!-- START POPUP BLOCK -->
@@ -347,7 +347,7 @@
                                                                         <td colspan="2"> 
                                                                             <asp:Label ID="invMsgUserNM" class="invisible" runat="server" Text=""></asp:Label>
                                                                         </td>
-                                                                    <tr/>
+                                                                    </tr>
                                                                     <tr>
                                                                         <td>
                                                                             <div class="nav-link tbl"> Password: </div>
@@ -360,7 +360,7 @@
                                                                         <td colspan="2"> 
                                                                             <asp:Label id="invMsgUserPSW"  runat="server"  class="invisible"></asp:Label>
                                                                         </td>
-                                                                    <tr/>
+                                                                    </tr>
                                                                 </table>
                                                                 <!-- END POPUP BLOCK -->
                                                                 <!-- START POPUP BLOCK -->

@@ -46,7 +46,7 @@
                   <p>+Localization(now En/ru only)</p>
                   <p>+Full stone age</p>
                   <p>+Networking and site integration</p>
-                  <p> <br> Does not finished yet<br></p>
+                  <p> <br/> Does not finished yet<br/></p>
                   <p>-Neolithic revolution(farming + taming animals)</p>
                   <p>-Tutorial</p>
                   <p>-History of the colony</p>
@@ -81,10 +81,10 @@
                   <p>-Population split by age and sex</p>
                   <p>-Deaths and born depends on the medecine level</p>
                   <p>-Diseases and medicines</p>
-                  <p>-The number of newborns depends on the number of women <br>aged 14  to 40 years.</p>
+                  <p>-The number of newborns depends on the number of women <br/>aged 14  to 40 years.</p>
                   <p>-Schools, universities, church, temples, wonders of the world</p>
                   <p>-Speed of reasearch depends on the education level</p>
-                  <p>-The number of newborns depends on the education level,  <br>religion level, crowded population</p>
+                  <p>-The number of newborns depends on the education level,  <br/>religion level, crowded population</p>
                   <p>-Iron age, Middle Ages</p>
                   <p>(the full list could be increased)</p>
               </div>
@@ -93,7 +93,7 @@
         </div>
         <div class="col-lg-6">
           <div class="offer-single__img">
-            <img class="img-fluid" src="img/home/offer.png" alt="">
+            <img class="img-fluid" src="img/home/offer.png" alt=""/>
           </div>
         </div>
       </div>

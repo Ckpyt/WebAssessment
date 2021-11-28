@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="index.aspx.cs" Inherits="WebAssessment.Games.ColonyRuler.index" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Header" runat="server">
-    <link rel="stylesheet" href="TemplateData/style.css">
-    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css"/>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico"/>
     <script>
         function GetUserName() {
             return '<%= UserName %>';
@@ -14,12 +14,29 @@
     <div class="hero-banner--sm__content">
         <h1>Colony ruler</h1>
         <nav aria-label="breadcrumb" class="banner-breadcrumb">
-          <ol class="breadcrumb">
+            <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.aspx">Home</a></li>
             <li class="breadcrumb-item active">Colony ruler</li>
           </ol>
+            <nav class="navbar navbar-expand-lg navbar-light">
+                Colony Ruler Api:
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                    <ul class="nav ">
+                        <li class="nav-item"><a class="nav-link" href='<%= ResolveUrl("~/Games/ColonyRuler/GetLanguagesListApi.aspx")%>'>Get languages list</a></li>
+                        <li class="nav-item"><a class="nav-link" href='<%= ResolveUrl("~/Games/ColonyRuler/GetLocalizationApi.aspx")%>'>Get localization</a></li>
+                        <li class="nav-item"><a class="nav-link" href='<%= ResolveUrl("~/Games/ColonyRuler/SettingsApi.aspx")%>'>Settings</a></li>
+                        <li class="nav-item"><a class="nav-link" href='<%= ResolveUrl("~/Games/ColonyRuler/GetSaveNamesApi.aspx")%>'>Get save names list</a></li>
+                        <li class="nav-item"><a class="nav-link" href='<%= ResolveUrl("~/Games/ColonyRuler/SaveApi.aspx")%>'>Save</a></li>
+                    </ul>
+                </div>
+            </nav>
         </nav>
-      </div>
+    </div>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
    <div style="width: 960px; height: 670px; position:relative; left: 50%;
@@ -27,7 +44,7 @@
     -webkit-transform: translateX(-50%);
     transform: translateX(-50%)">
            <div id="unity-container" class="unity-desktop">
-          <canvas id="unity-canvas" width=960 height=600></canvas>
+          <canvas id="unity-canvas" width="960" height="600"></canvas>
           <div id="unity-loading-bar">
             <div id="unity-logo"></div>
             <div id="unity-progress-bar-empty">
