@@ -306,7 +306,7 @@ namespace WebAssessment
 
         }
 
-        async Task<string> ReadData()
+        public async Task<string> ReadData()
         {
             string converted = "";
             try
