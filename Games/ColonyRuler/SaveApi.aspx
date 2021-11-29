@@ -30,4 +30,40 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+  <section class="section-margin">
+    <div class="container">
+      <div class="section-intro pb-85px text-center">
+        <section class="core-rail">
+            <section class="profile">
+                <section class="top-card-layout top-card-layout--show-current-hide-past-position">
+                    <figure class="cover-img onload lazy-loaded"></figure>
+                    <div class="top-card-layout__card">
+                        <br/>
+                        <div class="top-card-layout__entity-info-container">
+                            <div class="top-card-layout__entity-info">
+                                <h1 class="top-card-layout__title">Save Api</h1>
+                                This reguest require login. if a user is not loggined, the login could be "Not authorized"<br/>
+                                It has 3 types of reguest: get, post and delete<br/>
+                                Get: <br/>
+                                Parameter: login - your login name. Not secure yet. <br/> 
+                                saveName - save name from GetSaveNames reguest.  <br/>
+                                Return: JSON-string with serialised save<br/>
+                                Post: <br/>
+                                Parameter: login - your login name. Not secure yet. <br/> 
+                                saveName - the new name of the save. If the save exists, it will be overwritten.<br/>
+                                body: JSON-string with serialised save<br/>
+                                Delete: <br/>
+                                Parameter: login - your login name. Not secure yet. <br/> 
+                                saveName - save name from GetSaveNames reguest. <br/>
+                                Example: <br/>
+                                <a href="https://ckpyt.com/api/save?login=Not authorized&saveName=1111">https://ckpyt.com/api/save?login=Not authorized&saveName=1111</a><br/>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </section>
+        </section>
+      </div>
+    </div>
+ </section>
 </asp:Content>

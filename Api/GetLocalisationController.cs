@@ -10,7 +10,7 @@ namespace WebAssessment.Api
 {
     public class GetLocalisationController : ApiController
     {
-        public string Get(int id=0, string name="English")
+        public string Get(int id=1, string language="English")
         {
             MySqlConnection conn = new MySqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["ModalConnectionString"].ConnectionString);
             string local = "";
@@ -19,20 +19,18 @@ namespace WebAssessment.Api
             MySqlCommand comm;
             switch (id)
             {
+                default:
+                case 1:
+                    comm = new MySqlCommand("select UILocalization from tblLocalization where(FullName=@name)", conn);
+                    break;
                 case 2:
                     comm = new MySqlCommand("select Items from tblLocalization where(FullName=@name)", conn);
                     break;
                 case 3:
                     comm = new MySqlCommand("select History from tblLocalization where(FullName=@name)", conn);
                     break;
-                case 4:
-                    comm = new MySqlCommand("select UILocalization from tblLocalization where(FullName=@name)", conn);
-                    break;
-                default:
-                    comm = new MySqlCommand("select UILocalization from tblLocalization where(FullName=@name)", conn);
-                    break;
             }
-            comm.Parameters.Add(new MySqlParameter("@name", name));
+            comm.Parameters.Add(new MySqlParameter("@name", language));
 
 
             try

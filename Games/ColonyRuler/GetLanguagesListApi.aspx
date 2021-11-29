@@ -30,4 +30,32 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <section class="section-margin">
+    <div class="container">
+      <div class="section-intro pb-85px text-center">
+        <section class="core-rail">
+            <section class="profile">
+                <section class="top-card-layout top-card-layout--show-current-hide-past-position">
+                    <figure class="cover-img onload lazy-loaded"></figure>
+                    <div class="top-card-layout__card">
+                        <br/>
+                        <div class="top-card-layout__entity-info-container">
+                            <div class="top-card-layout__entity-info">
+                                <h1 class="top-card-layout__title">Get Languages list Api</h1>
+                                This reguest does not require login, any parametres and can be done by anyone. <br/>
+                                It has only one type of reguests: get. <br/>
+                                Return: JSON-string with list of strings with currently langues supported by the game. <br/>
+                                Example: <br/>
+                                <a href="https://ckpyt.com/api/GetLangList">https://ckpyt.com/api/GetLangList</a><br/>
+                                Return: <br/>
+                                "{\"m_languages\":[\"English\",\"Russian\"]}" <br/>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </section>
+        </section>
+      </div>
+    </div>
+ </section>
 </asp:Content>

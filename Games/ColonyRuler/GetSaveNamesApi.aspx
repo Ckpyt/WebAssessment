@@ -30,4 +30,33 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+     <section class="section-margin">
+    <div class="container">
+      <div class="section-intro pb-85px text-center">
+        <section class="core-rail">
+            <section class="profile">
+                <section class="top-card-layout top-card-layout--show-current-hide-past-position">
+                    <figure class="cover-img onload lazy-loaded"></figure>
+                    <div class="top-card-layout__card">
+                        <br/>
+                        <div class="top-card-layout__entity-info-container">
+                            <div class="top-card-layout__entity-info">
+                                <h1 class="top-card-layout__title">Get save names Api</h1>
+                                This reguest require login. if a user is not loggined, the login could be "Not authorized"<br/>
+                                It has only one type of reguest: Get<br/>
+                                Get: <br/>
+                                Parameter: login - your login name. Not secure yet. <br/> 
+                                Return: JSON-string with serialised array of save names<br/>
+                                Example: <br/>
+                                <a href="https://ckpyt.com/api/getsavenames?login=Not authorized">https://ckpyt.com/api/getsavenames?login=Not authorized</a><br/>
+                                returns: "[\"ssss\",\"ssss1\",\"1111\"]" <br/>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </section>
+        </section>
+      </div>
+    </div>
+ </section>
 </asp:Content>
