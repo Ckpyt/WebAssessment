@@ -200,7 +200,7 @@
     <body>
         <form id="form1" runat="server">
             <asp:HiddenField ID="LoginNameRes" runat="server" />
-
+            <asp:HiddenField ID="SessionID" runat="server" />
             <asp:ScriptManager ID="smMain" runat="server" EnablePageMethods="true" />
             <header class="header_area" id="header">
                 <div class="main_menu">
@@ -242,6 +242,63 @@
                                         <div id='overlay-'></div>
                                         <table>
                                             <tr style="vertical-align:top">
+                                                                                                <td>
+                                                    
+                                                    <div id='modalMsg-1' class="HideModal">
+                                                        <div class="popupbox">
+                                                            <div>
+                                                                <h1> LOGIN
+                                                                <input type="button" value="X" class="button-close" onclick="return RemoveModal();" />
+                                                                </h1>
+                                                            </div>
+                                                            <hr />
+                                                            <div class="popupdesc">
+                                                                <!-- START POPUP BLOCK -->
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <div class="nav-link tbl"> Login: </div>
+                                                                        </td>
+                                                                        <td>
+                                                                           <asp:TextBox id="UserName" runat="server" />
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="2"> 
+                                                                            <asp:Label ID="invMsgUserNM" class="invisible" runat="server" Text=""></asp:Label>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <div class="nav-link tbl"> Password: </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <asp:TextBox id="UserPassword" runat="server" TextMode="Password" />
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="2"> 
+                                                                            <asp:Label id="invMsgUserPSW"  runat="server"  class="invisible"></asp:Label>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                                <!-- END POPUP BLOCK -->
+                                                                <!-- START POPUP BLOCK -->
+                                                                
+                                                                <div class="popblock popblocksubbtn">
+                                                       
+                                                                    <asp:Button ID="LoginBtn" class="button bluebg ibvm" runat="server" Text="Login" OnClick="LoginBtn_Click" />
+                                                        
+                                                                </div>
+                                                                <div class="popblock popblocksubbtn">
+                                                                    <asp:Button ID="RestoreBtn" class="button bluebg ibvm" runat="server" Text="Restore password" OnCLick="Restore_Click"/>
+                                                                </div>
+                                                                <!-- END POPUP BLOCK -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- end popup -->
+                                                </td>
                                                  <td >
                                                     <!-- start register-->
                                                     <div id='modalMsg-2' class="HideModal" style="padding:0px;">
@@ -322,63 +379,7 @@
                                                     </div>
                                                     <!-- end register-->
                                                 </td>
-                                                <td>
-                                                    
-                                                    <div id='modalMsg-1' class="HideModal">
-                                                        <div class="popupbox">
-                                                            <div>
-                                                                <h1> LOGIN
-                                                                <input type="button" value="X" class="button-close" onclick="return RemoveModal();" />
-                                                                </h1>
-                                                            </div>
-                                                            <hr />
-                                                            <div class="popupdesc">
-                                                                <!-- START POPUP BLOCK -->
-                                                                <table>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <div class="nav-link tbl"> Login: </div>
-                                                                        </td>
-                                                                        <td>
-                                                                           <asp:TextBox id="UserName" runat="server" />
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td colspan="2"> 
-                                                                            <asp:Label ID="invMsgUserNM" class="invisible" runat="server" Text=""></asp:Label>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <div class="nav-link tbl"> Password: </div>
-                                                                        </td>
-                                                                        <td>
-                                                                            <asp:TextBox id="UserPassword" runat="server" TextMode="Password" />
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td colspan="2"> 
-                                                                            <asp:Label id="invMsgUserPSW"  runat="server"  class="invisible"></asp:Label>
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
-                                                                <!-- END POPUP BLOCK -->
-                                                                <!-- START POPUP BLOCK -->
-                                                                
-                                                                <div class="popblock popblocksubbtn">
-                                                       
-                                                                    <asp:Button ID="LoginBtn" class="button bluebg ibvm" runat="server" Text="Login" OnClick="LoginBtn_Click" />
-                                                        
-                                                                </div>
-                                                                <div class="popblock popblocksubbtn">
-                                                                    <asp:Button ID="RestoreBtn" class="button bluebg ibvm" runat="server" Text="Restore password" OnCLick="Restore_Click"/>
-                                                                </div>
-                                                                <!-- END POPUP BLOCK -->
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- end popup -->
-                                                </td>
+
                                                
                                             </tr>
                                         </table>

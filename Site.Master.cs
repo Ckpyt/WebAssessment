@@ -12,6 +12,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using MySql.Data.EntityFramework;
 using WebAssessment.App_Start;
+using System.Collections.Generic;
 
 namespace WebAssessment
 {
@@ -27,7 +28,7 @@ namespace WebAssessment
     [DbConfigurationType(typeof(MySqlEFConfiguration))]
     public partial class MySite : System.Web.UI.MasterPage
     {
-        private readonly string ConnString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["ModalConnectionString"].ConnectionString;
+        private readonly string connString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["ModalConnectionString"].ConnectionString;
 
         static bool m_isItInint = false;
 
@@ -109,6 +110,27 @@ namespace WebAssessment
         }
 
 
+        void StoreUser(string login)
+        {
+            try
+            {
+                MySqlConnection conn = new MySqlConnection(connString);
+                MySqlCommand comm;
+
+                conn.Open();
+
+                comm = new MySqlCommand("insert into tblUsers(id, name) select max(id) + 1 , @login from tblUsers", conn);
+                comm.Parameters.Add(new MySqlParameter("@login", login));
+
+                MySqlDataReader result = comm.ExecuteReader();
+
+            }
+            catch (Exception ex)
+            {
+                MySite.ShowAlert(this, "Error happens:" + ex.Message);
+            }
+        }
+
         protected bool RegisterUser()
         {
             var userStore = new UserStore<IdentityUser>();
@@ -158,8 +180,8 @@ namespace WebAssessment
                 UserPassword.Text = Password.Text;
                 SendEmail(user, "Hello, " + user.UserName + "<br>Congratulation!<br> You was registered on my site!<br> I'll never send you any junk mails, only security confirmations.<br><br>Cheers, Dmitriy Shabalin",
                     "Registration is complete");
+                StoreUser(UserName.Text);
                 LoginBtn_Click(null, null);
-
                 //ShowAlert(this, "user " + Login.Text + " successful register");
             }
             else
@@ -240,6 +262,63 @@ namespace WebAssessment
             LogIn(sender, e);
         }
 
+        string GetUserBySessionID(string id)
+        {
+            var conn = new MySqlConnection(connString);
+            conn.Open();
+            var comm = new MySqlCommand("select SaveName from tblSaves where(UserName=@name)", conn);
+            comm.Parameters.Add(new MySqlParameter("@name", id));
+            List<string> answ = new List<string>();
+            try
+            {
+                MySqlDataReader result = comm.ExecuteReader();
+                if (result.HasRows)
+                    return Convert.ToString(result[0]);
+                else
+                    return "";
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("ColonyRulerApi: GetSaveNames error:" + ex.Message);
+            }
+            conn.Close();
+            return "";
+        }
+
+        string GetNewSessionID()
+        {
+            Random rnd = new Random(DateTime.Now.Millisecond + DateTime.Now.Second);
+            var sessionID = rnd.Next().ToString();
+            if (GetUserBySessionID(sessionID).Length > 0)
+                return GetNewSessionID();
+            else
+                return sessionID;
+        }
+
+        void StoreSessionID()
+        {
+            try
+            {
+                MySqlConnection conn = new MySqlConnection(connString);
+                MySqlCommand comm;
+
+                conn.Open();
+
+                comm = new MySqlCommand("update tblUsers set SessionID=@SessionID, LastLogin=@date where(Name=@name)", conn);
+                comm.Parameters.Add(new MySqlParameter("@name", LoginNameRes.Value));
+                comm.Parameters.Add(new MySqlParameter("@SessionID", SessionID.Value));
+                comm.Parameters.Add(new MySqlParameter("@date", DateTime.Now.ToString("s")));
+
+                MySqlDataReader result = comm.ExecuteReader();
+                
+            }
+            catch (Exception ex)
+            {
+                MySite.ShowAlert(this, "Error happens:" + ex.Message);
+            }
+        }
+
         public bool LogIn(object sender, EventArgs e)
         {
             UserStore<IdentityUser> userStore = new UserStore<IdentityUser>();
@@ -255,12 +334,14 @@ namespace WebAssessment
 
                     IAuthenticationManager authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
                     ClaimsIdentity userIdentity = userManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
-                    LoginNameRes.Value = UserName.Text;
                     authenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = false }, userIdentity);
                     SignBtn.Visible = false;
                     Logout.Visible = true;
                     Logout.Text = "Sign out, " + UserName.Text;
 
+                    LoginNameRes.Value = UserName.Text;
+                    SessionID.Value = GetNewSessionID();
+                    StoreSessionID();
                     string returnParam = Request.Params.Get("ReturnUrl");
                     if (returnParam != null)
                         Response.Redirect(returnParam);
@@ -345,7 +426,7 @@ namespace WebAssessment
             pg.SendEmail(user, "Hello, " + user.UserName + "<br>Somebody want to change your password on my web-site <br>If it was your action, please, follow the link and type this code:" + randome + ". <br> <a href=\"http://localhost:62817/passwordChangeConfirm.aspx \"> Confirm page </a><br>Your new password will be the same as it was typed in the password field  <br> Cheers, Dmitriy Shabalin",
                 "Password changing request");
 
-            MySqlConnection conn = new MySqlConnection(ConnString);
+            MySqlConnection conn = new MySqlConnection(connString);
             conn.Open();
             MySqlCommand comm = new MySqlCommand("insert into tblPassConfirm values('" + user.Id +
                 "'," + randome + ",'" + DateTime.Now.ToString("yyyy-MM-ddThh:mm:ss") +

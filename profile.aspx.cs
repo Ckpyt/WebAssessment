@@ -18,6 +18,8 @@ namespace WebAssessment
             var userManager = new UserManager<IdentityUser>(userStore);
             var m_currDescr = Description.Text;
             var user = userManager.FindByName(this.User.Identity.Name);
+            if (user == null) return;
+
             Login.Text = user.UserName;
             //save e-mail
             if (UserEmail.Text.Length == 0)
@@ -105,10 +107,14 @@ namespace WebAssessment
 
             MySqlConnection conn = new MySqlConnection(ConnString);
             conn.Open();
-            MySqlCommand comm = new MySqlCommand("delete from tblDescription where id='" + user.Id + "';", conn);
+            MySqlCommand comm = new MySqlCommand("delete from tblDescription where id=@userId;", conn);
+            comm.Parameters.Add( new MySqlParameter( "@userId", user.Id));
+            MySqlCommand comm2 = new MySqlCommand("delete from tblUsers where name=@login;", conn);
+            comm2.Parameters.Add(new MySqlParameter("@login", user.UserName));
             try
             {
-                comm.ExecuteReader();
+                int answ = comm.ExecuteNonQuery();
+                answ = comm2.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
@@ -126,7 +132,7 @@ namespace WebAssessment
             DeleteAccount(User.Identity.GetUserId(), this);
 
             var pg = Page.Master as MySite;
-            pg.SendEmail(user, "Hello, " + user.UserName + "<br>Unfortunatelly, your account was deleted.<br>If it was not your action, please, register again. <br><br> Cheers, Dmitriy Shabalin",
+            pg.SendEmail(user, "Hello, " + user.UserName + "<br>Unfortunately, your account was deleted.<br>If it was not your action, please, register again. <br><br> Cheers, Dmitriy Shabalin",
                 "Account was deleted");
             pg.SignOut(null, null);
 
