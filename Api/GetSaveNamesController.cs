@@ -6,13 +6,20 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Newtonsoft.Json;
+using System.Web.Http.Description;
 
 namespace WebAssessment.Api
 {
-    public class GetSaveNamesController : ApiController
+    public class GetSaveNamesController : AbstractController
     {
-        public string Get(string login)
+
+        [ResponseType(typeof(string))]
+        public HttpResponseMessage Get(string login, int sessionID)
         {
+            if (CheckSessionId(login, sessionID) == false)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.Unauthorized, "Error: wrong session id");
+            }
             var conn = new MySqlConnection(System.Web.Configuration.WebConfigurationManager.ConnectionStrings["ModalConnectionString"].ConnectionString);
             conn.Open();
             var comm = new MySqlCommand("select SaveName from tblSaves where(UserName=@name)", conn);
@@ -30,16 +37,21 @@ namespace WebAssessment.Api
 
                     }
                     conn.Close();
-                    return JsonConvert.SerializeObject(answ);
+                    return Request.CreateResponse(HttpStatusCode.OK, JsonConvert.SerializeObject(answ));
                 }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.InternalServerError, "Login not found");
+                }
+
 
             }
             catch (Exception ex)
             {
+                conn.Close();
                 Console.WriteLine("ColonyRulerApi: GetSaveNames error:" + ex.Message);
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
-            conn.Close();
-            return "";
         }
     }
 }

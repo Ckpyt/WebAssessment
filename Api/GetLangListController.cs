@@ -33,8 +33,9 @@ namespace WebAssessment.Api
                 foreach (System.Data.Common.DbDataRecord res in result)
                 {
                     lang.m_languages.Add(res.GetValue(0).ToString());
+                    
                 }
-
+                result.Close();
                 conn.Close();
                 local = JsonConvert.SerializeObject(lang);
             }

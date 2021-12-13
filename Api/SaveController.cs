@@ -5,14 +5,15 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace WebAssessment.Api
 {
-    public class SaveController : ApiController
+    public class SaveController : AbstractController
     {
         string connString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["ModalConnectionString"].ConnectionString;
 
-        public string Get(string login, string saveName)
+        string Get(string login, string saveName)
         {
             MySqlConnection conn = new MySqlConnection(connString);
 
@@ -41,8 +42,22 @@ namespace WebAssessment.Api
             return "";
         }
 
-        public void Post(string login, string saveName)
+        [ResponseType(typeof(string))]
+        public HttpResponseMessage Get(string login, int sessionID, string saveName)
         {
+            if (CheckSessionId(login, sessionID) == false)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.Unauthorized, "Error: wrong session id");
+            }
+            return Request.CreateResponse(HttpStatusCode.OK, Get(login, saveName));
+        }
+
+        [ResponseType(typeof(void))]
+        public HttpResponseMessage Post(string login, int sessionID, string saveName)
+        {
+            if (CheckSessionId(login, sessionID) == false)
+                return Request.CreateErrorResponse(HttpStatusCode.Unauthorized, "Error: wrong session id");
+
             try
             {
                 string converted = "";
@@ -85,12 +100,17 @@ namespace WebAssessment.Api
             }
             catch (System.Exception e)
             {
-                Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
             }
+            return Request.CreateResponse(HttpStatusCode.OK);
         }
 
-        public void Delete(string login, string saveName)
+        [ResponseType(typeof(void))]
+        public HttpResponseMessage Delete(string login, int sessionID, string saveName)
         {
+            if (CheckSessionId(login, sessionID) == false)
+                return Request.CreateErrorResponse(HttpStatusCode.Unauthorized, "Error: wrong session id");
+
             var conn = new MySqlConnection(connString);
 
             conn.Open();
@@ -100,13 +120,28 @@ namespace WebAssessment.Api
 
             try
             {
-                comm.ExecuteReader();
+                var answ = comm.ExecuteReader();
+                if (answ.RecordsAffected > 0)
+                {
+                    answ.Close();
+                    conn.Close();
+                    return Request.CreateResponse(HttpStatusCode.OK);
+                }
+                else
+                {
+                    answ.Close();
+                    conn.Close();
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, "saveName not found");
+                }
+
+                
             }
             catch (Exception ex)
             {
                 Console.WriteLine("ColonyRulerApi: DeleteSave error:" + ex.Message);
+                conn.Close();
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
-            conn.Close();
         }
     }
 }

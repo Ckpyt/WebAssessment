@@ -45,12 +45,12 @@
                                 This reguest does not require login and can be done by anyone. <br/>
                                 There is two parametres: <br/>string "language", should be the same as it was recieve from GetLanguagesList request, could be skipped(English by default) <br/>
                                 and id - could be 1-3. <br/>
+                                Could be skipped, 1 by default<br/>
                                 id = 1: returns UI localisation string <br/>
                                 id = 2: returns items localisation array <br/>
                                 id = 3: return history localisation string(not realised yet) <br/>
                                 Any others id returns UI localisation string <br/>
                                 It has only one type of reguests: get. <br/>
-                                Could be skipped, 1 by default<br/>
                                 Example: <br/>
                                 <a href="https://ckpyt.com/api/GetLocalisation?id=1&language=Russian">https://ckpyt.com/api/GetLocalisation?id=1&language=Russian</a><br/>
                                 Return: <br/>

@@ -839,6 +839,7 @@
     <Compile Include="AdsEditor.aspx.designer.cs">
       <DependentUpon>AdsEditor.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Api\AbstractController.cs" />
     <Compile Include="Api\GetLocalisationController.cs" />
     <Compile Include="Api\GetLangListController.cs" />
     <Compile Include="Api\GetSaveNamesController.cs" />

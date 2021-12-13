@@ -45,7 +45,9 @@
                                 This reguest require login. if a user is not loggined, the login could be "Not authorized"<br/>
                                 It has only one type of reguest: Get<br/>
                                 Get: <br/>
-                                Parameter: login - your login name. Not secure yet. <br/> 
+                                Parameters: <br/> 
+                                login - your login name. <br/> 
+                                sessionID - your sessionID. Hidden field, filled after logging. 0 for "Not authorized"<br/>
                                 Return: JSON-string with serialised array of save names<br/>
                                 Example: <br/>
                                 <a href="https://ckpyt.com/api/getsavenames?login=Not authorized">https://ckpyt.com/api/getsavenames?login=Not authorized</a><br/>
