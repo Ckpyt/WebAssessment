@@ -42,19 +42,21 @@
                         <div class="top-card-layout__entity-info-container">
                             <div class="top-card-layout__entity-info">
                                 <h1 class="top-card-layout__title">Settings Api</h1>
-                                This reguest require login. if a user is not loggined, the login could be "Not authorized"<br/>
+                                Login required. if a user is not loggined, the login could be "Not authorized"<br/>
                                 It has only two type of reguests: get and post. <br/>
                                 Get: <br/>
                                 Parameters:<br/>
-                                login - your login name. Not secure yet. <br/> 
+                                login - your login name. <br/> 
                                 sessionID - your sessionID. Hidden field, filled after logging. 0 for "Not authorized"<br/>
                                 Return: JSON-string with serialised settings<br/>
+                                <br/>
                                 Post: <br/>
                                 Parameters:<br/>
                                 login - your login name. Not secure yet. <br/> 
                                 sessionID - your sessionID. Hidden field, filled after logging. 0 for "Not authorized"<br/>
                                 body: JSON-string with serialised settings<br/>
                                 returns OK, if it is ok or error, if something happens<br/>
+                                <br/>
                                 Example: <br/>
                                 <a href="https://ckpyt.com/api/settings?login=Not authorized">https://ckpyt.com/api/settings?login=Not authorized</a><br/>
                                 returns: "{\"m_isItFullTree\":false,\"m_productQueueLimit\":10,\"m_localization\":{\"m_currentLanguage\":0}}\r" <br/>

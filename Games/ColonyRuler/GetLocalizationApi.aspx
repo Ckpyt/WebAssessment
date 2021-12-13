@@ -42,15 +42,15 @@
                         <div class="top-card-layout__entity-info-container">
                             <div class="top-card-layout__entity-info">
                                 <h1 class="top-card-layout__title">Get localisation Api</h1>
-                                This reguest does not require login and can be done by anyone. <br/>
-                                There is two parametres: <br/>string "language", should be the same as it was recieve from GetLanguagesList request, could be skipped(English by default) <br/>
-                                and id - could be 1-3. <br/>
-                                Could be skipped, 1 by default<br/>
+                                This reguest does not require login. <br/>
+                                There is two parametres: <br/>string "language", the same as GetLanguagesList request, English by default <br/>
+                                id - 1-3(1 by default)<br/>
                                 id = 1: returns UI localisation string <br/>
                                 id = 2: returns items localisation array <br/>
-                                id = 3: return history localisation string(not realised yet) <br/>
+                                id = 3: returns history localisation string(not realised yet) <br/>
                                 Any others id returns UI localisation string <br/>
                                 It has only one type of reguests: get. <br/>
+                                <br/>
                                 Example: <br/>
                                 <a href="https://ckpyt.com/api/GetLocalisation?id=1&language=Russian">https://ckpyt.com/api/GetLocalisation?id=1&language=Russian</a><br/>
                                 Return: <br/>

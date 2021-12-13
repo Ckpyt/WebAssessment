@@ -42,25 +42,29 @@
                         <div class="top-card-layout__entity-info-container">
                             <div class="top-card-layout__entity-info">
                                 <h1 class="top-card-layout__title">Save Api</h1>
-                                This reguest require login. if a user is not loggined, the login could be "Not authorized"<br/>
+                                Login required. if a user is not loggined, the login could be "Not authorized"<br/>
                                 It has 3 types of reguest: get, post and delete<br/>
+                                <br/>
                                 Get: <br/>
                                 Parameters: <br/>
                                 login - your login name. <br/> 
                                 sessionID - your sessionID. Hidden field, filled after logging. 0 for "Not authorized"<br/>
                                 saveName - save name from GetSaveNames reguest.  <br/>
                                 Return: JSON-string with serialised save<br/>
+                                <br/>
                                 Post: <br/>
                                 Parameters:<br/>
                                 login - your login name. Not secure yet. <br/> 
                                 sessionID - your sessionID. Hidden field, filled after logging. 0 for "Not authorized"<br/>
                                 saveName - the new name of the save. If the save exists, it will be overwritten.<br/>
                                 body: JSON-string with serialised save<br/>
+                                <br/>
                                 Delete: <br/>
                                 Parameters:<br/>
                                 login - your login name. Not secure yet. <br/> 
                                 sessionID - your sessionID. Hidden field, filled after logging. 0 for "Not authorized"<br/>
                                 saveName - save name from GetSaveNames reguest. <br/>
+                                <br/>
                                 Example: <br/>
                                 <a href="https://ckpyt.com/api/save?login=Not authorized&saveName=1111">https://ckpyt.com/api/save?login=Not authorized&saveName=1111</a><br/>
                             </div>

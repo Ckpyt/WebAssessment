@@ -42,13 +42,14 @@
                         <div class="top-card-layout__entity-info-container">
                             <div class="top-card-layout__entity-info">
                                 <h1 class="top-card-layout__title">Get save names Api</h1>
-                                This reguest require login. if a user is not loggined, the login could be "Not authorized"<br/>
+                                Login required. if a user is not loggined, the login could be "Not authorized"<br/>
                                 It has only one type of reguest: Get<br/>
                                 Get: <br/>
                                 Parameters: <br/> 
                                 login - your login name. <br/> 
                                 sessionID - your sessionID. Hidden field, filled after logging. 0 for "Not authorized"<br/>
                                 Return: JSON-string with serialised array of save names<br/>
+                                <br/>
                                 Example: <br/>
                                 <a href="https://ckpyt.com/api/getsavenames?login=Not authorized">https://ckpyt.com/api/getsavenames?login=Not authorized</a><br/>
                                 returns: "[\"ssss\",\"ssss1\",\"1111\"]" <br/>

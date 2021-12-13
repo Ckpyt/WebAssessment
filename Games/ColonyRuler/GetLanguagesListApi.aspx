@@ -45,6 +45,7 @@
                                 This reguest does not require login, any parametres and can be done by anyone. <br/>
                                 It has only one type of reguests: get. <br/>
                                 Return: JSON-string with list of strings with currently langues supported by the game. <br/>
+                                <br/>
                                 Example: <br/>
                                 <a href="https://ckpyt.com/api/GetLangList">https://ckpyt.com/api/GetLangList</a><br/>
                                 Return: <br/>

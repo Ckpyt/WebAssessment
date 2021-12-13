@@ -4,7 +4,10 @@
     <link rel="shortcut icon" href="TemplateData/favicon.ico"/>
     <script>
         function GetUserName() {
-            return '<%= UserName %>';
+            return '<%=UserName%>';
+        }
+        function GetSessionID() {
+            return '<%=SessionID%>';
         }
         //unityInstance.SendMessage('MainMenu', 'StoreUserName', '<%= UserName %>');
 
