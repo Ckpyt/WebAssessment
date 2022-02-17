@@ -66,7 +66,7 @@
                                 saveName - save name from GetSaveNames reguest. <br/>
                                 <br/>
                                 Example: <br/>
-                                <a href="https://ckpyt.com/api/save?login=Not authorized&saveName=1111">https://ckpyt.com/api/save?login=Not authorized&saveName=1111</a><br/>
+                                <a href="https://ckpyt.com/api/save?login=Not authorized&saveName=1111">https://ckpyt.com/api/save?login=Not authorized&saveName=1111&sessionID=0</a><br/>
                             </div>
                         </div>
                     </div>

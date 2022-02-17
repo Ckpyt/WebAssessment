@@ -52,13 +52,13 @@
                                 <br/>
                                 Post: <br/>
                                 Parameters:<br/>
-                                login - your login name. Not secure yet. <br/> 
+                                login - your login name.<br/> 
                                 sessionID - your sessionID. Hidden field, filled after logging. 0 for "Not authorized"<br/>
                                 body: JSON-string with serialised settings<br/>
                                 returns OK, if it is ok or error, if something happens<br/>
                                 <br/>
                                 Example: <br/>
-                                <a href="https://ckpyt.com/api/settings?login=Not authorized">https://ckpyt.com/api/settings?login=Not authorized</a><br/>
+                                <a href="https://ckpyt.com/api/settings?login=Not authorized">https://ckpyt.com/api/settings?login=Not authorized&sessionID=0</a><br/>
                                 returns: "{\"m_isItFullTree\":false,\"m_productQueueLimit\":10,\"m_localization\":{\"m_currentLanguage\":0}}\r" <br/>
                             </div>
                         </div>

@@ -51,7 +51,7 @@
                                 Return: JSON-string with serialised array of save names<br/>
                                 <br/>
                                 Example: <br/>
-                                <a href="https://ckpyt.com/api/getsavenames?login=Not authorized">https://ckpyt.com/api/getsavenames?login=Not authorized</a><br/>
+                                <a href="https://ckpyt.com/api/getsavenames?login=Not authorized">https://ckpyt.com/api/getsavenames?login=Not authorized&sessionID=0</a><br/>
                                 returns: "[\"ssss\",\"ssss1\",\"1111\"]" <br/>
                             </div>
                         </div>

@@ -327,6 +327,7 @@
     <Content Include="Games\ColonyRuler\GetLanguagesListApi.aspx" />
     <Content Include="Games\ColonyRuler\GetLocalizationApi.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="img\0.jpg" />
     <Content Include="img\banner\banner-bg.png" />
     <Content Include="img\banner\hero-banner.png" />
     <Content Include="img\blog\add.jpg" />
@@ -1037,6 +1038,7 @@
     <Content Include="Games\BullRush\Build\WebGL.json" />
     <Content Include="Games\ColonyRuler\Build\WebGL.data" />
     <Content Include="Games\ColonyRuler\Build\WebGL.wasm" />
+    <Content Include="Games\ColonyRuler\WebGL.framework.js.gz" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\IISProfile.pubxml" />
