@@ -844,6 +844,7 @@
     <Compile Include="Api\GetLocalisationController.cs" />
     <Compile Include="Api\GetLangListController.cs" />
     <Compile Include="Api\GetSaveNamesController.cs" />
+    <Compile Include="Api\LobbyController.cs" />
     <Compile Include="Api\SaveController.cs" />
     <Compile Include="Api\SettingsController.cs" />
     <Compile Include="blog-detail.aspx.cs">

@@ -58,7 +58,7 @@
                                 returns OK, if it is ok or error, if something happens<br/>
                                 <br/>
                                 Example: <br/>
-                                <a href="https://ckpyt.com/api/settings?login=Not authorized">https://ckpyt.com/api/settings?login=Not authorized&sessionID=0</a><br/>
+                                <a href="https://ckpyt.com/api/settings?login=Not authorized&sessionID=0">https://ckpyt.com/api/settings?login=Not authorized&sessionID=0</a><br/>
                                 returns: "{\"m_isItFullTree\":false,\"m_productQueueLimit\":10,\"m_localization\":{\"m_currentLanguage\":0}}\r" <br/>
                             </div>
                         </div>
